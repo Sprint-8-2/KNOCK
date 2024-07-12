@@ -4,7 +4,7 @@ interface BoxButtonProps {
   handleClick: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
   isDisalbed?: boolean;
   children: React.ReactNode;
-  theme?: string;
+  isLightTheme?: boolean;
   isSmallButton?: boolean;
 }
 
@@ -12,16 +12,16 @@ const BoxButton = ({
   handleClick,
   isDisalbed = false,
   children,
-  theme,
-  isSmallButton,
+  isLightTheme = false,
+  isSmallButton = false,
 }: BoxButtonProps) => {
   return (
     <>
       <button
         className={`
 					${styles['button']} 
-					${theme === 'light' ? styles['button--light'] : ''}
 					${isSmallButton ? styles['button--small'] : ''}
+					${isLightTheme ? styles['button--light'] : ''}
 				`}
         onClick={handleClick}
         disabled={isDisalbed}
