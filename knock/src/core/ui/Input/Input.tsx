@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import styles from '../../styles/input.module.scss';
 
-interface Props {
+interface InputProps {
   value: string;
   onKeyDown: React.KeyboardEventHandler<HTMLInputElement>;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
 }
 
-const Input = ({ value, onKeyDown, onChange }: Props) => {
+const Input = ({ value, onKeyDown, onChange }: InputProps) => {
   const [isFocused, setIsFocused] = useState<Boolean>(false);
 
   const handleFocus = () => {
