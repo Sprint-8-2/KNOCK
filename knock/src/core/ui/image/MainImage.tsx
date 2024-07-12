@@ -1,15 +1,14 @@
-import React from 'react';
-import mainimage from '../../assets/image/mainimage.png';
-import './MainImage.module.scss';
+import styles from '../../styles/image/mainimage.module.scss';
 
-const MainImage: React.FC = () => {
+type MainImageProps = {
+  src: string;
+  alt: string;
+};
+
+const MainImage: React.FC<MainImageProps> = ({ src, alt }) => {
   return (
-    <div className="main-image">
-      <img
-        className="main-image__img"
-        src={mainimage}
-        alt="메인페이지 이미지"
-      />
+    <div className={styles['main-image']}>
+      <img className={styles['main-image__img']} src={src} alt={alt} />
     </div>
   );
 };

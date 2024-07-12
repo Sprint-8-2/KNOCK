@@ -1,15 +1,14 @@
-import React from 'react';
-import emptyimage from '../../assets/image/Image3.svg';
-import './EmptyQuestion.module.scss';
+import styles from '../../styles/image/emptyquestion.module.scss';
 
-const EmptyQuestion: React.FC = () => {
+type EmptyQuestionProps = {
+  src: string;
+  alt: string;
+};
+
+const EmptyQuestion: React.FC<EmptyQuestionProps> = ({ src, alt }) => {
   return (
     <div>
-      <img
-        className="Empty-Question__img"
-        src={emptyimage}
-        alt="개별피드 빈질문 이미지"
-      />
+      <img className={styles['Empty-Question__img']} src={src} alt={alt} />
     </div>
   );
 };

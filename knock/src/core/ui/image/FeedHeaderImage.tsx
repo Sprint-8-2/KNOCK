@@ -1,15 +1,14 @@
-import React from 'react';
-import feedimage from '../../assets/image/feedHeaderImage.png';
-import './FeedHeaderImage.module.scss';
+import styles from '../../styles/image/feedheaderimage.module.scss';
 
-const FeedHeaderImage: React.FC = () => {
+type FeedHeaderImageProps = {
+  src: string;
+  alt: string;
+};
+
+const FeedHeaderImage: React.FC<FeedHeaderImageProps> = ({ src, alt }) => {
   return (
-    <div className="feedheader-image">
-      <img
-        className="feedheader-image__img"
-        src={feedimage}
-        alt="메인페이지 이미지"
-      />
+    <div className={styles['feedheader-image']}>
+      <img className={styles['feedheader-image__img']} src={src} alt={alt} />
     </div>
   );
 };
