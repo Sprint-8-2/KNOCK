@@ -1,0 +1,27 @@
+@import './global.scss';
+
+.Badge {
+  width: 3.25rem;
+  height: 1.125rem;
+  @include Caption1-Medium;
+  display: flex;
+  padding: 0.25rem 0.75rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+.answered {
+  border-radius: 0.5rem;
+  border: 1px solid var(--Brown-40, $Brown-40);
+  background: var(--Grayscale-10, #fff);
+  color: var(--Brown-40, $Brown-40);
+}
+
+.unanswered {
+  border-radius: 0.5rem;
+  border: 1px solid var(--Grayscale-40, $Grayscale-40);
+  background: var(--Grayscale-10, #fff);
+  color: var(--Grayscale-40, $Grayscale-40);
+}
+
