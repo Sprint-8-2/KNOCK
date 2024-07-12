@@ -2,12 +2,13 @@ import { useState } from 'react';
 import styles from '../../styles/input.module.scss';
 
 interface InputProps {
+  children: React.ReactNode;
   value: string;
   onKeyDown?: React.KeyboardEventHandler<HTMLInputElement>;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
 }
 
-const Input = ({ value, onKeyDown, onChange }: InputProps) => {
+const Input = ({ children, value, onKeyDown, onChange }: InputProps) => {
   const [isFocused, setIsFocused] = useState<boolean>(false);
 
   const handleFocus = () => {
@@ -20,7 +21,7 @@ const Input = ({ value, onKeyDown, onChange }: InputProps) => {
     <div
       className={`${styles['form-input']} ${isFocused ? styles['form-input--focused'] : ''}`}
     >
-      <div className={styles['form-input__icon']}></div>
+      <div className={styles['form-input__icon']}>{children}</div>
       <input
         type="text"
         className={styles['form-input__input']}
