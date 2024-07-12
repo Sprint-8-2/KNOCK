@@ -7,23 +7,22 @@ interface DropdownProps {
   children: React.ReactNode;
   dropdownElementList: React.ReactNode[] | string[];
   handleSelectElement: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
-  selected: string;
+  selected?: string;
 }
 
 const Dropdown = ({
   children,
   dropdownElementList,
   handleSelectElement,
-  selected,
+  selected = '',
 }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const handleOpen = () => {
     setIsOpen((prev) => !prev);
   };
-
   return (
-    <div className="dropdown">
+    <div className={`${styles['dropdown']}`}>
       <button
         className={`${styles['dropdown__button']} ${isOpen ? styles['dropdown__button--active'] : ''}`}
         onClick={handleOpen}
