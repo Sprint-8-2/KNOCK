@@ -8,7 +8,12 @@ interface InputProps {
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
 }
 
-const Input = ({ children, value, onKeyDown, onChange }: InputProps) => {
+const Input = ({
+  children,
+  value,
+  onKeyDown = () => {},
+  onChange = () => {},
+}: InputProps) => {
   const [isFocused, setIsFocused] = useState<boolean>(false);
 
   const handleFocus = () => {
