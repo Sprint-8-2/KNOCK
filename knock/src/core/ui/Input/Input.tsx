@@ -9,8 +9,12 @@ interface Props {
 
 const Input = ({ value, onKeyDown, onChange }: Props) => {
   const [isFocused, setIsFocused] = useState<Boolean>(false);
-  const handleInputFocus = (focusState: Boolean) => {
-    setIsFocused(focusState);
+
+  const handleFocus = () => {
+    setIsFocused(true);
+  };
+  const handleBlur = () => {
+    setIsFocused(false);
   };
   return (
     <div
@@ -21,8 +25,8 @@ const Input = ({ value, onKeyDown, onChange }: Props) => {
         type="text"
         className={styles['form-input__input']}
         placeholder="이름을 입력하세요"
-        onFocus={() => handleInputFocus(true)}
-        onBlur={() => handleInputFocus(false)}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
         value={value}
         onKeyDown={onKeyDown}
         onChange={onChange}
