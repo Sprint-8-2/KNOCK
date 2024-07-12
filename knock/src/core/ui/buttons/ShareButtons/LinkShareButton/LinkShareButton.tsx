@@ -1,7 +1,6 @@
 import { useLocation } from 'react-router-dom';
 import { ReactComponent as Icon } from '../../../../assets/icon/Link-light.svg';
 import RoundButton from '../../RoundButton/RoundButton';
-// import styles from './LinkShareButton.module.scss';
 
 interface LinkShareButtonProps {
   handleClick: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
