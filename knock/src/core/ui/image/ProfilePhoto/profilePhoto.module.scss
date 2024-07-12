@@ -1,4 +1,9 @@
 .Profile-Photo__img {
-  width: 8.5rem;
-  height: 8.5rem;
+  width: 3.75rem;
+  height: 3.75rem;
+
+  @media (max-width: 375px) {
+    width: 3rem;
+    height: 3rem;
+  }
 }
