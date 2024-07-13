@@ -80,11 +80,11 @@ class APIHandler {
       body: JSON.stringify(body),
     });
   }
-  public async delete<BodyType = any, ResponseType = ReturnType<typeof fetch>>(
+  public async delete<T = any>(
     url: string,
     options?: Omit<RequestInit, 'method' | 'body'>,
   ) {
-    return await this.apiHandler<ResponseType>(url, {
+    return await this.apiHandler<T>(url, {
       method: 'DELETE',
       ...options,
     });
