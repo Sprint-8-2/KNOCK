@@ -1,0 +1,41 @@
+@import '../global.scss';
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & li {
+    text-decoration: none;
+  }
+
+  &__button {
+    @include Body1-Regular;
+    border: none;
+    font-family: 'Actor';
+    display: flex;
+    width: 2.5rem;
+    height: 2.5rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    background-color: $Grayscale-10;
+    color: $Grayscale-40;
+    cursor: pointer;
+
+    &:hover {
+      color: $Grayscale-60;
+    }
+
+    &--selected {
+      color: $Brown-40;
+    }
+
+    @media (width < 768px) {
+      @include Body3-Regular;
+      font-family: 'Actor';
+      line-height: 1.5625rem;
+    }
+  }
+}
