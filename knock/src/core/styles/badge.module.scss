@@ -3,7 +3,7 @@
 @mixin badge-styles($color) {
   border-radius: 0.5rem;
   border: 1px solid $color;
-  background: $Grayscale-10 #fff;
+  background: $Grayscale-10;
   color: $color;
 }
 
