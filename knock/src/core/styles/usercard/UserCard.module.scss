@@ -1,4 +1,4 @@
-@import 'global.scss';
+@import '../global.scss';
 
 .user-card {
   display: flex;
@@ -10,8 +10,8 @@
   align-items: flex-start;
   flex-shrink: 0;
   border-radius: 1rem;
-  border: 1px solid var(--Grayscale-40, #818181);
-  background: var(--Grayscale-10, #fff);
+  border: 1px solid $Grayscale-40;
+  background: $Grayscale-10;
   text-decoration: none;
 
   @media (max-width: 375px) {
@@ -22,15 +22,18 @@
 
   &__name {
     margin: 0.75rem 0 auto 0;
-    color: var(--Grayscale-60, #000);
-    font-family: Actor;
-    font-size: 1.25rem;
-    font-style: normal;
-    font-weight: 400;
+    @include H3;
 
     @media (max-width: 375px) {
       font-size: 1.125rem;
     }
+  }
+
+  &__received-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
   &__icon-questions {
@@ -49,10 +52,8 @@
   }
 
   &__received-questions {
-    color: var(--Grayscale-40, #818181);
-    font-size: 1rem;
-    font-style: normal;
-    font-weight: 400;
+    @include Body3-Regular;
+    color: $Grayscale-40;
 
     @media (max-width: 375px) {
       font-size: 0.875rem;
@@ -60,10 +61,8 @@
   }
 
   &__count {
-    color: var(--Grayscale-40, #818181);
-    font-size: 1rem;
-    font-style: normal;
-    font-weight: 400;
+    @include Body3-Regular;
+    color: $Grayscale-40;
 
     @media (max-width: 375px) {
       font-size: 0.875rem;

@@ -1,20 +1,26 @@
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import ProfileImage from '../Image/ProfileImage';
 import Icon from '../Icon/Icon';
-import styles from './UserCard.module.scss';
+import styles from '../../styles/usercard/UserCard.module.scss';
 import messages from '../../assets/icon/Messages.svg';
-import profileimage from '../../assets/image/Profilephoto.svg';
 
 interface UserCardProps {
   count?: number;
   to: string;
+  name: string;
+  src: string;
 }
 
-const UserCard: React.FC<UserCardProps> = ({ count = 0, to }) => {
+const UserCard: React.FC<UserCardProps> = ({ count = 0, to, name, src }) => {
+  const navigate = useNavigate();
+  const handleClick = () => {
+    navigate(to);
+  };
+
   return (
-    <Link to={to} className={styles['user-card']}>
-      <ProfileImage src={profileimage} alt="프로필 이미지" />
-      <h3 className={styles['user-card__name']}>아초는 고양이</h3>
+    <div onClick={handleClick} className={styles['user-card']}>
+      <ProfileImage src={src} alt="프로필 이미지" />
+      <h3 className={styles['user-card__name']}>{name}</h3>
       <div className={styles['user-card__received-container']}>
         <div className={styles['user-card__icon-questions']}>
           <Icon
@@ -28,7 +34,7 @@ const UserCard: React.FC<UserCardProps> = ({ count = 0, to }) => {
         </div>
         <span className={styles['user-card__count']}>{count}개</span>
       </div>
-    </Link>
+    </div>
   );
 };
 
