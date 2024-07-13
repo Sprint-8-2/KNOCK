@@ -1,0 +1,7 @@
+@import '../../../../styles/global.scss';
+
+.button {
+  &--custom-color {
+    background-color: $Blue-50;
+  }
+}
