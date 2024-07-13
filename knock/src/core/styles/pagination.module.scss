@@ -1,11 +1,11 @@
-@import '../global.scss';
+@import './global.scss';
 
 .pagination {
   display: flex;
   justify-content: center;
   align-items: center;
 
-  & li {
+  &__list {
     text-decoration: none;
   }
 

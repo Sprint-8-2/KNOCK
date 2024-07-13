@@ -1,4 +1,4 @@
-import styles from '../../styles/pagination/pagination.module.scss';
+import styles from '../../styles/pagination.module.scss';
 
 interface PaginationButtonProps {
   children: React.ReactNode;
