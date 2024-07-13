@@ -1,4 +1,4 @@
-const BASE_URL = 'https://openmind-api.vercel.app/';
+const BASE_URL = 'https://openmind-api.vercel.app/8-2/';
 
 type NetworkError = {
   message?: string;
