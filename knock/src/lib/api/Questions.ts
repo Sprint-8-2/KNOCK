@@ -1,4 +1,8 @@
 import { APIOptions } from '../../core/types/api/Request';
+import {
+  QuestionDetailResponse,
+  QuestionReactionResponse,
+} from '../../core/types/api/Response';
 import { apiHandler } from './APIHandler';
 
 const DOMAIN = 'questions/';
@@ -7,30 +11,12 @@ interface QuestionDetailsProps extends APIOptions {
   questionId: number | string;
 }
 
-interface QuestionDetailResponseAnswer {
-  id: number;
-  questionId: number;
-  content: string;
-  isRejected: boolean;
-  createdAt: string;
-}
-
-interface QuestionsDetailResponse {
-  id: number;
-  subjectId: number;
-  content: string;
-  like: number;
-  dislike: number;
-  createdAt: string;
-  answer: QuestionDetailResponseAnswer;
-}
-
 export const getQuestionDetails = async ({
   questionId,
   options,
 }: QuestionDetailsProps) => {
   const url = `${DOMAIN}${questionId}/`;
-  return await apiHandler.get<QuestionsDetailResponse>(url, options);
+  return await apiHandler.get<QuestionDetailResponse>(url, options);
 };
 
 interface DeleteQuestionProps extends APIOptions {
@@ -50,16 +36,6 @@ interface CreateQuestionReactionProps extends APIOptions {
   type: 'like' | 'dislike';
 }
 
-interface CreateQuestionReactionResponse {
-  id: number;
-  subjectId: number;
-  content: string;
-  like: number;
-  dislike: number;
-  createdAt: string;
-  answer: null | QuestionDetailResponseAnswer;
-}
-
 export const createQuestionReaction = async ({
   questionId,
   type,
@@ -69,7 +45,7 @@ export const createQuestionReaction = async ({
   const body = { type };
   return await apiHandler.post<
     Omit<CreateQuestionReactionProps, 'questionId' | 'options'>,
-    CreateQuestionReactionResponse
+    QuestionReactionResponse
   >(url, body, options);
 };
 
