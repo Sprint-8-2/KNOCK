@@ -1,7 +1,7 @@
 const BASE_URL = 'https://openmind-api.vercel.app/8-2/';
 
 type NetworkError = {
-  message?: string;
+  detail?: string;
 };
 
 class APIHandler {
@@ -26,15 +26,13 @@ class APIHandler {
       const response = await fetch(`${this.baseUrl}${url}`, _options);
       if (!response.ok) {
         const error = (await response.json()) as NetworkError;
-        throw new Error(
-          `${response.status}\n${error.message}` ?? '알 수 없는 에러입니다.',
-        );
+        throw new Error(`${error.detail ?? '알 수 없는 에러입니다'}`);
       }
 
       return response.json() as T;
     } catch (error) {
-      console.error('API Error');
-      console.error(error);
+      console.log('API Error');
+      console.log(error);
       throw error;
     }
   }
