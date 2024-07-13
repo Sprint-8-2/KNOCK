@@ -7,7 +7,7 @@ const ShareButtons = () => {
   return (
     <>
       <div className={styles['buttons__wrapper']}>
-        <LinkShareButton handleClick={() => {}} />
+        <LinkShareButton />
         <KakaoShareButton />
         <FacebookShareButton />
       </div>
