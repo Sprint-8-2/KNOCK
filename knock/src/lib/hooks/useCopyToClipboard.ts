@@ -8,12 +8,9 @@ const useCopyToClipboard = (): [boolean, (text: string) => void] => {
       () => {
         setIsCopied(true);
         setTimeout(() => setIsCopied(false), 2000);
-      },
-      () => {
+      }).catch(() => {
         setIsCopied(false);
-      },
-    );
-  };
+      });
 
   return [isCopied, copyToClipboard];
 };
