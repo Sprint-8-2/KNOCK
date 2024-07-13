@@ -1,24 +1,23 @@
 import styles from './RoundButton.module.scss';
 
 interface RoundButtonProps {
+  className?: string;
   handleClick: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
   children: React.ReactNode;
-  backgroundColor?: string;
   isDisalbed?: boolean;
 }
 
 const RoundButton = ({
+  className,
   handleClick,
   children,
-  backgroundColor,
   isDisalbed = false,
 }: RoundButtonProps) => {
   return (
     <>
       <button
-        className={`${styles['button']}`}
+        className={`${styles['button']} ${className ? className : ''}`}
         onClick={handleClick}
-        style={backgroundColor ? { backgroundColor: backgroundColor } : {}}
         disabled={isDisalbed}
       >
         {children}
