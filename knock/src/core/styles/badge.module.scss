@@ -1,5 +1,12 @@
 @import './global.scss';
 
+@mixin badge-styles($color) {
+  border-radius: 0.5rem;
+  border: 1px solid $color;
+  background: $Grayscale-10 #fff;
+  color: $color;
+}
+
 .Badge {
   width: 3.25rem;
   height: 1.125rem;
@@ -9,19 +16,12 @@
   justify-content: center;
   align-items: center;
   gap: 0.625rem;
-}
 
-.answered {
-  border-radius: 0.5rem;
-  border: 1px solid var(--Brown-40, $Brown-40);
-  background: var(--Grayscale-10, #fff);
-  color: var(--Brown-40, $Brown-40);
-}
+  &__answered {
+    @include badge-styles($Brown-40);
+  }
 
-.unanswered {
-  border-radius: 0.5rem;
-  border: 1px solid var(--Grayscale-40, $Grayscale-40);
-  background: var(--Grayscale-10, #fff);
-  color: var(--Grayscale-40, $Grayscale-40);
+  &__unanswered {
+    @include badge-styles($Grayscale-40);
+  }
 }
-
