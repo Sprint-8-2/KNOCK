@@ -1,6 +1,13 @@
-import { APIOptions } from '../../core/types/api/Request';
 import {
-  QuestionReactionResponse,
+  CreateSubjectProps,
+  CreateSubjectQuestionProps,
+  DeleteSubjectProps,
+  SubjectGetDetailParams,
+  SubjectListParams,
+  SubjectQuestionListParams,
+} from '../../core/types/api/Request';
+import {
+  QuestionDetailResponse,
   SubjectDetailResponse,
   SubjectListResponse,
   SubjectQuestionListResponse,
@@ -8,11 +15,6 @@ import {
 import { apiHandler } from './APIHandler';
 
 const DOMAIN = 'subjects/';
-
-interface SubjectListParams extends APIOptions {
-  limit?: number;
-  offset?: number;
-}
 
 export const getSubjectList = async ({
   limit = undefined,
@@ -23,10 +25,6 @@ export const getSubjectList = async ({
   return await apiHandler.get<SubjectListResponse>(url, options);
 };
 
-interface SubjectGetDetailParams extends APIOptions {
-  userId: number | string;
-}
-
 export const getDetailSubject = async ({
   userId,
   options,
@@ -34,10 +32,6 @@ export const getDetailSubject = async ({
   const url = `${DOMAIN}${userId}/`;
   return await apiHandler.get<SubjectDetailResponse>(url, options);
 };
-
-interface CreateSubjectProps extends APIOptions {
-  name: string;
-}
 
 export const createSubject = async ({ name, options }: CreateSubjectProps) => {
   const body = { name };
@@ -47,10 +41,6 @@ export const createSubject = async ({ name, options }: CreateSubjectProps) => {
   >(DOMAIN, body, options);
 };
 
-interface DeleteSubjectProps extends APIOptions {
-  subjectId: number | string;
-}
-
 export const deleteSubject = async ({
   subjectId,
   options,
@@ -58,10 +48,6 @@ export const deleteSubject = async ({
   const url = `${DOMAIN}${subjectId}/`;
   return await apiHandler.delete<undefined>(url, options);
 };
-
-interface SubjectQuestionListParams extends SubjectListParams {
-  subjectId: number | string;
-}
 
 export const getSubjectQuestionList = async ({
   subjectId,
@@ -72,19 +58,6 @@ export const getSubjectQuestionList = async ({
   const url = `${DOMAIN}${subjectId}/questions/?${limit !== undefined ? 'limit=' + limit : ''}${offset !== undefined ? 'offset=' + offset : ''}/`;
   return await apiHandler.get<SubjectQuestionListResponse>(url, options);
 };
-
-interface CreateSubjectQuestionAnswer {
-  content: string;
-  isRejected: boolean;
-}
-
-interface CreateSubjectQuestionProps extends APIOptions {
-  subjectId: number | string;
-  content: string;
-  like?: number;
-  dislike?: number;
-  answer?: CreateSubjectQuestionAnswer;
-}
 
 const DEFAULT_SUBJECT_QUESTION_ANWER = {
   content: '',
@@ -108,6 +81,6 @@ export const createSubjectQuestion = async ({
   };
   return await apiHandler.post<
     Omit<CreateSubjectQuestionProps, 'subjectId' | 'options'>,
-    QuestionReactionResponse
+    QuestionDetailResponse
   >(url, body, options);
 };

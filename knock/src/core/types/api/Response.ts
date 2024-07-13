@@ -31,16 +31,15 @@ export interface QuestionDetailResponse {
   answer: QuestionDetailResponseAnswer | null;
 }
 
-export interface QuestionReactionResponse {
-  id: number;
-  subjectId: number;
-  content: string;
-  like: number;
-  dislike: number;
-  createdAt: string;
-  answer: null | QuestionDetailResponseAnswer;
-}
 export interface SubjectQuestionListResponse
   extends Omit<SubjectListResponse, 'results'> {
   results: QuestionDetailResponse[];
+}
+
+export interface QuestionAnswerResponse {
+  answerId: number;
+  questionId: number;
+  content: string;
+  isRejected: boolean;
+  createdAt: string;
 }
