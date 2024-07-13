@@ -25,11 +25,11 @@ interface QuestionsDetailResponse {
   answer: QuestionDetailResponseAnswer;
 }
 
-export const getQuestionDetails = async <QuestionsDetailResponse>({
+export const getQuestionDetails = async ({
   questionId,
   options,
 }: QuestionDetailsProps) => {
-  const url = `${DOMAIN}${questionId}`;
+  const url = `${DOMAIN}${questionId}/`;
   return await apiHandler.get<QuestionsDetailResponse>(url, options);
 };
 
@@ -37,7 +37,7 @@ interface DeleteQuestionProps extends APIOptions {
   questionId: number | string;
 }
 
-export const deleteQuestion = async <undefined>({
+export const deleteQuestion = async ({
   questionId,
   options,
 }: DeleteQuestionProps) => {
@@ -60,16 +60,16 @@ interface CreateQuestionReactionResponse {
   answer: null | QuestionDetailResponseAnswer;
 }
 
-export const createQuestionReaction = async <PostQuestionReactionResponse>({
+export const createQuestionReaction = async ({
   questionId,
   type,
   options,
 }: CreateQuestionReactionProps) => {
-  const url = `${DOMAIN}${questionId}`;
+  const url = `${DOMAIN}${questionId}/reaction/`;
   const body = { type };
   return await apiHandler.post<
     Omit<CreateQuestionReactionProps, 'questionId' | 'options'>,
-    PostQuestionReactionResponse
+    CreateQuestionReactionResponse
   >(url, body, options);
 };
 
@@ -87,7 +87,7 @@ interface CreateQuestionAnswerResponse {
   createdAt: string;
 }
 
-export const createQuestionAnswer = async <CreateQuestionAnswerResponse>({
+export const createQuestionAnswer = async ({
   questionId,
   content,
   isRejected,
