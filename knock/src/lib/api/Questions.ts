@@ -41,7 +41,7 @@ export const deleteQuestion = async ({
   questionId,
   options,
 }: DeleteQuestionProps) => {
-  const url = `${DOMAIN}${questionId}`;
+  const url = `${DOMAIN}${questionId}/`;
   return await apiHandler.delete<undefined>(url, options);
 };
 
