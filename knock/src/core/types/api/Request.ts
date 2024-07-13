@@ -3,7 +3,7 @@ export interface APIOptions {
 }
 
 export interface AnswerParams extends APIOptions {
-  userId: number | string;
+  subjectId: number | string;
 }
 
 export interface AnswerHasBodyParams extends AnswerParams {
@@ -36,7 +36,7 @@ export interface SubjectListParams extends APIOptions {
 }
 
 export interface SubjectGetDetailParams extends APIOptions {
-  userId: number | string;
+  subjectId: number | string;
 }
 
 export interface CreateSubjectProps extends APIOptions {

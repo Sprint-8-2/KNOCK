@@ -26,10 +26,10 @@ export const getSubjectList = async ({
 };
 
 export const getDetailSubject = async ({
-  userId,
+  subjectId,
   options,
 }: SubjectGetDetailParams) => {
-  const url = `${DOMAIN}${userId}/`;
+  const url = `${DOMAIN}${subjectId}/`;
   return await apiHandler.get<SubjectDetailResponse>(url, options);
 };
 
