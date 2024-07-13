@@ -8,7 +8,7 @@ interface RoundButtonProps {
 }
 
 const RoundButton = ({
-  className,
+  className='',
   handleClick,
   children,
   isDisalbed = false,
@@ -16,7 +16,7 @@ const RoundButton = ({
   return (
     <>
       <button
-        className={`${styles['button']} ${className ? className : ''}`}
+        className={`${styles['button']} ${className}`}
         onClick={handleClick}
         disabled={isDisalbed}
       >
