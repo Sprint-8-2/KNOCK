@@ -15,15 +15,15 @@ export const getQuestionDetails = async ({
   questionId,
   options,
 }: QuestionDetailsProps) => {
-  const url = `${DOMAIN}${questionId}/`;
-  return await apiHandler.get<QuestionDetailResponse>(url, options);
+  const path = `${DOMAIN}${questionId}/`;
+  return await apiHandler.get<QuestionDetailResponse>(path, options);
 };
 export const deleteQuestion = async ({
   questionId,
   options,
 }: QuestionDetailsProps) => {
-  const url = `${DOMAIN}${questionId}/`;
-  return await apiHandler.delete<undefined>(url, options);
+  const path = `${DOMAIN}${questionId}/`;
+  return await apiHandler.delete<undefined>(path, options);
 };
 
 export const createQuestionReaction = async ({
@@ -31,12 +31,12 @@ export const createQuestionReaction = async ({
   type,
   options,
 }: QuestionReactionProps) => {
-  const url = `${DOMAIN}${questionId}/reaction/`;
+  const path = `${DOMAIN}${questionId}/reaction/`;
   const body = { type };
   return await apiHandler.post<
     Omit<QuestionReactionProps, 'questionId' | 'options'>,
     QuestionDetailResponse
-  >(url, body, options);
+  >(path, body, options);
 };
 export const createQuestionAnswer = async ({
   questionId,
@@ -44,7 +44,7 @@ export const createQuestionAnswer = async ({
   isRejected,
   options,
 }: QuestionAnswerProps) => {
-  const url = `${DOMAIN}${questionId}/answers/`;
+  const path = `${DOMAIN}${questionId}/answers/`;
   const body = {
     content,
     isRejected,
@@ -52,5 +52,5 @@ export const createQuestionAnswer = async ({
   return await apiHandler.post<
     Omit<QuestionAnswerProps, 'questionId' | 'options'>,
     QuestionAnswerResponse
-  >(url, body, options);
+  >(path, body, options);
 };

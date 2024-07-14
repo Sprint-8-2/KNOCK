@@ -9,8 +9,8 @@ import { apiHandler } from './APIHandler';
 const DOMAIN = 'answer/';
 
 export const getAnswer = async ({ subjectId, options }: AnswerParams) => {
-  const url = `${DOMAIN}${subjectId}/`;
-  return apiHandler.get<QuestionDetailResponseAnswer>(url, options);
+  const path = `${DOMAIN}${subjectId}/`;
+  return apiHandler.get<QuestionDetailResponseAnswer>(path, options);
 };
 
 export const putAnswer = async ({
@@ -18,9 +18,9 @@ export const putAnswer = async ({
   body,
   options,
 }: AnswerHasBodyParams) => {
-  const url = `${DOMAIN}${subjectId}/`;
+  const path = `${DOMAIN}${subjectId}/`;
   return apiHandler.put<AnswerBody, QuestionDetailResponseAnswer>(
-    url,
+    path,
     body,
     options,
   );
@@ -31,15 +31,15 @@ export const patchAnswer = async ({
   body,
   options,
 }: AnswerHasBodyParams) => {
-  const url = `${DOMAIN}${subjectId}/`;
+  const path = `${DOMAIN}${subjectId}/`;
   return apiHandler.put<AnswerBody, QuestionDetailResponseAnswer>(
-    url,
+    path,
     body,
     options,
   );
 };
 
 export const deleteAnswer = async ({ subjectId, options }: AnswerParams) => {
-  const url = `${DOMAIN}${subjectId}/`;
-  return apiHandler.delete<undefined>(url, options);
+  const path = `${DOMAIN}${subjectId}/`;
+  return apiHandler.delete<undefined>(path, options);
 };

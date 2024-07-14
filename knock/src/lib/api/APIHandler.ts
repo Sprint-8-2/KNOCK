@@ -11,7 +11,7 @@ class APIHandler {
     this.baseUrl = baseUrl;
   }
 
-  private async apiHandler<T = any>(url: string, options?: RequestInit) {
+  private async apiHandler<T = any>(path: string, options?: RequestInit) {
     const headers: HeadersInit = {
       'Content-Type': 'application/json',
       ...options?.headers,
@@ -23,7 +23,7 @@ class APIHandler {
     };
 
     try {
-      const response = await fetch(`${this.baseUrl}${url}`, _options);
+      const response = await fetch(`${this.baseUrl}${path}`, _options);
       if (!response.ok) {
         const error = (await response.json()) as NetworkError;
         throw new Error(`${error.detail ?? '알 수 없는 에러입니다'}`);
@@ -38,18 +38,18 @@ class APIHandler {
   }
 
   public async get<T = any>(
-    url: string,
+    path: string,
     options?: Omit<RequestInit, 'method' | 'body'>,
   ) {
-    return await this.apiHandler<T>(url, options);
+    return await this.apiHandler<T>(path, options);
   }
 
   public async post<BodyType = any, ResponseType = ReturnType<typeof fetch>>(
-    url: string,
+    path: string,
     body: BodyType,
     options?: Omit<RequestInit, 'method' | 'body'>,
   ) {
-    return await this.apiHandler<ResponseType>(url, {
+    return await this.apiHandler<ResponseType>(path, {
       method: 'POST',
       ...options,
       body: JSON.stringify(body),
@@ -57,32 +57,32 @@ class APIHandler {
   }
 
   public async put<BodyType = any, ResponseType = ReturnType<typeof fetch>>(
-    url: string,
+    path: string,
     body: BodyType,
     options?: Omit<RequestInit, 'method' | 'body'>,
   ) {
-    return await this.apiHandler<ResponseType>(url, {
+    return await this.apiHandler<ResponseType>(path, {
       method: 'PUT',
       ...options,
       body: JSON.stringify(body),
     });
   }
   public async patch<BodyType = any, ResponseType = ReturnType<typeof fetch>>(
-    url: string,
+    path: string,
     body: BodyType,
     options?: Omit<RequestInit, 'method' | 'body'>,
   ) {
-    return await this.apiHandler<ResponseType>(url, {
+    return await this.apiHandler<ResponseType>(path, {
       method: 'PATCH',
       ...options,
       body: JSON.stringify(body),
     });
   }
   public async delete<T = any>(
-    url: string,
+    path: string,
     options?: Omit<RequestInit, 'method' | 'body'>,
   ) {
-    return await this.apiHandler<T>(url, {
+    return await this.apiHandler<T>(path, {
       method: 'DELETE',
       ...options,
     });
