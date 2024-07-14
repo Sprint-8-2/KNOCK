@@ -21,16 +21,16 @@ export const getSubjectList = async ({
   offset = undefined,
   options,
 }: SubjectListParams) => {
-  const url = `${DOMAIN}?${limit !== undefined ? 'limit=' + limit : ''}${offset !== undefined ? 'offset=' + offset : ''}/`;
-  return await apiHandler.get<SubjectListResponse>(url, options);
+  const path = `${DOMAIN}?${limit !== undefined ? 'limit=' + limit : ''}${offset !== undefined ? 'offset=' + offset : ''}/`;
+  return await apiHandler.get<SubjectListResponse>(path, options);
 };
 
 export const getDetailSubject = async ({
   subjectId,
   options,
 }: SubjectGetDetailParams) => {
-  const url = `${DOMAIN}${subjectId}/`;
-  return await apiHandler.get<SubjectDetailResponse>(url, options);
+  const path = `${DOMAIN}${subjectId}/`;
+  return await apiHandler.get<SubjectDetailResponse>(path, options);
 };
 
 export const createSubject = async ({ name, options }: CreateSubjectProps) => {
@@ -45,8 +45,8 @@ export const deleteSubject = async ({
   subjectId,
   options,
 }: DeleteSubjectProps) => {
-  const url = `${DOMAIN}${subjectId}/`;
-  return await apiHandler.delete<undefined>(url, options);
+  const path = `${DOMAIN}${subjectId}/`;
+  return await apiHandler.delete<undefined>(path, options);
 };
 
 export const getSubjectQuestionList = async ({
@@ -55,8 +55,8 @@ export const getSubjectQuestionList = async ({
   offset,
   options,
 }: SubjectQuestionListParams) => {
-  const url = `${DOMAIN}${subjectId}/questions/?${limit !== undefined ? 'limit=' + limit : ''}${offset !== undefined ? 'offset=' + offset : ''}/`;
-  return await apiHandler.get<SubjectQuestionListResponse>(url, options);
+  const path = `${DOMAIN}${subjectId}/questions/?${limit !== undefined ? 'limit=' + limit : ''}${offset !== undefined ? 'offset=' + offset : ''}/`;
+  return await apiHandler.get<SubjectQuestionListResponse>(path, options);
 };
 
 const DEFAULT_SUBJECT_QUESTION_ANWER = {
@@ -72,7 +72,7 @@ export const createSubjectQuestion = async ({
   answer = DEFAULT_SUBJECT_QUESTION_ANWER,
   options,
 }: CreateSubjectQuestionProps) => {
-  const url = `${DOMAIN}${subjectId}/questions/`;
+  const path = `${DOMAIN}${subjectId}/questions/`;
   const body = {
     content,
     like,
@@ -82,5 +82,5 @@ export const createSubjectQuestion = async ({
   return await apiHandler.post<
     Omit<CreateSubjectQuestionProps, 'subjectId' | 'options'>,
     QuestionDetailResponse
-  >(url, body, options);
+  >(path, body, options);
 };
