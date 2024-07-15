@@ -1,6 +1,6 @@
 @import '../../../styles/global.scss';
 
-@mixin button-theme($theme: 'default') {
+@mixin box-button-theme($theme: 'default') {
   @if $theme == 'default' {
     &:hover {
       border: 2px solid $Brown-50;
@@ -37,9 +37,12 @@
   }
 }
 
-.button {
-  @include Body3-Regular;
+.common-button {
+  cursor: pointer;
+}
 
+.box-button {
+  @include Body3-Regular;
   display: inline-flex;
   padding: 0.75rem 1.5rem;
   justify-content: center;
@@ -49,8 +52,7 @@
   border-radius: 0.5rem;
   background: $Brown-40;
   color: $Grayscale-10;
-  cursor: pointer;
-  @include button-theme('default');
+  @include box-button-theme('default');
 
   &--small {
     @include Caption1-Regular;
@@ -60,6 +62,32 @@
   }
 
   &--light {
-    @include button-theme('light');
+    @include box-button-theme('light');
   }
+}
+
+.floating-button {
+  @include Body1-Regular;
+  @include Shadow(2);
+  display: flex;
+  width: 13rem;
+  height: 3.375rem;
+  padding: 0.75rem 1.5rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+  border-radius: 12.5rem;
+  background: $Brown-40;
+  color: $Grayscale-10;
+}
+
+.round-button {
+  display: flex;
+  width: 2.5rem;
+  height: 2.5rem;
+  justify-content: center;
+  align-items: center;
+  border: 0;
+  border-radius: 12.5rem;
 }
