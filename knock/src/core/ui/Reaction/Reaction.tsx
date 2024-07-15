@@ -1,20 +1,30 @@
-import BeforeLike from '../../assets/icon/Before-like.svg';
-import BeforeHate from '../../assets/icon/Before-hate.svg';
-import AfterLike from '../../assets/icon/After-like.svg';
-import AfterHate from '../../assets/icon/After-hate.svg';
+import BeforeLikeIcon from '../../assets/icon/like/Before-like.svg';
+import BeforeUnLikeIcon from '../../assets/icon/unlike/Before-unLike.svg';
+import AfterLikeIcon from '../../assets/icon/like/After-like.svg';
+import AfterUnLikeIcon from '../../assets/icon/unlike/After-unLike.svg';
 import styles from '../../styles/Reaction.module.scss';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-interface ReactionProps {}
-
-const Reaction = ({}: ReactionProps) => {
+const Reaction = () => {
   const [likeCount, setLikeCount] = useState(0);
   const [liked, setLiked] = useState(false);
   const [unLiked, setUnLiked] = useState(false);
 
+  useEffect(() => {
+    fetch('your_api_endpoint')
+      .then((response) => response.json())
+      .then((data) => {
+        setLikeCount(data.likeCount);
+        setLiked(data.liked);
+        setUnLiked(data.unLiked);
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
+  }, []);
+
   const handleLikeClick = () => {
-    const count = likeCount + 1;
-    setLikeCount(count);
+    setLikeCount((prev) => prev + 1);
     setLiked(true);
     setUnLiked(false);
   };
@@ -27,8 +37,8 @@ const Reaction = ({}: ReactionProps) => {
 
   return (
     <div className={`${styles['container']}`}>
-      <label className={`${styles['label']}`} onClick={handleLikeClick}>
-        <img src={liked ? AfterLike : BeforeLike} alt="좋아요" />
+      <div className={`${styles['label']}`} onClick={handleLikeClick}>
+        <img src={liked ? AfterLikeIcon : BeforeLikeIcon} alt="좋아요" />
         <button
           className={`
           ${styles['text']}
@@ -37,9 +47,9 @@ const Reaction = ({}: ReactionProps) => {
         >
           좋아요 {liked ? likeCount : ''}
         </button>
-      </label>
-      <label className={`${styles['label']}`} onClick={handleUnLikeClick}>
-        <img src={unLiked ? AfterHate : BeforeHate} alt="싫어요" />
+      </div>
+      <div className={`${styles['label']}`} onClick={handleUnLikeClick}>
+        <img src={unLiked ? AfterUnLikeIcon : BeforeUnLikeIcon} alt="싫어요" />
         <button
           className={`
           ${styles['text']} 
@@ -48,7 +58,7 @@ const Reaction = ({}: ReactionProps) => {
         >
           싫어요
         </button>
-      </label>
+      </div>
     </div>
   );
 };
