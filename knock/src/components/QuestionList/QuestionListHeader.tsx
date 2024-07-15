@@ -1,4 +1,5 @@
-import BoxButton from '../../core/ui/buttons/BoxButton/BoxButton';
+import { Link } from 'react-router-dom';
+import UButton from '../../core/ui/buttons/UButton/UButton';
 
 import LogoImage from '../../core/assets/image/SubPageLogo.svg';
 import ArrowRightIcon from '../../core/assets/icon/Hyphen-Arrow-right.svg';
@@ -6,7 +7,6 @@ import ArrowRightIcon from '../../core/assets/icon/Hyphen-Arrow-right.svg';
 import styles from './QuestionListHeader.module.scss';
 import Icon from '../../core/ui/CommonIcon/icon';
 import Image from '../../core/ui/CommonImage/Image';
-import { Link } from 'react-router-dom';
 
 const QuestionListHeader = () => {
   return (
@@ -19,7 +19,7 @@ const QuestionListHeader = () => {
         />
       </Link>
       <Link to="/post">
-        <BoxButton handleClick={() => {}} isLightTheme={true}>
+        <UButton type="box" handleClick={() => {}} isLightTheme={true}>
           <p className={styles['question-list-header__button-content']}>
             <span>답변하러 가기</span>
             <Icon
@@ -28,7 +28,7 @@ const QuestionListHeader = () => {
               alt="오른쪽 화살표"
             />
           </p>
-        </BoxButton>
+        </UButton>
       </Link>
     </section>
   );
