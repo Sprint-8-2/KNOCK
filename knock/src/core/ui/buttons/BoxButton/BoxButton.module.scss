@@ -3,7 +3,7 @@
 @mixin button-theme($theme: 'default') {
   @if $theme == 'default' {
     &:hover {
-      border: 2px solid $Brown-50;
+      outline: 2px solid $Brown-50;
       background: $Brown-40;
     }
 
@@ -12,16 +12,16 @@
     }
 
     &:disabled {
-      border: 1px solid $Brown-30;
+      outline: 1px solid $Brown-30;
       background: $Brown-30;
     }
   } @else if $theme == 'light' {
-    border: 1px solid $Brown-40;
+    outline: 1px solid $Brown-40;
     background: $Brown-10;
     color: $Brown-40;
 
     &:hover {
-      border: 2px solid $Brown-40;
+      outline: 2px solid $Brown-40;
       background: $Brown-10;
     }
 
@@ -30,7 +30,7 @@
     }
 
     &:disabled {
-      border: 1px solid $Brown-30;
+      outline: 1px solid $Brown-30;
       background: $Brown-10;
       color: $Brown-30;
     }
