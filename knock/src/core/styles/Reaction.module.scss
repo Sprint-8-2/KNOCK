@@ -1,0 +1,36 @@
+@import './global.scss';
+
+.container {
+  width: 10.5rem;
+  height: 1.13rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+.text {
+  @include Caption1-Medium;
+  color: $Grayscale-40;
+  background: none;
+  border: none;
+  white-space: pre;
+}
+
+.like {
+  cursor: pointer;
+  &--active {
+    color: $Blue-50;
+  }
+}
+
+.dislike {
+  cursor: pointer;
+  &--active {
+    color: $Grayscale-60;
+  }
+}
