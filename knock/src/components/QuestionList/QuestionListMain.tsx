@@ -8,7 +8,7 @@ import QuestionListPagination from './QuestionListPagination';
 import styles from './QuestionListMain.module.scss';
 
 const QuestionListMain = () => {
-  const [order, setOrder] = useState<string>('이름순');
+  const [order, setOrder] = useState<string>('최신순');
 
   const handleOrder = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     setOrder((e.target as HTMLElement).innerText);

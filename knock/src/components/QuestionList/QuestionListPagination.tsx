@@ -35,6 +35,7 @@ const QuestionListPagination = ({ order }: QuestionListPaginationProps) => {
         order={order}
         indexLimit={indexLimit}
         currentPage={currentIndex}
+        setIndexLimit={setIndexLimit}
         setCurrentPage={setCurrentIndex}
         setMaxIndex={setMaxIndex}
       />

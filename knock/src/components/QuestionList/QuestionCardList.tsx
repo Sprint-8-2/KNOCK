@@ -7,11 +7,13 @@ import { SubjectListParams } from '../../core/types/api/Request';
 
 import styles from './QuestionCardList.module.scss';
 import useResizeObserver from '../../lib/hooks/useResizeObserver';
+import { getSubjectList } from '../../lib/api/Subject';
 
 interface QuestionCardListProps {
   order: string;
   indexLimit: number;
   currentPage: number;
+  setIndexLimit: (newVal: number) => void;
   setCurrentPage: (newVal: number) => void;
   setMaxIndex: (newVal: number) => void;
 }
@@ -87,17 +89,31 @@ const QuestionCardList = ({
   order,
   indexLimit,
   currentPage,
+  setIndexLimit,
   setCurrentPage,
   setMaxIndex,
 }: QuestionCardListProps) => {
   const [questions, setQuestions] = useState<SubjectDetailResponse[]>([]);
+  const [ulClassName, setUlClassName] = useState<string>(
+    styles['question-list-main__cards--large'],
+  );
   const { ref, cardWidth } = useResizeObserver();
 
+  // const handleUlClass = () => {
+  //   if (indexLimit === 8 && cardWidth === 186) {
+  //     setIndexLimit(6);
+  //     setUlClassName(styles['question-list-main__cards--small']);
+  //   } else if (indexLimit === 8 && cardWidth === 220) {
+  //     setIndexLimit(8);
+  //     setUlClassName(styles['question-list-main__cards--large']);
+  //   }
+  // };
+
   const handleQuestions = async ({ limit, offset }: SubjectListParams) => {
-    const results = () => ['API Response'];
-    setQuestions([]);
+    const { count, results } = await getSubjectList({ limit, offset });
+    setQuestions(results);
     setCurrentPage(1);
-    setMaxIndex(1);
+    setMaxIndex(count);
   };
 
   useEffect(() => {
@@ -105,13 +121,10 @@ const QuestionCardList = ({
   }, []);
 
   return (
-    <ul
-      ref={ref}
-      className={`${styles['question-list-main__cards']} ${cardWidth > 804 ? styles['question-list-main__cards--large'] : styles['question-list-main__cards--small']}`}
-    >
-      {mockData.map((e) => {
+    <ul className={`${styles['question-list-main__cards']} ${ulClassName}`}>
+      {mockData.slice(0, indexLimit).map((e) => {
         return (
-          <li key={e.id}>
+          <li key={e.id} ref={ref}>
             <Link to={`/post/${e.id}`}>
               <QuestionCard
                 name={e.name}
