@@ -3,7 +3,7 @@
 @mixin box-button-theme($theme: 'default') {
   @if $theme == 'default' {
     &:hover {
-      border: 2px solid $Brown-50;
+      outline: 2px solid $Brown-50;
       background: $Brown-40;
     }
 
@@ -21,7 +21,7 @@
     color: $Brown-40;
 
     &:hover {
-      border: 2px solid $Brown-40;
+      outline: 2px solid $Brown-40;
       background: $Brown-10;
     }
 
