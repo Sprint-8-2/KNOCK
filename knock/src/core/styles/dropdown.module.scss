@@ -22,23 +22,39 @@
     @include Button;
     @include Caption1-Medium;
     position: relative;
-    color: $Grayscale-40;
     border: 1px solid $Grayscale-40;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $Grayscale-40;
     &--active {
       @include Button;
       @include Caption1-Medium;
       border: 1px solid $Grayscale-60;
+      color: $Grayscale-60;
+    }
+
+    &--icon {
+      width: 0.875rem;
+      height: 0.875rem;
+      transition: 0.5s;
+      fill: $Grayscale-60;
+    }
+
+    &--turn {
+      fill: $Grayscale-40;
+      transform: rotate(180deg);
     }
   }
 
   &__content {
     position: absolute;
-    visibility: visible;
+    visibility: hidden;
     top: 120%;
 
-    &--invisible {
-      position: absolute;
-      visibility: hidden;
+    &--visible {
+      visibility: visible;
+      list-style: none;
     }
 
     & ul {

@@ -14,8 +14,6 @@
   gap: 0.75rem;
   margin-bottom: 1.87rem;
   &__dropdown {
-    @include Caption1-Medium;
-    color: $Grayscale-40;
     white-space: nowrap;
     display: flex;
     justify-content: center;
