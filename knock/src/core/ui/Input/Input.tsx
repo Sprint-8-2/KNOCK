@@ -14,25 +14,13 @@ const Input = ({
   onKeyDown = () => {},
   onChange = () => {},
 }: InputProps) => {
-  const [isFocused, setIsFocused] = useState<boolean>(false);
-
-  const handleFocus = () => {
-    setIsFocused(true);
-  };
-  const handleBlur = () => {
-    setIsFocused(false);
-  };
   return (
-    <div
-      className={`${styles['form-input']} ${isFocused ? styles['form-input--focused'] : ''}`}
-    >
+    <div className={`${styles['form-input']}`}>
       <div className={styles['form-input__icon']}>{children}</div>
       <input
         type="text"
         className={styles['form-input__input']}
         placeholder="이름을 입력하세요"
-        onFocus={handleFocus}
-        onBlur={handleBlur}
         value={value}
         onKeyDown={onKeyDown}
         onChange={onChange}

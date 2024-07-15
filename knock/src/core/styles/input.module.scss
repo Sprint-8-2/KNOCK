@@ -10,6 +10,10 @@
   margin: 100px;
   gap: 0.25rem;
 
+  &:focus-within {
+    border: 1px solid $Brown-40;
+  }
+
   &__icon {
     width: 1.25rem;
     height: 1.25rem;
@@ -25,9 +29,5 @@
     &::placeholder {
       color: $Grayscale-40;
     }
-  }
-
-  &--focused {
-    border: 1px solid $Brown-40;
   }
 }
