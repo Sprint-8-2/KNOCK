@@ -1,10 +1,8 @@
 import { useState } from 'react';
 
 import Dropdown from '../../core/ui/Dropdown/Dropdown';
-import Icon from '../../core/ui/CommonIcon/icon';
 
 import ArrowDownIcon from '../../core/assets/icon/Arrow-down.svg';
-import ArrowUpIcon from '../../core/assets/icon/Arrow-up.svg';
 import QuestionListPagination from './QuestionListPagination';
 
 import styles from './QuestionListMain.module.scss';
@@ -31,7 +29,7 @@ const QuestionListMain = () => {
           </p>
         </Dropdown>
       </section>
-      <QuestionListPagination />
+      <QuestionListPagination order={order} />
     </main>
   );
 };

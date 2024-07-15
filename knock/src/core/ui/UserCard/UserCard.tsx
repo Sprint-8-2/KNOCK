@@ -1,7 +1,8 @@
 import Image from '../CommonImage/Image';
 import Icon from '../CommonIcon/icon';
-import styles from '../../styles/usercard/UserCard.module.scss';
+
 import messages from '../../assets/icon/Messages.svg';
+import styles from '../../styles/usercard/UserCard.module.scss';
 
 interface UserCardProps {
   imgClassName?: string;

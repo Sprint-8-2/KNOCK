@@ -5,4 +5,11 @@
   margin: 0 2rem;
   grid-template: repeat(2, 1fr) / repeat(4, minmax(11.625rem, 1fr));
   gap: 1.25rem;
+
+  & a {
+    text-decoration: none;
+  }
+  & li {
+    cursor: pointer;
+  }
 }
