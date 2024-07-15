@@ -1,15 +1,16 @@
-import styles from '../../styles/icon/icon.module.scss';
+import { Fragment } from 'react/jsx-runtime';
 
 type IconProps = {
   src: string;
   alt: string;
+  className: string;
 };
 
-const Icon: React.FC<IconProps> = ({ src, alt }) => {
+const Icon: React.FC<IconProps> = ({ src, alt, className }) => {
   return (
-    <div>
-      <img className={styles['icon-image']} src={src} alt={alt} />
-    </div>
+    <Fragment>
+      <img className={className} src={src} alt={alt} />
+    </Fragment>
   );
 };
 
