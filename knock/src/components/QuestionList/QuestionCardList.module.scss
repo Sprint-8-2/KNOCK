@@ -1,7 +1,8 @@
 .question-list-main__cards {
   display: grid;
   width: 100%;
-  height: 100%;
-  grid-template: repeat(2, 1fr) / repeat(4, minmax(186px, auto));
+  justify-content: center;
+  margin: 0 2rem;
+  grid-template: repeat(2, 1fr) / repeat(4, minmax(11.625rem, 1fr));
   gap: 1.25rem;
 }

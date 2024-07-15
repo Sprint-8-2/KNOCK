@@ -1,5 +1,5 @@
 import Dropdown from '../../core/ui/Dropdown/Dropdown';
-import Icon from '../../core/ui/Icon/Icon';
+import Icon from '../../core/ui/CommonIcon/icon';
 
 import ArrowDownIcon from '../../core/assets/icon/Arrow-down.svg';
 import ArrowUpIcon from '../../core/assets/icon/Arrow-up.svg';

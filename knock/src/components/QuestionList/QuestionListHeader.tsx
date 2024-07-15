@@ -1,17 +1,17 @@
 import BoxButton from '../../core/ui/buttons/BoxButton/BoxButton';
 
-import LogoImage from '../../core/assets/image/logo.svg';
-import ArrowRightIcon from '../../core/assets/icon/arrow-right-1.svg';
+import LogoImage from '../../core/assets/image/SubPageLogo.svg';
+import ArrowRightIcon from '../../core/assets/icon/Hyphen-Arrow-right.svg';
 
 import styles from './QuestionListHeader.module.scss';
-import Icon from '../../core/ui/Icon/Icon';
-// import MainLogo from '../../core/ui/CommonImage/MainLogo';
+import Icon from '../../core/ui/CommonIcon/icon';
+import Image from '../../core/ui/CommonImage/Image';
 
 const QuestionListHeader = () => {
   return (
     <section className={styles['question-list-header']}>
-      <img
-        className={styles['question-list-header__img']}
+      <Image
+        imageClassName={styles['question-list-header__img']}
         src={LogoImage}
         alt="메인 로고"
       />

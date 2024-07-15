@@ -1,5 +1,5 @@
 import QuestionCard from './QuestionCard';
-import src from '../../core/assets/image/Image3.svg';
+import src from '../../core/assets/image/Profilephoto.svg';
 
 import styles from './QuestionCardList.module.scss';
 
