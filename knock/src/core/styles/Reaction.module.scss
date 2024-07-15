@@ -22,9 +22,15 @@
 }
 
 .like {
-  color: $Blue-50;
+  cursor: pointer;
+  &--active {
+    color: $Blue-50;
+  }
 }
 
-.hate {
-  color: $Grayscale-60;
+.dislike {
+  cursor: pointer;
+  &--active {
+    color: $Grayscale-60;
+  }
 }

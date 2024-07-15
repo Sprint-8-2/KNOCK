@@ -40,7 +40,8 @@ const Reaction: React.FC<ReactionProps> = ({
           <button
             className={`
             ${styles['text']}
-            ${isLiked ? styles['like'] : ''}
+						${styles['like']} 
+            ${isLiked ? styles['like--active'] : ''}
             `}
             onClick={handleClickLike}
           >
@@ -53,7 +54,8 @@ const Reaction: React.FC<ReactionProps> = ({
           <button
             className={`
             ${styles['text']} 
-            ${isDisliked ? styles['hate'] : ''}
+						${styles['dislike']} 
+            ${isDisliked ? styles['dislike--active'] : ''}
             `}
             onClick={handleClickDislike}
           >
