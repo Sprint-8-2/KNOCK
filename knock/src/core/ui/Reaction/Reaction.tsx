@@ -3,25 +3,12 @@ import BeforeUnLikeIcon from '../../assets/icon/unlike/Before-unLike.svg';
 import AfterLikeIcon from '../../assets/icon/like/After-like.svg';
 import AfterUnLikeIcon from '../../assets/icon/unlike/After-unLike.svg';
 import styles from '../../styles/Reaction.module.scss';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
-const Reaction = () => {
-  const [likeCount, setLikeCount] = useState(0);
+const Reaction: React.FC<ReactionProps> = ({ likeCount }) => {
+  const [showlikeCount, setLikeCount] = useState(likeCount);
   const [liked, setLiked] = useState(false);
   const [unLiked, setUnLiked] = useState(false);
-
-  useEffect(() => {
-    fetch('your_api_endpoint')
-      .then((response) => response.json())
-      .then((data) => {
-        setLikeCount(data.likeCount);
-        setLiked(data.liked);
-        setUnLiked(data.unLiked);
-      })
-      .catch((error) => {
-        console.error('Error fetching data:', error);
-      });
-  }, []);
 
   const handleLikeClick = () => {
     setLikeCount((prev) => prev + 1);
@@ -32,7 +19,6 @@ const Reaction = () => {
   const handleUnLikeClick = () => {
     setUnLiked(!unLiked);
     setLiked(false);
-    setLikeCount(0);
   };
 
   return (
@@ -45,7 +31,7 @@ const Reaction = () => {
           ${liked ? styles['like'] : ''}
           `}
         >
-          좋아요 {liked ? likeCount : ''}
+          좋아요 {liked ? showlikeCount : ''}
         </button>
       </div>
       <div className={`${styles['label']}`} onClick={handleUnLikeClick}>
@@ -62,4 +48,8 @@ const Reaction = () => {
     </div>
   );
 };
+
+interface ReactionProps {
+  likeCount: number;
+}
 export default Reaction;
