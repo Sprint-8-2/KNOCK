@@ -7,61 +7,55 @@ import { useState } from 'react';
 
 interface ReactionProps {
   likeCount: number;
-  onLikeClick: () => void;
-  onLikeDoubleClick: () => void;
+  onClickLike: () => void;
+  onClickDislike: () => void;
+  isLiked?: boolean;
+  isDisliked?: boolean;
 }
 
 const Reaction: React.FC<ReactionProps> = ({
   likeCount,
-  onLikeClick,
-  onLikeDoubleClick,
+  onClickLike,
+  onClickDislike,
+  isLiked,
+  isDisliked,
 }) => {
-  const [liked, setLiked] = useState(false);
-  const [unLiked, setUnLiked] = useState(false);
-
   const handleLikeClick = () => {
-    if (!liked) {
-      onLikeClick();
-      setLiked(true);
-      setUnLiked(false);
+    if (!isLiked) {
+      onClickLike();
     } else {
-      onLikeClick();
-      setLiked(false);
-      setUnLiked(true);
+      onClickLike();
     }
   };
 
   const handleLikeDoubleClick = () => {
-    setLiked(false);
-    setUnLiked(false);
-    onLikeDoubleClick();
+    onClickDislike();
   };
 
   return (
-    <div
-      className={`${styles['container']}`}
-      onDoubleClick={handleLikeDoubleClick}
-    >
-      <div className={`${styles['label']}`} onClick={handleLikeClick}>
+    <div className={`${styles['container']}`}>
+      <div className={`${styles['label']}`}>
         <div>
-          <img src={liked ? AfterLikeIcon : BeforeLikeIcon} alt="좋아요" />
+          <img src={isLiked ? AfterLikeIcon : BeforeLikeIcon} alt="좋아요" />
           <button
             className={`
             ${styles['text']}
-            ${liked ? styles['like'] : ''}
+            ${isLiked ? styles['like'] : ''}
             `}
+            onClick={handleLikeClick}
           >
-            좋아요 {liked ? likeCount : ''}
+            좋아요 {likeCount}
           </button>
           <img
-            src={unLiked ? AfterUnLikeIcon : BeforeUnLikeIcon}
+            src={isDisliked ? AfterUnLikeIcon : BeforeUnLikeIcon}
             alt="싫어요"
           />
           <button
             className={`
             ${styles['text']} 
-            ${unLiked ? styles['hate'] : ''}
+            ${isDisliked ? styles['hate'] : ''}
             `}
+            onClick={handleLikeDoubleClick}
           >
             싫어요
           </button>
