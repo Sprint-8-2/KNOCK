@@ -9,6 +9,7 @@ import Icon from '../../core/ui/CommonIcon/icon';
 import Image from '../../core/ui/CommonImage/Image';
 
 const QuestionListHeader = () => {
+  const userId = window.localStorage.getItem('userId');
   return (
     <section className={styles['question-list-header']}>
       <Link to="/">
@@ -18,7 +19,7 @@ const QuestionListHeader = () => {
           alt="메인 로고"
         />
       </Link>
-      <Link to="/post">
+      <Link to={userId ? `/post/${userId}/answer` : '/'}>
         <UButton type="box" handleClick={() => {}} isLightTheme={true}>
           <p className={styles['question-list-header__button-content']}>
             <span>답변하러 가기</span>
