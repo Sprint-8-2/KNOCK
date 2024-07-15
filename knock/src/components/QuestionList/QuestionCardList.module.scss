@@ -3,7 +3,7 @@
   width: 100%;
   justify-content: center;
   margin: 0 2rem;
-  grid-template: repeat(2, 1fr) / repeat(4, minmax(11.625rem, 1fr));
+  grid-template: repeat(2, 1fr) / repeat(4, minmax(186px, 220px));
   gap: 1.25rem;
 
   & a {
