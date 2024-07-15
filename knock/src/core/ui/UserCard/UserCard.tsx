@@ -1,5 +1,5 @@
 import Image from '../CommonImage/Image';
-import Icon from '../icon/Icon';
+import Icon from '../CommonIcon/icon';
 import styles from '../../styles/usercard/UserCard.module.scss';
 import messages from '../../assets/icon/Messages.svg';
 

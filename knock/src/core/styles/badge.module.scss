@@ -1,0 +1,27 @@
+@import './global.scss';
+
+@mixin badge-styles($color) {
+  border-radius: 0.5rem;
+  border: 1px solid $color;
+  background: $Grayscale-10;
+  color: $color;
+}
+
+.Badge {
+  width: 3.25rem;
+  height: 1.125rem;
+  @include Caption1-Medium;
+  display: flex;
+  padding: 0.25rem 0.75rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+
+  &__answered {
+    @include badge-styles($Brown-40);
+  }
+
+  &__unanswered {
+    @include badge-styles($Grayscale-40);
+  }
+}
