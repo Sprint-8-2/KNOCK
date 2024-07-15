@@ -7,31 +7,19 @@ import { useState } from 'react';
 
 interface ReactionProps {
   likeCount: number;
-  onClickLike: () => void;
-  onClickDislike: () => void;
+  handleClickLike: () => void;
+  handleClickDislike: () => void;
   isLiked?: boolean;
   isDisliked?: boolean;
 }
 
 const Reaction: React.FC<ReactionProps> = ({
   likeCount,
-  onClickLike,
-  onClickDislike,
+  handleClickLike,
+  handleClickDislike,
   isLiked,
   isDisliked,
 }) => {
-  const handleClickLike = () => {
-    if (!isLiked) {
-      onClickLike();
-    } else {
-      onClickLike();
-    }
-  };
-
-  const handleClickDislike = () => {
-    onClickDislike();
-  };
-
   return (
     <div className={`${styles['container']}`}>
       <div className={`${styles['label']}`}>
