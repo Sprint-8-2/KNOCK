@@ -6,6 +6,7 @@ import { SubjectDetailResponse } from '../../core/types/api/Response';
 import { SubjectListParams } from '../../core/types/api/Request';
 
 import styles from './QuestionCardList.module.scss';
+import useResizeObserver from '../../lib/hooks/useResizeObserver';
 
 interface QuestionCardListProps {
   order: string;
@@ -90,10 +91,13 @@ const QuestionCardList = ({
   setMaxIndex,
 }: QuestionCardListProps) => {
   const [questions, setQuestions] = useState<SubjectDetailResponse[]>([]);
+  const { ref, cardWidth } = useResizeObserver();
+
   const handleQuestions = async ({ limit, offset }: SubjectListParams) => {
     const results = () => ['API Response'];
-
     setQuestions([]);
+    setCurrentPage(1);
+    setMaxIndex(1);
   };
 
   useEffect(() => {
@@ -101,7 +105,10 @@ const QuestionCardList = ({
   }, []);
 
   return (
-    <ul className={styles['question-list-main__cards']}>
+    <ul
+      ref={ref}
+      className={`${styles['question-list-main__cards']} ${cardWidth > 804 ? styles['question-list-main__cards--large'] : styles['question-list-main__cards--small']}`}
+    >
       {mockData.map((e) => {
         return (
           <li key={e.id}>

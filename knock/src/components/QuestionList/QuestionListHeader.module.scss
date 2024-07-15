@@ -8,6 +8,11 @@
   margin: 0 auto;
   padding: 2.5rem 0;
 
+  @media (width <= 430px) {
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
   &__button {
     cursor: pointer;
     &-content {
