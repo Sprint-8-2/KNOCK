@@ -1,26 +1,33 @@
 import React, { useState, useEffect } from 'react';
 import styles from '../../styles/toast.module.scss';
 
-const Toast: React.FC = () => {
-  const [alert, alertSet] = useState(true);
+const Toast: React.FC<ToastProps> = ({ showToast, toastMessage }) => {
+  const [showToastState, setShowToast] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      alertSet(false);
-    }, 2000);
+    if (showToast) {
+      const timer = setTimeout(() => {
+        setShowToast(false);
+      }, 2000);
 
-    return () => clearTimeout(timer);
-  }, []);
+      return () => clearTimeout(timer);
+    }
+  }, [showToast]);
 
   return (
     <>
-      {alert === true ? (
-        <div className={`${styles['layout']}`}>
-          <div className={`${styles['text']}`}>URL이 복사되었습니다</div>
+      {showToastState && (
+        <div className={styles['layout']}>
+          <div className={styles['text']}>{toastMessage}</div>
         </div>
-      ) : null}
+      )}
     </>
   );
 };
+
+interface ToastProps {
+  showToast: boolean;
+  toastMessage: string;
+}
 
 export default Toast;
