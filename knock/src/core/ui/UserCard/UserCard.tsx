@@ -1,5 +1,5 @@
-import ProfileImage from '../CommonImage/ProfileImage';
-import Icon from '../Icon/Icon';
+import Image from '../CommonImage/Image';
+import Icon from '../CommonIcon/icon';
 import styles from '../../styles/usercard/UserCard.module.scss';
 import messages from '../../assets/icon/Messages.svg';
 
@@ -18,7 +18,7 @@ const UserCard: React.FC<UserCardProps> = ({
 }) => {
   return (
     <div onClick={onClick} className={styles['user-card']}>
-      <ProfileImage src={src} alt="프로필 이미지" />
+      <Image src={src} alt="프로필 이미지" />
       <h3 className={styles['user-card__name']}>{name}</h3>
       <div className={styles['user-card__received-container']}>
         <div className={styles['user-card__icon-questions']}>
