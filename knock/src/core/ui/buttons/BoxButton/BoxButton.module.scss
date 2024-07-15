@@ -12,11 +12,11 @@
     }
 
     &:disabled {
-      outline: 1px solid $Brown-30;
+      border: 1px solid $Brown-30;
       background: $Brown-30;
     }
   } @else if $theme == 'light' {
-    outline: 1px solid $Brown-40;
+    border: 1px solid $Brown-40;
     background: $Brown-10;
     color: $Brown-40;
 
@@ -30,7 +30,7 @@
     }
 
     &:disabled {
-      outline: 1px solid $Brown-30;
+      border: 1px solid $Brown-30;
       background: $Brown-10;
       color: $Brown-30;
     }
