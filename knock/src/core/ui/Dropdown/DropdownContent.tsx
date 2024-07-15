@@ -14,7 +14,7 @@ const DropdownContent = ({
       {dropdownElementList.map((e, idx) => {
         return (
           <li
-            className={` ${selected === e ? styles['dropdown__content--selected'] : ''}`}
+            className={` ${selected === e ? styles['dropdown__content--selected'] : styles['dropdown__content--disselected']}`}
             key={idx}
           >
             {e}
