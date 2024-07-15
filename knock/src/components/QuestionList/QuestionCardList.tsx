@@ -105,7 +105,7 @@ const QuestionCardList = ({
       {mockData.map((e) => {
         return (
           <li key={e.id}>
-            <Link to={`${e.id}`}>
+            <Link to={`/post/${e.id}`}>
               <QuestionCard
                 name={e.name}
                 src={e.imageSource}
