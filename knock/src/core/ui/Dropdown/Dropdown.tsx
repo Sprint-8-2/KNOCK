@@ -4,6 +4,7 @@ import DropdownContent from './DropdownContent';
 import styles from '../../styles/dropdown.module.scss';
 
 interface DropdownProps {
+  ButtonclassName?: string;
   children: React.ReactNode;
   dropdownElementList: React.ReactNode[] | string[];
   handleSelectElement: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
@@ -11,6 +12,7 @@ interface DropdownProps {
 }
 
 const Dropdown = ({
+  ButtonclassName,
   children,
   dropdownElementList,
   handleSelectElement,
@@ -24,7 +26,9 @@ const Dropdown = ({
   return (
     <div className={`${styles['dropdown']}`}>
       <button
-        className={`${styles['dropdown__button']} ${isOpen ? styles['dropdown__button--active'] : ''}`}
+        className={`${
+          ButtonclassName ? ButtonclassName : styles['dropdown__button']
+        } ${isOpen ? styles['dropdown__button--active'] : ''}`}
         onClick={handleOpen}
       >
         {children}
