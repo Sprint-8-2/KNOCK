@@ -20,7 +20,7 @@ const Reaction: React.FC<ReactionProps> = ({
   isLiked,
   isDisliked,
 }) => {
-  const handleLikeClick = () => {
+  const handleClickLike = () => {
     if (!isLiked) {
       onClickLike();
     } else {
@@ -28,7 +28,7 @@ const Reaction: React.FC<ReactionProps> = ({
     }
   };
 
-  const handleLikeDoubleClick = () => {
+  const handleClickDislike = () => {
     onClickDislike();
   };
 
@@ -42,7 +42,7 @@ const Reaction: React.FC<ReactionProps> = ({
             ${styles['text']}
             ${isLiked ? styles['like'] : ''}
             `}
-            onClick={handleLikeClick}
+            onClick={handleClickLike}
           >
             좋아요 {likeCount}
           </button>
@@ -55,7 +55,7 @@ const Reaction: React.FC<ReactionProps> = ({
             ${styles['text']} 
             ${isDisliked ? styles['hate'] : ''}
             `}
-            onClick={handleLikeDoubleClick}
+            onClick={handleClickDislike}
           >
             싫어요
           </button>
