@@ -1,16 +1,17 @@
 import { ReactComponent as Icon } from '../../../../assets/icon/Kakaotalk.svg';
-import RoundButton from '../../RoundButton/RoundButton';
+import UButton from '../../UButton/UButton';
 import styles from './KakaoShareButton.module.scss';
 
 const KakaoShareButton = () => {
   return (
     <>
-      <RoundButton
+      <UButton
+        type="round"
         className={styles['button--custom-color']}
         handleClick={() => {}}
       >
         <Icon />
-      </RoundButton>
+      </UButton>
     </>
   );
 };
