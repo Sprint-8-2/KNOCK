@@ -12,13 +12,13 @@ const FeedList = ({ count, next, previous, results }: FeedListProps) => {
   const isEmptyQuestion = count === 0;
   const headerMessage = isEmptyQuestion
     ? '아직 질문이 없습니다'
-    : '3 개의 질문이 있습니다';
+    : `${count} 개의 질문이 있습니다`;
 
   return (
     <>
       <div className={styles['feedlist']}>
         <div className={styles['feedlist__header']}>
-          <Icon className="" src={IconMessage} alt="메시지 이모티콘" />
+          <Icon className="" src={IconMessage} alt="메시지" />
           {headerMessage}
         </div>
         {!isEmptyQuestion &&
