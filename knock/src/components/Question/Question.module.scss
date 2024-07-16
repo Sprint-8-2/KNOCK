@@ -1,0 +1,21 @@
+@import '../../core/styles/global.scss';
+
+.question {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.25rem;
+  flex: 1 0 0;
+
+  &__timestamp {
+    @include Caption1-Medium;
+    color: $Grayscale-40;
+  }
+
+  &__content {
+    @include Body2-Regular;
+    @media (max-width: 768px) {
+      font-size: 1rem;
+    }
+  }
+}
