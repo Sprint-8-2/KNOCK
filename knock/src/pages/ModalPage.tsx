@@ -6,22 +6,30 @@ import Textarea from '../core/ui/Textarea/Textarea';
 import Icon from '../core/ui/CommonIcon/icon';
 import messageicon from '../core/assets/icon/Messages.svg';
 import closeicon from '../core/assets/icon/Close.svg';
+import { createQuestionAnswer } from '../lib/api/Questions';
 
 interface ModalPageProps {
   name: string;
   src: string;
   alt: string;
+  questionId: string;
 }
 
-const ModalPage: React.FC<ModalPageProps> = ({ name, src, alt }) => {
+const ModalPage: React.FC<ModalPageProps> = ({
+  name,
+  src,
+  alt,
+  questionId,
+}) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [textareaValue, setTextareaValue] = useState('');
-  const [activation, setActivation] = useState(true);
+  const [isActivated, setIsActivated] = useState(true);
   const modalBackground = useRef<HTMLDivElement>(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleModalOpen = () => {
     setTextareaValue('');
-    setActivation(true);
+    setIsActivated(true);
     setModalOpen(true);
   };
 
@@ -34,15 +42,36 @@ const ModalPage: React.FC<ModalPageProps> = ({ name, src, alt }) => {
   ) => {
     setTextareaValue(event.target.value);
     if (event.target.value) {
-      setActivation(false);
+      setIsActivated(false);
     } else {
-      setActivation(true);
+      setIsActivated(true);
     }
   };
 
   const handleClickOutsideModal = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === modalBackground.current) {
       setModalOpen(false);
+    }
+  };
+
+  const handleSubmit = async () => {
+    setIsLoading(true);
+    try {
+      if (!textareaValue.trim()) {
+        throw new Error('질문을 입력해주세요.');
+      }
+      const response = await createQuestionAnswer({
+        questionId,
+        content: textareaValue,
+        isRejected: false,
+        options: {},
+      });
+      console.log('질문제출 성공', response);
+      handleModalClose();
+    } catch (error) {
+      console.error('질문제출 실패', error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -105,10 +134,10 @@ const ModalPage: React.FC<ModalPageProps> = ({ name, src, alt }) => {
               </div>
               <div className="modal-content__question-button">
                 <UButton
-                  handleClick={handleModalClose}
+                  handleClick={handleSubmit}
                   type="box"
                   isLightTheme={false}
-                  isDisalbed={activation}
+                  isDisalbed={isActivated || isLoading}
                   isSmallButton={false}
                 >
                   질문 보내기
