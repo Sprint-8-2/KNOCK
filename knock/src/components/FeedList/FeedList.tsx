@@ -22,11 +22,11 @@ const FeedList = ({ count, next, previous, results }: FeedListProps) => {
           {headerMessage}
         </div>
         {!isEmptyQuestion &&
-          results.map((q, idx) => {
+          results.map((q) => {
             return (
               <>
                 <FeedCard
-                  key={q.id}
+                  key={`feed_${q.id}`}
                   id={q.id}
                   subjectId={q.subjectId}
                   like={q.like}
