@@ -1,0 +1,7 @@
+@import '../../core/styles/global.scss';
+
+.rejection {
+  @include Body3-Regular;
+  color: $Red-50;
+  align-self: stretch;
+}

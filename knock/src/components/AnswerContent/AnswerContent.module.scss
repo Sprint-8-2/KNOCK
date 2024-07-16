@@ -1,0 +1,6 @@
+@import '../../core/styles/global.scss';
+
+.content {
+  @include Body3-Regular;
+  align-self: stretch;
+}
