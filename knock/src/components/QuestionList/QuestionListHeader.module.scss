@@ -1,0 +1,32 @@
+@import '../../core/styles/global.scss';
+
+.question-list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2.5rem 0;
+
+  @media (width <= 430px) {
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  &__button {
+    cursor: pointer;
+    &-content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    &-icon {
+      width: 1.125rem;
+      height: 1.125rem;
+      filter: invert(19%) sepia(14%) saturate(2296%) hue-rotate(337deg)
+        brightness(96%) contrast(92%);
+    }
+  }
+}

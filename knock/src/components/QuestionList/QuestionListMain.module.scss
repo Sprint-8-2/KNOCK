@@ -1,0 +1,35 @@
+@import '../../core//styles/global.scss';
+
+.question-list-main {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.question-list-title {
+  @include H1;
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.87rem;
+  @media (width <= 430px) {
+    @include H3;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 1.5rem 1.12rem;
+  }
+  &__dropdown {
+    white-space: nowrap;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.25rem;
+    align-self: stretch;
+    &--icon {
+      width: 0.875rem;
+      height: 0.875rem;
+    }
+  }
+}

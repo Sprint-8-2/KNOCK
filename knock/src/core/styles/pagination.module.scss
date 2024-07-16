@@ -28,6 +28,11 @@
       color: $Grayscale-60;
     }
 
+    &:disabled {
+      color: $Grayscale-40;
+      cursor: auto;
+    }
+
     &--selected {
       color: $Brown-40;
     }

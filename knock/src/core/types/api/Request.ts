@@ -31,6 +31,7 @@ export interface QuestionAnswerProps extends APIOptions {
 }
 
 export interface SubjectListParams extends APIOptions {
+  sort?: 'name' | 'time';
   limit?: number;
   offset?: number;
 }

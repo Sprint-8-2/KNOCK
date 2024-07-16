@@ -1,0 +1,32 @@
+.question-list-main__cards {
+  display: grid;
+  justify-content: center;
+  margin: 0 2rem;
+  gap: 1.25rem;
+
+  @media (width <= 430px) {
+    margin: 0 1.5rem;
+  }
+
+  &--large {
+    grid-template: repeat(2, 1fr) / repeat(4, minmax(186px, 220px));
+  }
+
+  &--small {
+    grid-template: repeat(2, 1fr) / repeat(3, minmax(186px, 220px));
+    @media (width <= 430px) {
+      grid-template: repeat(3, 1fr) / repeat(2, 1fr);
+      gap: 1rem;
+    }
+  }
+
+  & a {
+    text-decoration: none;
+  }
+  & li {
+    cursor: pointer;
+    @media (width <= 430px) {
+      width: 9.71875rem;
+    }
+  }
+}
