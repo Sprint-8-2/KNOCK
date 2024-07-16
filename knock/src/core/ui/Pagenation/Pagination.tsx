@@ -14,7 +14,7 @@ const Pagination = ({
   currentPage,
   handleCurrentPage,
 }: PaginationProps) => {
-  const [currentPageIndexes, setCurrentPageIndexes] = useState<number[]>(
+  const [currentPageIndexes, setCurrentPageIndexes] = useState<number[]>(() =>
     pageIndexes.slice(0, 5),
   );
   const [prevDisabled, setPrevDisabled] = useState<boolean>(true);
