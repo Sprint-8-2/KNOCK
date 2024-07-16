@@ -30,6 +30,8 @@ const UButton = ({
             [styles['box-button--light']]: type === 'box' && isLightTheme,
             [styles['box-button--small']]: type === 'box' && isSmallButton,
             [styles['floating-button']]: type === 'floating',
+            [styles['floating-button--small']]:
+              type === 'floating' && isSmallButton,
             [styles['round-button']]: type === 'round',
           },
           className,

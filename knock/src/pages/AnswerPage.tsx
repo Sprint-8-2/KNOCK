@@ -4,6 +4,9 @@ import MetaTags from '../core/ui/MetaTags/MetaTags';
 import Image from '../core/ui/CommonImage/Image';
 import ImageBanner from '../core/assets/image/feedHeaderImage.png';
 import styles from '../core/styles/answerPage.module.scss';
+import UButton from '../core/ui/buttons/UButton/UButton';
+import Profile from '../components/Profile/Profile';
+import imgLogo from '../core/assets/image/SubPageLogo.svg';
 
 function AnswerPage() {
   const { id } = useParams(); // subjectId
@@ -18,7 +21,24 @@ function AnswerPage() {
             src={ImageBanner}
             alt="배너"
           />
+          <div>
+            <Image
+              containerClassName={styles['page__logo']}
+              src={imgLogo}
+              alt="로고"
+            />
+          </div>
+          <Profile name="dd" profileImage="" />
           <div className={styles['page__feed-list']}>
+            <div className={styles['page__list-header']}>
+              <UButton
+                type="floating"
+                isSmallButton={true}
+                handleClick={() => {}}
+              >
+                삭제하기
+              </UButton>
+            </div>
             <FeedList
               count={4}
               next={null}
