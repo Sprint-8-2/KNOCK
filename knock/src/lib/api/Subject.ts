@@ -19,9 +19,23 @@ const DOMAIN = 'subjects/';
 export const getSubjectList = async ({
   limit = undefined,
   offset = undefined,
+  sort = 'time',
   options,
 }: SubjectListParams) => {
-  const path = `${DOMAIN}?${limit !== undefined ? 'limit=' + limit : ''}${offset !== undefined ? 'offset=' + offset : ''}/`;
+  const query = () => {
+    const queryArray = [];
+    if (limit) {
+      queryArray.push(`limit=${limit}`);
+    }
+    if (offset) {
+      queryArray.push(`offset=${offset}`);
+    }
+    if (sort) {
+      queryArray.push(`sort=${sort}`);
+    }
+    return queryArray.join('&');
+  };
+  const path = `${DOMAIN}?${query()}`;
   return await apiHandler.get<SubjectListResponse>(path, options);
 };
 
