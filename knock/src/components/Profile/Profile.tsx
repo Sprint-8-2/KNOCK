@@ -1,18 +1,24 @@
 import styles from './Profile.module.scss';
-import profileImage from '../../core/assets/image/Profilephoto.svg';
+import defaultImage from '../../core/assets/image/Profilephoto.svg';
 import ShareButtons from '../../core/ui/buttons/ShareButtons/ShareButtons';
 
-interface ProfileProps {}
+interface ProfileProps {
+  profileImage: string;
+  name: string;
+}
 
-const Profile = ({}: ProfileProps) => {
+const Profile = ({
+  profileImage,
+  name = '',
+}: ProfileProps) => {
   return (
     <div className={`${styles['container']}`}>
       <img
-        src={profileImage}
+        src={profileImage || defaultImage}
         alt="profileImage"
         className={`${styles['profileImage']}`}
       />
-      <div className={`${styles['text']}`}>아초는고양이</div>
+      <div className={`${styles['text']}`}>{name}</div>
       <ShareButtons />
     </div>
   );
