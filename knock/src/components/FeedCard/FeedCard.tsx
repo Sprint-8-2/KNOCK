@@ -1,39 +1,32 @@
+import { QuestionDetailResponse } from '../../core/types/api/Response';
 import Badge from '../../core/ui/Badge/Badge';
 import Dropdown from '../../core/ui/Dropdown/Dropdown';
 import Question from '../Question/Question';
 import Reaction from '../../core/ui/Reaction/Reaction';
 import styles from './FeedCard.module.scss';
 
-interface FeedCardProps {
-  questionId: number;
-  subjectId: number;
-  isRejected: boolean;
-  handleUpdateAnswer: (answerId: number, content: string) => void;
-  handleRejectAnswer: (answerId: number, isRejected: boolean) => void;
-  questionContent: string;
-  likeCount: number;
-  dislikeCount: number;
+interface FeedCardProps extends QuestionDetailResponse {
+  handleUpdateAnswer: (answerId: number | undefined, content: string) => void;
+  handleRejectAnswer: (
+    answerId: number | undefined,
+    isRejected: boolean,
+  ) => void;
   handleClickLike: (questionId: number) => void;
   handleClickDislike: (questionId: number) => void;
-  createdAt: string;
-  answerId: number;
-  answerContent?: string;
 }
 
 const FeedCard = ({
-  questionId,
+  id,
   subjectId,
-  isRejected = false,
   handleUpdateAnswer,
   handleRejectAnswer,
-  questionContent,
-  likeCount = 0,
-  dislikeCount = 0,
+  content,
+  like,
+  dislike,
   handleClickLike,
   handleClickDislike,
-  answerId,
   createdAt,
-  answerContent,
+  answer,
 }: FeedCardProps) => {
   const dropdownElementList = ['수정하기', '거절하기'];
 
@@ -42,20 +35,20 @@ const FeedCard = ({
     console.log(target.textContent);
     if (target.textContent === dropdownElementList[0]) {
       const content = '';
-      handleUpdateAnswer(answerId, content);
+      handleUpdateAnswer(answer?.id, content);
     } else if (target.textContent === dropdownElementList[1]) {
-      handleRejectAnswer(answerId, true);
+      handleRejectAnswer(answer?.id, true);
     }
   };
 
-  const onClickLike = () => handleClickLike(questionId);
-  const onClickDisike = () => handleClickDislike(questionId);
+  const onClickLike = () => handleClickLike(id);
+  const onClickDisike = () => handleClickDislike(id);
 
   return (
     <>
-      <div className={styles['feedcard']} key={questionId}>
+      <div className={styles['feedcard']} key={id}>
         <div className={styles['feedcard__header']}>
-          <Badge isAnswered={!isRejected} />
+          <Badge isAnswered={!answer?.isRejected} />
           <Dropdown
             ButtonclassName={styles['feedcard__btn-dropdown']}
             dropdownElementList={dropdownElementList}
@@ -65,13 +58,13 @@ const FeedCard = ({
           </Dropdown>
         </div>
         <div>
-          <Question content={questionContent} createAt={createdAt} />
+          <Question content={content} createAt={createdAt} />
         </div>
         <div>{/* 답변 */}</div>
         <div className={styles['feedcard__line']} />
         <div>
           <Reaction
-            likeCount={likeCount}
+            likeCount={like}
             handleClickLike={onClickLike}
             handleClickDislike={onClickDisike}
           />
