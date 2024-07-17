@@ -4,7 +4,7 @@ import AnswerPage from './pages/AnswerPage';
 import MainPage from './pages/MainPage';
 import PostPage from './pages/PostPage';
 import QuestionList from './pages/QuestionList';
-import NotFound from './pages/NotFound';
+import NotFound from './pages/NotFound/NotFound';
 
 function App() {
   return (
