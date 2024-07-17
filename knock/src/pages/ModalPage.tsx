@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import './modalPage.scss';
+import './ModalPage.scss';
 import UButton from '../core/ui/buttons/UButton/UButton';
 import Image from '../core/ui/CommonImage/Image';
 import Textarea from '../core/ui/Textarea/Textarea';
@@ -12,7 +12,7 @@ interface ModalPageProps {
   name: string;
   src: string;
   alt: string;
-  subjectId: number;
+  subjectId: number | string;
 }
 
 const ModalPage: React.FC<ModalPageProps> = ({ name, src, alt, subjectId }) => {
