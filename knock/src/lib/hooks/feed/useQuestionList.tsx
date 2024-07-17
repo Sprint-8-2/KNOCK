@@ -1,41 +1,48 @@
 import { useState, useEffect } from 'react';
 import { getSubjectQuestionList } from '../../api/Subject';
+import { SubjectQuestionListResponse } from '../../../core/types/api/Response';
+import { SubjectQuestionListParams } from '../../../core/types/api/Request';
 
-interface useQuestionListProps {
-  subjectId: number;
-  limit: number;
-  offset: number;
+interface useQuestionListProps extends SubjectQuestionListParams {
+  handleSuccess: (response: SubjectQuestionListResponse) => void;
+  handleError?: (error: any) => void;
+  deps: [];
 }
 
 const useQuestionList = ({
-  subjectId,
-  limit,
-  offset,
+  handleSuccess,
+  handleError,
+  deps,
+  ...subjectQuestionListParams
 }: useQuestionListProps) => {
-  // const [data, setData] = useState<IResponse[]>();
-  // const [isLoading, setIsLoading] = useState<boolean>(true);
-  // const [error, setError] = useState<string>('');
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       await axios(url)
-  //         .then(res => {
-  //           setData(res.data);
-  //         })
-  //         .finally(() => {
-  //           setIsLoading(false);
-  //         });
-  //     } catch (err: any) {
-  //       setError(err);
-  //       alert(err);
-  //     }
-  //   };
-  //   if (isLoading) {
-  //     fetchData();
-  //   }
-  // }, [url]);
-  // return { data, error, isLoading };
-  // getSubjectQuestionList(subjectId, limit, offset, options);
+  const [data, setData] = useState<SubjectQuestionListResponse>();
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    setIsLoading(true);
+
+    const fetchData = async () => {
+      try {
+        await await getSubjectQuestionList({
+          subjectId: subjectQuestionListParams.subjectId,
+          limit: subjectQuestionListParams.limit,
+          offset: subjectQuestionListParams.offset,
+          options: {},
+        })
+          .then((response) => {
+            setData(response);
+          })
+          .finally(() => {
+            setIsLoading(false);
+          });
+      } catch (err: any) {
+        if (handleError) handleError(err);
+      }
+      if (isLoading) fetchData();
+    };
+  }, deps);
+
+  return { data, isLoading };
 };
 
 export default useQuestionList;
