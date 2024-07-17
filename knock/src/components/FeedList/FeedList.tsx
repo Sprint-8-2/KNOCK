@@ -24,22 +24,20 @@ const FeedList = ({ count, next, previous, results }: FeedListProps) => {
         {!isEmptyQuestion &&
           results.map((q) => {
             return (
-              <>
-                <FeedCard
-                  key={`feed_${q.id}`}
-                  id={q.id}
-                  subjectId={q.subjectId}
-                  like={q.like}
-                  dislike={q.dislike}
-                  createdAt={q.createdAt}
-                  content={q.content}
-                  answer={q.answer}
-                  handleClickLike={() => {}}
-                  handleClickDislike={() => {}}
-                  handleUpdateAnswer={() => {}}
-                  handleRejectAnswer={() => {}}
-                />
-              </>
+              <FeedCard
+                key={`feed_${q.id}`}
+                id={q.id}
+                subjectId={q.subjectId}
+                like={q.like}
+                dislike={q.dislike}
+                createdAt={q.createdAt}
+                content={q.content}
+                answer={q.answer}
+                handleClickLike={() => {}}
+                handleClickDislike={() => {}}
+                handleUpdateAnswer={() => {}}
+                handleRejectAnswer={() => {}}
+              />
             );
           })}
         {isEmptyQuestion && (
