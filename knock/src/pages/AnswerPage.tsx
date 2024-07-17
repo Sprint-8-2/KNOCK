@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import FeedList from '../components/FeedList/FeedList';
+import FeedList from '../components/feed/FeedList/FeedList';
 import MetaTags from '../core/ui/MetaTags/MetaTags';
 import Image from '../core/ui/CommonImage/Image';
 import ImageBanner from '../core/assets/image/feedHeaderImage.png';

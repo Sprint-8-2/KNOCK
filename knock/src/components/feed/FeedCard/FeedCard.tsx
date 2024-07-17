@@ -1,19 +1,19 @@
 import {
   QuestionDetailResponse,
   SubjectDetailResponse,
-} from '../../core/types/api/Response';
-import Badge from '../../core/ui/Badge/Badge';
-import Dropdown from '../../core/ui/Dropdown/Dropdown';
-import Question from '../Question/Question';
-import Reaction from '../../core/ui/Reaction/Reaction';
-import Answer, { AnswerState } from '../Answer/Answer';
+} from '../../../core/types/api/Response';
+import Badge from '../../../core/ui/Badge/Badge';
+import Dropdown from '../../../core/ui/Dropdown/Dropdown';
+import Question from '../../Question/Question';
+import Reaction from '../../../core/ui/Reaction/Reaction';
+import Answer, { AnswerState } from '../../feed/Answer/Answer';
 import { useEffect, useState } from 'react';
 import {
   createQuestionAnswer,
   createQuestionReaction,
   getQuestionDetails,
-} from '../../lib/api/Questions';
-import { putAnswer } from '../../lib/api/Answers';
+} from '../../../lib/api/Questions';
+import { putAnswer } from '../../../lib/api/Answers';
 import styles from './FeedCard.module.scss';
 
 interface FeedCardProps

@@ -2,7 +2,7 @@ import Image from '../core/ui/CommonImage/Image';
 import styles from './PostPage.module.scss';
 import postPageBannerImage from '../core/assets/image/feedHeaderImage.png';
 import mainLogo from '../core/assets/image/MainPgaeLogo.svg';
-import FeedList from '../components/FeedList/FeedList';
+import FeedList from '../components/feed/FeedList/FeedList';
 import { useEffect, useState } from 'react';
 import { getDetailSubject, getSubjectQuestionList } from '../lib/api/Subject';
 import {

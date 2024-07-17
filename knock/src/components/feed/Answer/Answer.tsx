@@ -1,10 +1,10 @@
-import Image from '../../core/ui/CommonImage/Image';
+import Image from '../../../core/ui/CommonImage/Image';
 import AnswerForm from '../AnswerForm/AnswerForm';
 import styles from './Answer.module.scss';
 import AnswerContent from '../AnswerContent/AnswerContent';
 import AnswerRejection from '../AnswerRejection/AnswerRejection';
 import AnswerModification from '../AnswerModification/AnswerModification';
-import useElapsedTime from '../../lib/hooks/useElapsedTime';
+import useElapsedTime from '../../../lib/hooks/useElapsedTime';
 
 export type AnswerState = 'answered' | 'empty' | 'rejected';
 

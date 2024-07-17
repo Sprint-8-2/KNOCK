@@ -1,12 +1,11 @@
-import { SubjectQuestionListResponse } from '../../core/types/api/Response';
+import { SubjectQuestionListResponse } from '../../../core/types/api/Response';
 import FeedCard from '../FeedCard/FeedCard';
-import Image from '../../core/ui/CommonImage/Image';
-import Icon from '../../core/ui/CommonIcon/icon';
-import ImageEmptyQuestion from '../../core/assets/image/EmptyQuestion.svg';
-import IconMessage from '../../core/assets/icon/MessagesBrown.svg';
+import Image from '../../../core/ui/CommonImage/Image';
+import Icon from '../../../core/ui/CommonIcon/icon';
+import ImageEmptyQuestion from '../../../core/assets/image/EmptyQuestion.svg';
+import IconMessage from '../../../core/assets/icon/MessagesBrown.svg';
+import useGetUserInfo from '../../../lib/hooks/feed/useGetUserInfo';
 import styles from './FeedList.module.scss';
-import { QuestionAnswerProps } from '../../core/types/api/Request';
-import useGetUserInfo from '../../lib/hooks/feed/useGetUserInfo';
 
 interface FeedListProps extends SubjectQuestionListResponse {
   subejctId: number;

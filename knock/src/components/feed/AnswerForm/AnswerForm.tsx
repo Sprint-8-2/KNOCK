@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Textarea from '../../core/ui/Textarea/Textarea';
+import Textarea from '../../../core/ui/Textarea/Textarea';
 import styles from './AnswerForm.module.scss';
 
 interface AnswerProps {
