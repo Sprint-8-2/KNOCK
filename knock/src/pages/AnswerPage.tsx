@@ -8,36 +8,16 @@ import UButton from '../core/ui/buttons/UButton/UButton';
 import Profile from '../components/Profile/Profile';
 import imgLogo from '../core/assets/image/SubPageLogo.svg';
 import useQuestionList from '../lib/hooks/feed/useQuestionList';
-import { createQuestionAnswer, deleteQuestion } from '../lib/api/Questions';
-import { QuestionAnswerProps } from '../core/types/api/Request';
+import { deleteQuestion } from '../lib/api/Questions';
 import styles from '../core/styles/answerPage.module.scss';
 
 function AnswerPage() {
   const { id } = useParams(); // subjectId
   const [subjectId, setSubjectId] = useState<number>(Number(id?.trim()));
 
-  const {
-    data: questions,
-    isLoading: questionsLoading,
-    error: questionsError,
-  } = useQuestionList({
+  const { data: questions } = useQuestionList({
     subjectId: Number(id) || '',
-    limit: 3,
-    offset: 0,
-    options: {},
   });
-
-  const handleAddAnswer = ({
-    questionId,
-    content,
-    isRejected,
-  }: QuestionAnswerProps) => {
-    createQuestionAnswer({
-      questionId: questionId,
-      content: content,
-      isRejected: isRejected,
-    });
-  };
 
   const hadleDeleteAll = () => {
     questions?.results.map((question) => {

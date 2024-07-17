@@ -25,7 +25,6 @@ interface FeedCardProps
 
 const FeedCard = ({
   mode = 'answer',
-  isShowDropdown = true,
   id,
   subjectId,
   content,
@@ -142,7 +141,7 @@ const FeedCard = ({
       <div className={styles['feedcard']} key={id}>
         <div className={styles['feedcard__header']}>
           <Badge isAnswered={!questionValue.answer?.isRejected} />
-          {isShowDropdown && (
+          {mode !== 'post' && (
             <Dropdown
               ButtonclassName={styles['feedcard__btn-dropdown']}
               dropdownElementList={dropdownElementList}
