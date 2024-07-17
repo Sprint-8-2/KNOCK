@@ -6,22 +6,25 @@ import Textarea from '../core/ui/Textarea/Textarea';
 import Icon from '../core/ui/CommonIcon/icon';
 import messageicon from '../core/assets/icon/Messages.svg';
 import closeicon from '../core/assets/icon/Close.svg';
+import useSubmitQuestion from '../lib/hooks/useSubmitQuestion';
 
 interface ModalPageProps {
   name: string;
   src: string;
   alt: string;
+  subjectId: number;
 }
 
-const ModalPage: React.FC<ModalPageProps> = ({ name, src, alt }) => {
+const ModalPage: React.FC<ModalPageProps> = ({ name, src, alt, subjectId }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [textareaValue, setTextareaValue] = useState('');
-  const [activation, setActivation] = useState(true);
+  const [isActivation, setIsActivation] = useState(true);
   const modalBackground = useRef<HTMLDivElement>(null);
+  const [errorModalOpen, setErrorModalOpen] = useState(false);
 
   const handleModalOpen = () => {
     setTextareaValue('');
-    setActivation(true);
+    setIsActivation(true);
     setModalOpen(true);
   };
 
@@ -34,9 +37,9 @@ const ModalPage: React.FC<ModalPageProps> = ({ name, src, alt }) => {
   ) => {
     setTextareaValue(event.target.value);
     if (event.target.value) {
-      setActivation(false);
+      setIsActivation(false);
     } else {
-      setActivation(true);
+      setIsActivation(true);
     }
   };
 
@@ -44,6 +47,27 @@ const ModalPage: React.FC<ModalPageProps> = ({ name, src, alt }) => {
     if (e.target === modalBackground.current) {
       setModalOpen(false);
     }
+  };
+
+  const handleErrorModalClose = () => {
+    setErrorModalOpen(false);
+  };
+
+  const { handleSubmit, isLoading } = useSubmitQuestion({
+    subjectId,
+    onSuccess: handleModalClose,
+    onError: () => {
+      setModalOpen(false);
+      setErrorModalOpen(true);
+    },
+  });
+
+  const handleSendClick = () => {
+    if (!textareaValue.trim()) {
+      setErrorModalOpen(true);
+      return;
+    }
+    handleSubmit(textareaValue);
   };
 
   return (
@@ -105,16 +129,33 @@ const ModalPage: React.FC<ModalPageProps> = ({ name, src, alt }) => {
               </div>
               <div className="modal-content__question-button">
                 <UButton
-                  handleClick={handleModalClose}
+                  handleClick={handleSendClick}
                   type="box"
                   isLightTheme={false}
-                  isDisalbed={activation}
+                  isDisalbed={isActivation || isLoading}
                   isSmallButton={false}
                 >
                   질문 보내기
                 </UButton>
               </div>
             </div>
+          </div>
+        </div>
+      )}
+      {errorModalOpen && (
+        <div className="error-modal__container">
+          <div className="error-modal__content">
+            <div>
+              <h2 className="error-modal__title">전송실패</h2>
+              <h3 className="error-modal__title">재작성 부탁드립니다.</h3>
+            </div>
+            <UButton
+              handleClick={handleErrorModalClose}
+              type="box"
+              isLightTheme={false}
+            >
+              닫기
+            </UButton>
           </div>
         </div>
       )}
