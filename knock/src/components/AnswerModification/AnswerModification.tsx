@@ -5,8 +5,8 @@ import styles from './AnswerModification.module.scss';
 interface AnswerModificationProps {
   isDisable?: boolean;
   content: string;
-  handleSubmit?: (answerId: number | string, content: string) => void;
-  answerId: number | string;
+  handleSubmit?: (answerId: number | undefined, content: string) => void;
+  answerId: number | undefined;
 }
 
 const AnswerModification = ({

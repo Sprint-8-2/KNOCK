@@ -5,14 +5,26 @@ import Icon from '../../core/ui/CommonIcon/icon';
 import ImageEmptyQuestion from '../../core/assets/image/EmptyQuestion.svg';
 import IconMessage from '../../core/assets/icon/MessagesBrown.svg';
 import styles from './FeedList.module.scss';
+import { QuestionAnswerProps } from '../../core/types/api/Request';
+import useGetUserInfo from '../../lib/hooks/feed/useGetUserInfo';
 
-interface FeedListProps extends SubjectQuestionListResponse {}
+interface FeedListProps extends SubjectQuestionListResponse {
+  subejctId: number;
+}
 
-const FeedList = ({ count, next, previous, results }: FeedListProps) => {
+const FeedList = ({
+  count,
+  next,
+  previous,
+  results,
+  subejctId,
+}: FeedListProps) => {
   const isEmptyQuestion = count === 0;
   const headerMessage = isEmptyQuestion
     ? '아직 질문이 없습니다'
     : `${count} 개의 질문이 있습니다`;
+
+  const { data, isLoading, error } = useGetUserInfo({ subjectId: subejctId });
 
   return (
     <>
@@ -24,22 +36,18 @@ const FeedList = ({ count, next, previous, results }: FeedListProps) => {
         {!isEmptyQuestion &&
           results.map((q) => {
             return (
-              <>
-                <FeedCard
-                  key={`feed_${q.id}`}
-                  id={q.id}
-                  subjectId={q.subjectId}
-                  like={q.like}
-                  dislike={q.dislike}
-                  createdAt={q.createdAt}
-                  content={q.content}
-                  answer={q.answer}
-                  handleClickLike={() => {}}
-                  handleClickDislike={() => {}}
-                  handleUpdateAnswer={() => {}}
-                  handleRejectAnswer={() => {}}
-                />
-              </>
+              <FeedCard
+                key={`feed_${q.id}`}
+                id={q.id}
+                subjectId={q.subjectId}
+                like={q.like}
+                dislike={q.dislike}
+                createdAt={q.createdAt}
+                content={q.content}
+                answer={q.answer}
+                name={data?.name || '이름'}
+                imageSource={data?.imageSource || ''}
+              />
             );
           })}
         {isEmptyQuestion && (

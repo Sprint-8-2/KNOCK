@@ -4,8 +4,8 @@ import styles from './AnswerForm.module.scss';
 
 interface AnswerProps {
   content: string;
-  handleSubmit?: (questionId: number | string, content: string) => void;
-  questionId: number | string;
+  handleSubmit?: (questionId: number | undefined, content: string) => void;
+  questionId: number | undefined;
 }
 
 const AnswerForm = ({
