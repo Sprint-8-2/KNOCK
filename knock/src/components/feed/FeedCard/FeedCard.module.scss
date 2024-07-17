@@ -11,6 +11,7 @@ $bgColor: $Grayscale-10;
   gap: 2rem;
   border-radius: 1rem;
   background: $bgColor;
+  word-break: break-all;
   @include Shadow(1);
 
   &__header {

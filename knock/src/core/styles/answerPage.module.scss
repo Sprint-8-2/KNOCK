@@ -21,12 +21,8 @@ body {
   &__container {
     display: flex;
     width: 44.75rem;
-    // width: 100%;
     flex-direction: column;
     align-items: center;
-    @media (width <= 430px) {
-      width: 20.4375rem;
-    }
   }
 
   &__logo {
