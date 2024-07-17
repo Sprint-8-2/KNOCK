@@ -13,7 +13,7 @@
   align-items: center;
   gap: 0.75rem;
   margin-bottom: 1.87rem;
-  @media (width <= 430px) {
+  @media (width < 668px) {
     @include H3;
     flex-direction: row;
     justify-content: space-between;

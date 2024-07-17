@@ -6,18 +6,17 @@ import styles from './QuestionListPagination.module.scss';
 import { SubjectDetailResponse } from '../../core/types/api/Response';
 import { SubjectListParams } from '../../core/types/api/Request';
 import { getSubjectList } from '../../lib/api/Subject';
+import useResize from '../../lib/hooks/useResize';
 
 interface QuestionListPaginationProps {
   order: string;
 }
 
 const QuestionListPagination = ({ order }: QuestionListPaginationProps) => {
+  const { pageSize } = useResize();
   const [questions, setQuestions] = useState<SubjectDetailResponse[]>([]);
-  const [pageIndexes, setPageIndexes] = useState<number[]>([1]);
+  const [maxIndex, setMaxIndex] = useState<number>(0);
   const [currentIndex, setCurrentIndex] = useState<number>(1);
-  const [pageQuestionCount, setPageQuestionCount] = useState<number>(8);
-  const [questionAllCounts, setQuestionAllCounts] = useState<number>(40);
-
   const handlecurrentIndex = (newValue: number) => {
     setCurrentIndex(newValue);
   };
@@ -26,35 +25,27 @@ const QuestionListPagination = ({ order }: QuestionListPaginationProps) => {
     setCurrentIndex(1);
   }, [order]);
 
-  useEffect(() => {
-    const maxIndex = Math.ceil(questionAllCounts / pageQuestionCount);
-    setPageIndexes(
-      Array(maxIndex)
-        .fill(0)
-        .map((_, i) => i + 1),
-    );
-  }, [questionAllCounts, pageQuestionCount]);
-
-  const handleQuestions = useCallback(
-    async ({ limit, offset, sort }: SubjectListParams) => {
-      const { count, results } = await getSubjectList({ limit, offset, sort });
-      setQuestions(results);
-      setQuestionAllCounts(count);
-    },
-    [order, currentIndex],
-  );
-
+  const handleQuestions = async ({
+    limit,
+    offset,
+    sort,
+  }: SubjectListParams) => {
+    const { count, results } = await getSubjectList({ limit, offset, sort });
+    setQuestions(results);
+    setMaxIndex(Math.ceil(count / pageSize));
+  };
   useEffect(() => {
     const sort = order === '이름순' ? 'name' : 'time';
-    handleQuestions({ limit: pageQuestionCount, offset: currentIndex, sort });
-  }, [handleQuestions]);
+    const offset = pageSize * (currentIndex - 1);
+    handleQuestions({ limit: pageSize, offset, sort });
+  }, [order, currentIndex, pageSize]);
 
   return (
     <section className={styles['question-list-main__pagination']}>
       <QuestionCardList questions={questions} />
       <Pagination
         currentPage={currentIndex}
-        pageIndexes={pageIndexes}
+        itemCount={maxIndex}
         handleCurrentPage={handlecurrentIndex}
       />
     </section>
