@@ -18,9 +18,12 @@ import styles from './FeedCard.module.scss';
 
 interface FeedCardProps
   extends QuestionDetailResponse,
-    Omit<Omit<SubjectDetailResponse, 'id'>, 'questionCount'> {}
+    Omit<Omit<SubjectDetailResponse, 'id'>, 'questionCount'> {
+  isShowDropdown?: boolean;
+}
 
 const FeedCard = ({
+  isShowDropdown = true,
   id,
   subjectId,
   content,
@@ -133,13 +136,15 @@ const FeedCard = ({
       <div className={styles['feedcard']} key={id}>
         <div className={styles['feedcard__header']}>
           <Badge isAnswered={!questionValue.answer?.isRejected} />
-          <Dropdown
-            ButtonclassName={styles['feedcard__btn-dropdown']}
-            dropdownElementList={dropdownElementList}
-            handleSelectElement={handleDropdown}
-          >
-            ...
-          </Dropdown>
+          {isShowDropdown && (
+            <Dropdown
+              ButtonclassName={styles['feedcard__btn-dropdown']}
+              dropdownElementList={dropdownElementList}
+              handleSelectElement={handleDropdown}
+            >
+              ...
+            </Dropdown>
+          )}
         </div>
         <div>
           <Question content={content} createAt={createdAt} />
