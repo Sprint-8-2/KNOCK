@@ -33,6 +33,7 @@ const FeedCard = ({
   answer,
   ...subjectDetail
 }: FeedCardProps) => {
+  const dropdownElementList = ['수정하기', '거절하기'];
   const [answerState, setAnswerState] = useState<AnswerState>('empty');
   const [isModification, setIsModification] = useState(false);
   const [questionValue, setQuestionValue] = useState<QuestionDetailResponse>({
@@ -44,7 +45,8 @@ const FeedCard = ({
     createdAt: createdAt,
     answer: answer,
   });
-  const dropdownElementList = ['수정하기', '거절하기'];
+  const [isLiked, setIsLiked] = useState<boolean>(false);
+  const [isDisiked, setIsDisiked] = useState<boolean>(false);
 
   const handleDropdown = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     const target = e.target as HTMLElement;
@@ -56,15 +58,17 @@ const FeedCard = ({
     }
   };
   const onClickLike = () => {
-    handleClickLike('like');
+    if (!isLiked) handleClickLike('like');
   };
   const onClickDislike = () => {
-    handleClickLike('dislike');
+    if (!isDisiked) handleClickLike('dislike');
   };
   const handleClickLike = (type: 'like' | 'dislike') =>
     createQuestionReaction({ questionId: questionValue.id, type: type }).then(
       () => {
         fetchQuestionDetails();
+        if (type === 'like') setIsLiked(true);
+        else setIsDisiked(true);
       },
     );
   const handleSubmitAnswer = (
@@ -124,10 +128,10 @@ const FeedCard = ({
   };
 
   useEffect(() => {
-    if (questionValue.answer?.content) {
-      setAnswerState('answered');
-    } else if (questionValue.answer?.isRejected) {
+    if (questionValue.answer?.isRejected) {
       setAnswerState('rejected');
+    } else if (questionValue.answer?.content) {
+      setAnswerState('answered');
     }
   }, []);
 
@@ -167,8 +171,8 @@ const FeedCard = ({
             likeCount={questionValue.like}
             handleClickLike={onClickLike}
             handleClickDislike={onClickDislike}
-            isLiked={false}
-            isDisliked={false}
+            isLiked={isLiked}
+            isDisliked={isDisiked}
           />
         </div>
       </div>
