@@ -1,0 +1,42 @@
+@import '../../core/styles/global.scss';
+
+.not-found {
+  margin: 20% auto 0;
+
+  &__title {
+    @include H1;
+    text-align: center;
+    color: $Brown-40;
+    padding: 1rem;
+  }
+
+  &__sub-title {
+    @include H2;
+    text-align: center;
+    color: $Brown-30;
+    padding: 1rem;
+  }
+
+  &__button {
+    &-wrapper {
+      padding: 1rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    &--icon {
+      width: 1.5rem;
+      filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(283deg)
+        brightness(106%) contrast(106%);
+    }
+  }
+
+  &__bg-img {
+    position: absolute;
+    width: 100%;
+    opacity: 60%;
+    top: 30%;
+    z-index: -1;
+  }
+}
