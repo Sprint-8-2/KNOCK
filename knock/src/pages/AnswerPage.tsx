@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import FeedList from '../components/feed/FeedList/FeedList';
 import MetaTags from '../core/ui/MetaTags/MetaTags';
 import Image from '../core/ui/CommonImage/Image';
@@ -14,6 +14,7 @@ import useGetUserInfo from '../lib/hooks/feed/useGetUserInfo';
 
 function AnswerPage() {
   const { id } = useParams(); // subjectId
+  const navigate = useNavigate();
   const [subjectId, setSubjectId] = useState<number>(Number(id?.trim()));
 
   const { data: userData } = useGetUserInfo({ subjectId: subjectId });
@@ -30,6 +31,10 @@ function AnswerPage() {
     });
   };
 
+  const handleClickLogo = () => {
+    navigate(`/`);
+  };
+
   return (
     <>
       <MetaTags />
@@ -40,12 +45,8 @@ function AnswerPage() {
             src={ImageBanner}
             alt="배너"
           />
-          <div>
-            <Image
-              containerClassName={styles['page__logo']}
-              src={imgLogo}
-              alt="로고"
-            />
+          <div className={styles['page__logo']} onClick={handleClickLogo}>
+            <Image src={imgLogo} alt="로고" />
           </div>
           <Profile
             name={userData?.name || ''}
