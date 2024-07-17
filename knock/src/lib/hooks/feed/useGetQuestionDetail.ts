@@ -33,10 +33,6 @@ const useGetQuestionDetail = ({
       });
   };
 
-  // useEffect(() => {
-  //   fetchData();
-  // }, []);
-
   useUpdateEffect(() => {
     fetchData();
   }, []);

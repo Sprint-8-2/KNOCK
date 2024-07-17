@@ -80,6 +80,7 @@ function AnswerPage() {
               next={questions?.next || null}
               previous={questions?.next || null}
               results={questions?.results || []}
+              subejctId={subjectId}
             />
           </div>
         </div>
