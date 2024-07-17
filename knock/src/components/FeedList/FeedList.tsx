@@ -5,10 +5,31 @@ import Icon from '../../core/ui/CommonIcon/icon';
 import ImageEmptyQuestion from '../../core/assets/image/EmptyQuestion.svg';
 import IconMessage from '../../core/assets/icon/MessagesBrown.svg';
 import styles from './FeedList.module.scss';
+import { QuestionAnswerProps } from '../../core/types/api/Request';
 
-interface FeedListProps extends SubjectQuestionListResponse {}
+interface FeedListProps extends SubjectQuestionListResponse {
+  handleLike: () => void;
+  handleDislike: () => void;
+  handleAddAnswer: ({
+    questionId,
+    content,
+    isRejected,
+  }: QuestionAnswerProps) => void;
+  handleUpdateAnswer: () => void;
+  handleRejectAnswer: () => void;
+}
 
-const FeedList = ({ count, next, previous, results }: FeedListProps) => {
+const FeedList = ({
+  count,
+  next,
+  previous,
+  results,
+  handleLike,
+  handleDislike,
+  handleAddAnswer,
+  handleRejectAnswer,
+  handleUpdateAnswer,
+}: FeedListProps) => {
   const isEmptyQuestion = count === 0;
   const headerMessage = isEmptyQuestion
     ? '아직 질문이 없습니다'
@@ -33,11 +54,11 @@ const FeedList = ({ count, next, previous, results }: FeedListProps) => {
                 createdAt={q.createdAt}
                 content={q.content}
                 answer={q.answer}
-                handleClickLike={() => {}}
-                handleClickDislike={() => {}}
-                handleAddAnswer={() => {}}
-                handleUpdateAnswer={() => {}}
-                handleRejectAnswer={() => {}}
+                handleClickLike={handleLike}
+                handleClickDislike={handleDislike}
+                handleAddAnswer={handleAddAnswer}
+                handleUpdateAnswer={handleUpdateAnswer}
+                handleRejectAnswer={handleRejectAnswer}
                 name={''}
                 imageSource={''}
               />

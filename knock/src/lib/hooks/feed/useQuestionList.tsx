@@ -12,28 +12,27 @@ const useQuestionList = ({
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string>('');
 
-  useEffect(() => {
+  const fetchData = async () => {
     setIsLoading(true);
+    await getSubjectQuestionList({
+      subjectId: subjectQuestionListParams.subjectId,
+      limit: subjectQuestionListParams.limit,
+      offset: subjectQuestionListParams.offset,
+    })
+      .then((response) => {
+        setData(response);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        setError(error);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
 
-    const fetchData = async () => {
-      try {
-        await await getSubjectQuestionList({
-          subjectId: subjectQuestionListParams.subjectId,
-          limit: subjectQuestionListParams.limit,
-          offset: subjectQuestionListParams.offset,
-          options: {},
-        })
-          .then((response) => {
-            setData(response);
-          })
-          .finally(() => {
-            setIsLoading(false);
-          });
-      } catch (err: any) {
-        setError(err);
-      }
-      if (isLoading) fetchData();
-    };
+  useEffect(() => {
+    fetchData();
   }, []);
 
   return { data, isLoading, error };

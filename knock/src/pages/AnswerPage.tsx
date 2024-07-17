@@ -3,11 +3,13 @@ import FeedList from '../components/FeedList/FeedList';
 import MetaTags from '../core/ui/MetaTags/MetaTags';
 import Image from '../core/ui/CommonImage/Image';
 import ImageBanner from '../core/assets/image/feedHeaderImage.png';
-import styles from '../core/styles/answerPage.module.scss';
 import UButton from '../core/ui/buttons/UButton/UButton';
 import Profile from '../components/Profile/Profile';
 import imgLogo from '../core/assets/image/SubPageLogo.svg';
 import useQuestionList from '../lib/hooks/feed/useQuestionList';
+import styles from '../core/styles/answerPage.module.scss';
+import { createQuestionAnswer } from '../lib/api/Questions';
+import { QuestionAnswerProps } from '../core/types/api/Request';
 
 function AnswerPage() {
   const { id } = useParams(); // subjectId
@@ -17,11 +19,23 @@ function AnswerPage() {
     isLoading: questionsLoading,
     error: questionsError,
   } = useQuestionList({
-    subjectId: Number(id),
+    subjectId: 7434,
     limit: 3,
     offset: 0,
     options: {},
   });
+
+  const handleAddAnswer = ({
+    questionId,
+    content,
+    isRejected,
+  }: QuestionAnswerProps) => {
+    createQuestionAnswer({
+      questionId: questionId,
+      content: content,
+      isRejected: isRejected,
+    });
+  };
 
   return (
     <>
@@ -56,6 +70,11 @@ function AnswerPage() {
               next={questions?.next || null}
               previous={questions?.next || null}
               results={questions?.results || []}
+              handleAddAnswer={handleAddAnswer}
+              handleRejectAnswer={() => {}}
+              handleUpdateAnswer={() => {}}
+              handleLike={() => {}}
+              handleDislike={() => {}}
             />
           </div>
         </div>

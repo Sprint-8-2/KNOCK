@@ -9,11 +9,12 @@ import Reaction from '../../core/ui/Reaction/Reaction';
 import Answer, { AnswerState } from '../Answer/Answer';
 import { useEffect, useState } from 'react';
 import styles from './FeedCard.module.scss';
+import { QuestionAnswerProps } from '../../core/types/api/Request';
 
 interface FeedCardProps
   extends QuestionDetailResponse,
     Omit<Omit<SubjectDetailResponse, 'id'>, 'questionCount'> {
-  handleAddAnswer: (questionID: number | undefined, content: string) => void;
+  handleAddAnswer: ({}: QuestionAnswerProps) => void;
   handleUpdateAnswer: (answerId: number | undefined, content: string) => void;
   handleRejectAnswer: (
     answerId: number | undefined,
@@ -54,6 +55,15 @@ const FeedCard = ({
 
   const onClickLike = () => handleClickLike(id);
   const onClickDisike = () => handleClickDislike(id);
+  const handleSubmitAnswer = (
+    questionId: number | undefined,
+    content: string,
+  ) =>
+    handleAddAnswer({
+      questionId: id,
+      content: content,
+      isRejected: false,
+    });
 
   useEffect(() => {
     if (answer?.content) {
@@ -82,14 +92,14 @@ const FeedCard = ({
         <Answer
           answerId={answer?.id || undefined}
           answerState={answerState}
-          answerSubmit={handleAddAnswer}
           content={answer?.content || ''}
           createAt={answer?.createdAt || ''}
           imageSource={subjectDetail.imageSource}
           name={subjectDetail.name}
           questionId={id}
-          answerModificationSubmit={handleUpdateAnswer}
           isModification={isModification}
+          answerSubmit={handleSubmitAnswer}
+          answerModificationSubmit={handleUpdateAnswer}
         />
         <div className={styles['feedcard__line']} />
         <div>
