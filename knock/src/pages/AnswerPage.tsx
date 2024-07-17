@@ -7,9 +7,21 @@ import styles from '../core/styles/answerPage.module.scss';
 import UButton from '../core/ui/buttons/UButton/UButton';
 import Profile from '../components/Profile/Profile';
 import imgLogo from '../core/assets/image/SubPageLogo.svg';
+import useQuestionList from '../lib/hooks/feed/useQuestionList';
 
 function AnswerPage() {
   const { id } = useParams(); // subjectId
+
+  const {
+    data: questions,
+    isLoading: questionsLoading,
+    error: questionsError,
+  } = useQuestionList({
+    subjectId: Number(id),
+    limit: 3,
+    offset: 0,
+    options: {},
+  });
 
   return (
     <>
@@ -40,59 +52,10 @@ function AnswerPage() {
               </UButton>
             </div>
             <FeedList
-              count={4}
-              next={null}
-              previous={null}
-              results={[
-                {
-                  id: 12727,
-                  subjectId: 7437,
-                  content: '안녕하세요',
-                  like: 0,
-                  dislike: 0,
-                  createdAt: '2024-07-15T17:26:53.383047Z',
-                  answer: {
-                    id: 5861,
-                    questionId: 12727,
-                    content: '거절된 질문입니다',
-                    isRejected: true,
-                    createdAt: '2024-07-15T17:29:35.962005Z',
-                  },
-                },
-                {
-                  id: 12726,
-                  subjectId: 7437,
-                  content: '질문이에요',
-                  like: 1,
-                  dislike: 1,
-                  createdAt: '2024-07-15T17:26:48.577990Z',
-                  answer: {
-                    id: 5862,
-                    questionId: 12726,
-                    content: '답변이에요',
-                    isRejected: false,
-                    createdAt: '2024-07-15T17:31:16.902560Z',
-                  },
-                },
-                {
-                  id: 12725,
-                  subjectId: 7437,
-                  content: '질문입니다',
-                  like: 0,
-                  dislike: 0,
-                  createdAt: '2024-07-15T17:26:43.626343Z',
-                  answer: null,
-                },
-                {
-                  id: 12724,
-                  subjectId: 7437,
-                  content: '질 문',
-                  like: 0,
-                  dislike: 0,
-                  createdAt: '2024-07-15T17:26:29.816185Z',
-                  answer: null,
-                },
-              ]}
+              count={questions?.count || 0}
+              next={questions?.next || null}
+              previous={questions?.next || null}
+              results={questions?.results || []}
             />
           </div>
         </div>
