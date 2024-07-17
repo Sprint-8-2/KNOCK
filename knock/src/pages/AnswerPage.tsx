@@ -71,11 +71,6 @@ function AnswerPage() {
               next={questions?.next || null}
               previous={questions?.next || null}
               results={questions?.results || []}
-              handleAddAnswer={handleAddAnswer}
-              handleRejectAnswer={() => {}}
-              handleUpdateAnswer={() => {}}
-              handleLike={() => {}}
-              handleDislike={() => {}}
             />
           </div>
         </div>

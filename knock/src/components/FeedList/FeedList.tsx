@@ -7,29 +7,9 @@ import IconMessage from '../../core/assets/icon/MessagesBrown.svg';
 import styles from './FeedList.module.scss';
 import { QuestionAnswerProps } from '../../core/types/api/Request';
 
-interface FeedListProps extends SubjectQuestionListResponse {
-  handleLike: () => void;
-  handleDislike: () => void;
-  handleAddAnswer: ({
-    questionId,
-    content,
-    isRejected,
-  }: QuestionAnswerProps) => void;
-  handleUpdateAnswer: () => void;
-  handleRejectAnswer: () => void;
-}
+interface FeedListProps extends SubjectQuestionListResponse {}
 
-const FeedList = ({
-  count,
-  next,
-  previous,
-  results,
-  handleLike,
-  handleDislike,
-  handleAddAnswer,
-  handleRejectAnswer,
-  handleUpdateAnswer,
-}: FeedListProps) => {
+const FeedList = ({ count, next, previous, results }: FeedListProps) => {
   const isEmptyQuestion = count === 0;
   const headerMessage = isEmptyQuestion
     ? '아직 질문이 없습니다'
