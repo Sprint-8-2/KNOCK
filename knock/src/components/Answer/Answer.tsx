@@ -6,7 +6,7 @@ import AnswerRejection from '../AnswerRejection/AnswerRejection';
 import AnswerModification from '../AnswerModification/AnswerModification';
 import useElapsedTime from '../../lib/hooks/useElapsedTime';
 
-type AnswerState = 'answered' | 'empty' | 'rejected';
+export type AnswerState = 'answered' | 'empty' | 'rejected';
 
 interface AnswerProps {
   answerState: AnswerState;
@@ -17,12 +17,12 @@ interface AnswerProps {
   imageSource: string;
   createAt: string;
   answerModificationSubmit?: (
-    answerId: number | string,
+    answerId: number | undefined,
     content: string,
   ) => void;
-  answerSubmit: (questionId: number | string, content: string) => void;
-  answerId: number | string;
-  questionId: number | string;
+  answerSubmit: (questionId: number | undefined, content: string) => void;
+  answerId: number | undefined;
+  questionId: number | undefined;
 }
 
 const Answer = ({

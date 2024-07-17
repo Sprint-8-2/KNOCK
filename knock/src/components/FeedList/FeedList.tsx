@@ -35,8 +35,11 @@ const FeedList = ({ count, next, previous, results }: FeedListProps) => {
                 answer={q.answer}
                 handleClickLike={() => {}}
                 handleClickDislike={() => {}}
+                handleAddAnswer={() => {}}
                 handleUpdateAnswer={() => {}}
                 handleRejectAnswer={() => {}}
+                name={''}
+                imageSource={''}
               />
             );
           })}
