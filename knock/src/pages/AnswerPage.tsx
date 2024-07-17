@@ -10,6 +10,7 @@ import useQuestionList from '../lib/hooks/feed/useQuestionList';
 import styles from '../core/styles/answerPage.module.scss';
 import { createQuestionAnswer } from '../lib/api/Questions';
 import { QuestionAnswerProps } from '../core/types/api/Request';
+import useAddAnswer from '../lib/hooks/feed/useAddAnswer';
 
 function AnswerPage() {
   const { id } = useParams(); // subjectId
@@ -19,7 +20,7 @@ function AnswerPage() {
     isLoading: questionsLoading,
     error: questionsError,
   } = useQuestionList({
-    subjectId: 7434,
+    subjectId: Number(id) || '',
     limit: 3,
     offset: 0,
     options: {},
@@ -36,6 +37,14 @@ function AnswerPage() {
       isRejected: isRejected,
     });
   };
+
+  // const {
+  // 	data: addingAnswer,
+  // 	isLoading: addingAnswerLoading,
+  // 	error: addingAnswerError,
+  // } = useAddAnswer({
+  // 	questionId:
+  // })
 
   return (
     <>

@@ -9,12 +9,15 @@ import Reaction from '../../core/ui/Reaction/Reaction';
 import Answer, { AnswerState } from '../Answer/Answer';
 import { useEffect, useState } from 'react';
 import styles from './FeedCard.module.scss';
-import { QuestionAnswerProps } from '../../core/types/api/Request';
+import {
+  createQuestionAnswer,
+  getQuestionDetails,
+} from '../../lib/api/Questions';
 
 interface FeedCardProps
   extends QuestionDetailResponse,
     Omit<Omit<SubjectDetailResponse, 'id'>, 'questionCount'> {
-  handleAddAnswer: ({}: QuestionAnswerProps) => void;
+  // handleAddAnswer: ({}: QuestionAnswerProps) => void;
   handleUpdateAnswer: (answerId: number | undefined, content: string) => void;
   handleRejectAnswer: (
     answerId: number | undefined,
@@ -27,7 +30,7 @@ interface FeedCardProps
 const FeedCard = ({
   id,
   subjectId,
-  handleAddAnswer,
+  // handleAddAnswer,
   handleUpdateAnswer,
   handleRejectAnswer,
   content,
@@ -41,6 +44,15 @@ const FeedCard = ({
 }: FeedCardProps) => {
   const [answerState, setAnswerState] = useState<AnswerState>('empty');
   const [isModification, setIsModification] = useState(false);
+  const [questionValue, setQuestionValue] = useState<QuestionDetailResponse>({
+    id: id,
+    subjectId: subjectId,
+    like: like,
+    dislike: dislike,
+    content: content,
+    createdAt: createdAt,
+    answer: answer,
+  });
   const dropdownElementList = ['수정하기', '거절하기'];
 
   const handleDropdown = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
@@ -52,23 +64,36 @@ const FeedCard = ({
       handleRejectAnswer(answer?.id, true);
     }
   };
-
   const onClickLike = () => handleClickLike(id);
   const onClickDisike = () => handleClickDislike(id);
   const handleSubmitAnswer = (
     questionId: number | undefined,
-    content: string,
+    answerContent: string,
   ) =>
-    handleAddAnswer({
+    createQuestionAnswer({
       questionId: id,
-      content: content,
+      content: answerContent,
       isRejected: false,
+    }).then(() => {
+      setAnswerState('answered');
+      fetchQuestionDetails();
     });
+  const fetchQuestionDetails = async () => {
+    await getQuestionDetails({
+      questionId: id,
+    })
+      .then((response) => {
+        setQuestionValue(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   useEffect(() => {
-    if (answer?.content) {
+    if (questionValue.answer?.content) {
       setAnswerState('answered');
-    } else if (answer?.isRejected) {
+    } else if (questionValue.answer?.isRejected) {
       setAnswerState('rejected');
     }
   }, []);
@@ -77,7 +102,7 @@ const FeedCard = ({
     <>
       <div className={styles['feedcard']} key={id}>
         <div className={styles['feedcard__header']}>
-          <Badge isAnswered={!answer?.isRejected} />
+          <Badge isAnswered={!questionValue.answer?.isRejected} />
           <Dropdown
             ButtonclassName={styles['feedcard__btn-dropdown']}
             dropdownElementList={dropdownElementList}
@@ -90,21 +115,21 @@ const FeedCard = ({
           <Question content={content} createAt={createdAt} />
         </div>
         <Answer
-          answerId={answer?.id || undefined}
+          answerId={questionValue.answer?.id || undefined}
           answerState={answerState}
-          content={answer?.content || ''}
-          createAt={answer?.createdAt || ''}
+          content={questionValue.answer?.content || ''}
+          createAt={questionValue.answer?.createdAt || ''}
           imageSource={subjectDetail.imageSource}
           name={subjectDetail.name}
           questionId={id}
           isModification={isModification}
           answerSubmit={handleSubmitAnswer}
-          answerModificationSubmit={handleUpdateAnswer}
+          answerModificationSubmit={handleSubmitAnswer}
         />
         <div className={styles['feedcard__line']} />
         <div>
           <Reaction
-            likeCount={like}
+            likeCount={questionValue.like}
             handleClickLike={onClickLike}
             handleClickDislike={onClickDisike}
           />
