@@ -11,8 +11,9 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route index element={<MainPage />} />
-        <Route path="/list" element={<QuestionList />} />
-        <Route path="post/:id/" element={<PostPage />}>
+        <Route path="list" element={<QuestionList />} />
+        <Route path="post/:id">
+          <Route index element={<PostPage />} />
           <Route path="answer" element={<AnswerPage />} />
         </Route>
         <Route path="*" element={<NotFound />} />

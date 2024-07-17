@@ -7,7 +7,7 @@ import styles from '../core/styles/answerPage.module.scss';
 
 function AnswerPage() {
   const { id } = useParams(); // subjectId
-  console.log(id);
+
   return (
     <>
       <MetaTags />
