@@ -4,7 +4,7 @@ import { SubjectQuestionListResponse } from '../../../core/types/api/Response';
 import { SubjectQuestionListParams } from '../../../core/types/api/Request';
 
 interface useQuestionListProps extends SubjectQuestionListParams {
-  handleSuccess: (response: SubjectQuestionListResponse) => void;
+  handleSuccess?: (response: SubjectQuestionListResponse) => void;
   handleError?: (error: any) => void;
   deps: [];
 }
