@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react';
 
+const getSize = () => {
+  return window.innerWidth >= 876 ? 8 : 6;
+};
+
 const useResize = () => {
-  const [pageSize, setPageSize] = useState<number>(window.innerWidth);
+  const [pageSize, setPageSize] = useState<number>(getSize());
 
   const handleSize = () => {
-    const width = window.innerWidth;
-    if (width >= 876) {
-      setPageSize(8);
-    } else {
-      setPageSize(6);
-    }
+    setPageSize(getSize());
   };
+
   useEffect(() => {
     window.addEventListener('resize', handleSize);
     return () => {

@@ -13,11 +13,10 @@ interface QuestionListPaginationProps {
 }
 
 const QuestionListPagination = ({ order }: QuestionListPaginationProps) => {
-  const [questions, setQuestions] = useState<SubjectDetailResponse[]>([]);
-  const [pageIndexes, setPageIndexes] = useState<number[]>([1]);
-  const [currentIndex, setCurrentIndex] = useState<number>(1);
-  const [questionAllCounts, setQuestionAllCounts] = useState<number>(40);
   const { pageSize } = useResize();
+  const [questions, setQuestions] = useState<SubjectDetailResponse[]>([]);
+  const [maxIndex, setMaxIndex] = useState<number>(0);
+  const [currentIndex, setCurrentIndex] = useState<number>(1);
   const handlecurrentIndex = (newValue: number) => {
     setCurrentIndex(newValue);
   };
@@ -26,35 +25,27 @@ const QuestionListPagination = ({ order }: QuestionListPaginationProps) => {
     setCurrentIndex(1);
   }, [order]);
 
-  useEffect(() => {
-    const maxIndex = Math.ceil(questionAllCounts / pageSize);
-    setPageIndexes(
-      Array(maxIndex)
-        .fill(0)
-        .map((_, i) => i + 1),
-    );
-  }, [questionAllCounts, pageSize]);
-
-  const handleQuestions = useCallback(
-    async ({ limit, offset, sort }: SubjectListParams) => {
-      const { count, results } = await getSubjectList({ limit, offset, sort });
-      setQuestions(results);
-      setQuestionAllCounts(count);
-    },
-    [order, currentIndex, pageSize],
-  );
-
+  const handleQuestions = async ({
+    limit,
+    offset,
+    sort,
+  }: SubjectListParams) => {
+    const { count, results } = await getSubjectList({ limit, offset, sort });
+    setQuestions(results);
+    setMaxIndex(Math.ceil(count / pageSize));
+  };
   useEffect(() => {
     const sort = order === '이름순' ? 'name' : 'time';
-    handleQuestions({ limit: pageSize, offset: currentIndex, sort });
-  }, [handleQuestions]);
+    const offset = pageSize * (currentIndex - 1);
+    handleQuestions({ limit: pageSize, offset, sort });
+  }, [order, currentIndex, pageSize]);
 
   return (
     <section className={styles['question-list-main__pagination']}>
       <QuestionCardList questions={questions} />
       <Pagination
         currentPage={currentIndex}
-        pageIndexes={pageIndexes}
+        itemCount={maxIndex}
         handleCurrentPage={handlecurrentIndex}
       />
     </section>
