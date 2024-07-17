@@ -40,20 +40,27 @@ const Answer = ({
   answerSubmit = () => {},
 }: AnswerProps) => {
   const { elapsedTime } = useElapsedTime();
+  const isShowProfile = answerState !== 'empty' || mode === 'answer';
 
   return (
     <div className={styles['answer']}>
-      <Image
-        src={imageSource}
-        alt="profileImg"
-        containerClassName={styles['answer__profile']}
-        imageClassName={styles['answer__profile-image']}
-      />
+      {isShowProfile && (
+        <Image
+          src={imageSource}
+          alt="profileImg"
+          containerClassName={styles['answer__profile']}
+          imageClassName={styles['answer__profile-image']}
+        />
+      )}
       <div className={styles['answer__details']}>
-        <div className={styles['answer__row']}>
-          <h1 className={styles['answer__username']}>{name}</h1>
-          <p className={styles['answer__timestamp']}>{elapsedTime(createAt)}</p>
-        </div>
+        {isShowProfile && (
+          <div className={styles['answer__row']}>
+            <h1 className={styles['answer__username']}>{name}</h1>
+            <p className={styles['answer__timestamp']}>
+              {elapsedTime(createAt)}
+            </p>
+          </div>
+        )}
         {isModification ? (
           <AnswerModification
             handleSubmit={answerModificationSubmit}
