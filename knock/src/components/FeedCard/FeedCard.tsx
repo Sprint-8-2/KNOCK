@@ -8,37 +8,24 @@ import Question from '../Question/Question';
 import Reaction from '../../core/ui/Reaction/Reaction';
 import Answer, { AnswerState } from '../Answer/Answer';
 import { useEffect, useState } from 'react';
-import styles from './FeedCard.module.scss';
 import {
   createQuestionAnswer,
+  createQuestionReaction,
   getQuestionDetails,
 } from '../../lib/api/Questions';
 import { putAnswer } from '../../lib/api/Answers';
+import styles from './FeedCard.module.scss';
 
 interface FeedCardProps
   extends QuestionDetailResponse,
-    Omit<Omit<SubjectDetailResponse, 'id'>, 'questionCount'> {
-  // handleAddAnswer: ({}: QuestionAnswerProps) => void;
-  handleUpdateAnswer: (answerId: number | undefined, content: string) => void;
-  handleRejectAnswer: (
-    answerId: number | undefined,
-    isRejected: boolean,
-  ) => void;
-  handleClickLike: (questionId: number) => void;
-  handleClickDislike: (questionId: number) => void;
-}
+    Omit<Omit<SubjectDetailResponse, 'id'>, 'questionCount'> {}
 
 const FeedCard = ({
   id,
   subjectId,
-  // handleAddAnswer,
-  // handleUpdateAnswer,
-  // handleRejectAnswer,
   content,
   like,
   dislike,
-  handleClickLike,
-  handleClickDislike,
   createdAt,
   answer,
   ...subjectDetail
@@ -65,8 +52,18 @@ const FeedCard = ({
       handleRejectAnswer();
     }
   };
-  const onClickLike = () => handleClickLike(id);
-  const onClickDisike = () => handleClickDislike(id);
+  const onClickLike = () => {
+    handleClickLike('like');
+  };
+  const onClickDislike = () => {
+    handleClickLike('dislike');
+  };
+  const handleClickLike = (type: 'like' | 'dislike') =>
+    createQuestionReaction({ questionId: questionValue.id, type: type }).then(
+      () => {
+        fetchQuestionDetails();
+      },
+    );
   const handleSubmitAnswer = (
     questionId: number | undefined,
     answerContent: string,
@@ -164,7 +161,7 @@ const FeedCard = ({
           <Reaction
             likeCount={questionValue.like}
             handleClickLike={onClickLike}
-            handleClickDislike={onClickDisike}
+            handleClickDislike={onClickDislike}
             isLiked={false}
             isDisliked={false}
           />

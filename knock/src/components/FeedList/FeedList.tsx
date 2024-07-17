@@ -54,11 +54,6 @@ const FeedList = ({
                 createdAt={q.createdAt}
                 content={q.content}
                 answer={q.answer}
-                handleClickLike={handleLike}
-                handleClickDislike={handleDislike}
-                // handleAddAnswer={handleAddAnswer}
-                handleUpdateAnswer={handleUpdateAnswer}
-                handleRejectAnswer={handleRejectAnswer}
                 name={''}
                 imageSource={''}
               />

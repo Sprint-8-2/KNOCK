@@ -38,14 +38,6 @@ function AnswerPage() {
     });
   };
 
-  // const {
-  // 	data: addingAnswer,
-  // 	isLoading: addingAnswerLoading,
-  // 	error: addingAnswerError,
-  // } = useAddAnswer({
-  // 	questionId:
-  // })
-
   return (
     <>
       <MetaTags />
