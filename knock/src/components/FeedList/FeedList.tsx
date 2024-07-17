@@ -10,6 +10,7 @@ import useGetUserInfo from '../../lib/hooks/feed/useGetUserInfo';
 
 interface FeedListProps extends SubjectQuestionListResponse {
   subejctId: number;
+  mode?: 'post' | 'answer';
 }
 
 const FeedList = ({
@@ -18,6 +19,7 @@ const FeedList = ({
   previous,
   results,
   subejctId,
+  mode = 'answer',
 }: FeedListProps) => {
   const isEmptyQuestion = count === 0;
   const headerMessage = isEmptyQuestion
@@ -37,6 +39,7 @@ const FeedList = ({
           results.map((q) => {
             return (
               <FeedCard
+                mode={mode}
                 key={`feed_${q.id}`}
                 id={q.id}
                 subjectId={q.subjectId}

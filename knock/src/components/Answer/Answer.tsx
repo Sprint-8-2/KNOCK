@@ -23,9 +23,11 @@ interface AnswerProps {
   answerSubmit: (questionId: number | undefined, content: string) => void;
   answerId: number | undefined;
   questionId: number | undefined;
+  mode?: 'answer' | 'post';
 }
 
 const Answer = ({
+  mode = 'answer',
   content,
   name,
   imageSource,
@@ -38,6 +40,7 @@ const Answer = ({
   answerSubmit = () => {},
 }: AnswerProps) => {
   const { elapsedTime } = useElapsedTime();
+
   return (
     <div className={styles['answer']}>
       <Image
@@ -60,7 +63,7 @@ const Answer = ({
         ) : (
           <>
             {answerState === 'answered' && <AnswerContent content={content} />}
-            {answerState === 'empty' && (
+            {answerState === 'empty' && mode === 'answer' && (
               <AnswerForm
                 content={content}
                 questionId={questionId}

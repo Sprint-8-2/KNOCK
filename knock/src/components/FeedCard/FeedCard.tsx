@@ -20,9 +20,11 @@ interface FeedCardProps
   extends QuestionDetailResponse,
     Omit<Omit<SubjectDetailResponse, 'id'>, 'questionCount'> {
   isShowDropdown?: boolean;
+  mode?: 'post' | 'answer';
 }
 
 const FeedCard = ({
+  mode = 'answer',
   isShowDropdown = true,
   id,
   subjectId,
@@ -154,6 +156,7 @@ const FeedCard = ({
           <Question content={content} createAt={createdAt} />
         </div>
         <Answer
+          mode={mode}
           answerId={questionValue.answer?.id || undefined}
           answerState={answerState}
           content={questionValue.answer?.content || ''}

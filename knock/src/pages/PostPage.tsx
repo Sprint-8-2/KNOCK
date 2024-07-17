@@ -68,6 +68,8 @@ const PostPage = () => {
         <div className={styles['post-page__feed-list']}>
           {subjectQuestionList && (
             <FeedList
+              mode="post"
+              subejctId={Number(subjectId)}
               count={subjectQuestionList.count}
               next={subjectQuestionList.next}
               previous={subjectQuestionList.previous}
