@@ -6,7 +6,7 @@ import {
 import { QuestionDetailResponseAnswer } from '../../core/types/api/Response';
 import { apiHandler } from './APIHandler';
 
-const DOMAIN = 'answer/';
+const DOMAIN = 'answers/';
 
 export const getAnswer = async ({ subjectId, options }: AnswerParams) => {
   const path = `${DOMAIN}${subjectId}/`;
@@ -32,7 +32,7 @@ export const patchAnswer = async ({
   options,
 }: AnswerHasBodyParams) => {
   const path = `${DOMAIN}${subjectId}/`;
-  return apiHandler.put<AnswerBody, QuestionDetailResponseAnswer>(
+  return apiHandler.patch<AnswerBody, QuestionDetailResponseAnswer>(
     path,
     body,
     options,

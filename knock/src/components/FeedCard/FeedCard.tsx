@@ -13,6 +13,7 @@ import {
   createQuestionAnswer,
   getQuestionDetails,
 } from '../../lib/api/Questions';
+import { putAnswer } from '../../lib/api/Answers';
 
 interface FeedCardProps
   extends QuestionDetailResponse,
@@ -31,8 +32,8 @@ const FeedCard = ({
   id,
   subjectId,
   // handleAddAnswer,
-  handleUpdateAnswer,
-  handleRejectAnswer,
+  // handleUpdateAnswer,
+  // handleRejectAnswer,
   content,
   like,
   dislike,
@@ -61,7 +62,7 @@ const FeedCard = ({
     if (target.textContent === dropdownElementList[0]) {
       setIsModification(true);
     } else if (target.textContent === dropdownElementList[1]) {
-      handleRejectAnswer(answer?.id, true);
+      handleRejectAnswer();
     }
   };
   const onClickLike = () => handleClickLike(id);
@@ -88,6 +89,38 @@ const FeedCard = ({
       .catch((error) => {
         console.log(error);
       });
+  };
+  const handleUpdateAnswer = (answerId: number | undefined, content: string) =>
+    putAnswer({
+      subjectId: questionValue.answer?.id || '',
+      body: { content: content, isRejected: false },
+    }).then(() => {
+      setAnswerState('answered');
+      setIsModification(false);
+      fetchQuestionDetails();
+    });
+  const handleRejectAnswer = () => {
+    if (questionValue.answer?.id) {
+      putAnswer({
+        subjectId: questionValue.answer?.id || '',
+        body: {
+          content: questionValue.answer?.content || 'rejected',
+          isRejected: true,
+        },
+      }).then(() => {
+        fetchQuestionDetails();
+        setAnswerState('rejected');
+      });
+    } else {
+      createQuestionAnswer({
+        questionId: id,
+        content: '-',
+        isRejected: true,
+      }).then(() => {
+        setAnswerState('rejected');
+        fetchQuestionDetails();
+      });
+    }
   };
 
   useEffect(() => {
@@ -124,7 +157,7 @@ const FeedCard = ({
           questionId={id}
           isModification={isModification}
           answerSubmit={handleSubmitAnswer}
-          answerModificationSubmit={handleSubmitAnswer}
+          answerModificationSubmit={handleUpdateAnswer}
         />
         <div className={styles['feedcard__line']} />
         <div>
@@ -132,6 +165,8 @@ const FeedCard = ({
             likeCount={questionValue.like}
             handleClickLike={onClickLike}
             handleClickDislike={onClickDisike}
+            isLiked={false}
+            isDisliked={false}
           />
         </div>
       </div>
