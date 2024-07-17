@@ -3,20 +3,14 @@ import { getSubjectQuestionList } from '../../api/Subject';
 import { SubjectQuestionListResponse } from '../../../core/types/api/Response';
 import { SubjectQuestionListParams } from '../../../core/types/api/Request';
 
-interface useQuestionListProps extends SubjectQuestionListParams {
-  handleSuccess?: (response: SubjectQuestionListResponse) => void;
-  handleError?: (error: any) => void;
-  deps: [];
-}
+interface useQuestionListProps extends SubjectQuestionListParams {}
 
 const useQuestionList = ({
-  handleSuccess,
-  handleError,
-  deps,
   ...subjectQuestionListParams
 }: useQuestionListProps) => {
   const [data, setData] = useState<SubjectQuestionListResponse>();
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string>('');
 
   useEffect(() => {
     setIsLoading(true);
@@ -36,13 +30,13 @@ const useQuestionList = ({
             setIsLoading(false);
           });
       } catch (err: any) {
-        if (handleError) handleError(err);
+        setError(err);
       }
       if (isLoading) fetchData();
     };
-  }, deps);
+  }, []);
 
-  return { data, isLoading };
+  return { data, isLoading, error };
 };
 
 export default useQuestionList;
