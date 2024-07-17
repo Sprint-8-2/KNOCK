@@ -1,7 +1,7 @@
 import QuesionListHeader from '../components/QuestionList/QuestionListHeader';
 import QuesionListMain from '../components/QuestionList/QuestionListMain';
 
-const QuesionList = () => {
+const QuestionList = () => {
   return (
     <>
       <QuesionListHeader />
@@ -10,4 +10,4 @@ const QuesionList = () => {
   );
 };
 
-export default QuesionList;
+export default QuestionList;

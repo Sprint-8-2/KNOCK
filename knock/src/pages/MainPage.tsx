@@ -1,4 +1,4 @@
-import MetaTags from '../../core/ui/MetaTags/MetaTags';
+import MetaTags from '../core/ui/MetaTags/MetaTags';
 
 function MainPage() {
   return (
