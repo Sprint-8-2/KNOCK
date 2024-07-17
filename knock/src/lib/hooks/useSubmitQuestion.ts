@@ -7,7 +7,7 @@ const DEFAULT_SUBJECT_QUESTION_ANSWER = {
 };
 
 interface UseSubmitQuestionProps {
-  subjectId: number;
+  subjectId: number | string;
   onSuccess: () => void;
   onError: () => void;
 }
