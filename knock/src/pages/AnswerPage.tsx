@@ -10,10 +10,13 @@ import imgLogo from '../core/assets/image/SubPageLogo.svg';
 import useQuestionList from '../lib/hooks/feed/useQuestionList';
 import { deleteQuestion } from '../lib/api/Questions';
 import styles from '../core/styles/answerPage.module.scss';
+import useGetUserInfo from '../lib/hooks/feed/useGetUserInfo';
 
 function AnswerPage() {
   const { id } = useParams(); // subjectId
   const [subjectId, setSubjectId] = useState<number>(Number(id?.trim()));
+
+  const { data: userData } = useGetUserInfo({ subjectId: subjectId });
 
   const { data: questions } = useQuestionList({
     subjectId: Number(id) || '',
@@ -44,7 +47,10 @@ function AnswerPage() {
               alt="로고"
             />
           </div>
-          <Profile name="dd" profileImage="" />
+          <Profile
+            name={userData?.name || ''}
+            profileImage={userData?.imageSource || ''}
+          />
           <div className={styles['page__feed-list']}>
             <div className={styles['page__list-header']}>
               <UButton

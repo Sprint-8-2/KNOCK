@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
 import { SubjectDetailResponse } from '../../../core/types/api/Response';
 import { SubjectGetDetailParams } from '../../../core/types/api/Request';
-import { getQuestionDetails } from '../../api/Questions';
-import useUpdateEffect from './useUpdateEffect';
 import { getDetailSubject } from '../../api/Subject';
 
 interface useGetUserInfoProps extends SubjectGetDetailParams {}
