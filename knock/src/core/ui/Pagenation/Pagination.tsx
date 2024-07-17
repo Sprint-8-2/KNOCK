@@ -27,7 +27,7 @@ const Pagination = ({
         setCurrentPageIndexes(
           Array(5)
             .fill(0)
-            .map((_, i) => newIndex + i + 1),
+            .map((_, i) => newIndex + i),
         );
         setNextDisabled(false);
         setPrevDisabled(newIndex <= 5 ? true : false);
@@ -35,9 +35,9 @@ const Pagination = ({
       case '>':
         newIndex = Math.ceil(currentPage / 5) * 5 + 1;
         setCurrentPageIndexes(
-          Array(Math.min(5, itemCount))
+          Array(Math.min(5, itemCount - newIndex))
             .fill(0)
-            .map((_, i) => newIndex + i + 1),
+            .map((_, i) => newIndex + i),
         );
 
         setNextDisabled(newIndex + 5 > itemCount ? true : false);
@@ -51,11 +51,13 @@ const Pagination = ({
   };
 
   useEffect(() => {
+    console.log(itemCount);
     setCurrentPageIndexes(
       Array(Math.min(5, itemCount))
         .fill(0)
         .map((_, i) => i + 1),
     );
+    setNextDisabled(itemCount <= 5 ? true : false);
   }, [itemCount]);
 
   return (
