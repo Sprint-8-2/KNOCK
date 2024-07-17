@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import FeedList from '../components/FeedList/FeedList';
 import MetaTags from '../core/ui/MetaTags/MetaTags';
@@ -7,13 +8,13 @@ import UButton from '../core/ui/buttons/UButton/UButton';
 import Profile from '../components/Profile/Profile';
 import imgLogo from '../core/assets/image/SubPageLogo.svg';
 import useQuestionList from '../lib/hooks/feed/useQuestionList';
-import styles from '../core/styles/answerPage.module.scss';
-import { createQuestionAnswer } from '../lib/api/Questions';
+import { createQuestionAnswer, deleteQuestion } from '../lib/api/Questions';
 import { QuestionAnswerProps } from '../core/types/api/Request';
-import useAddAnswer from '../lib/hooks/feed/useAddAnswer';
+import styles from '../core/styles/answerPage.module.scss';
 
 function AnswerPage() {
   const { id } = useParams(); // subjectId
+  const [subjectId, setSubjectId] = useState<number>(Number(id?.trim()));
 
   const {
     data: questions,
@@ -35,6 +36,14 @@ function AnswerPage() {
       questionId: questionId,
       content: content,
       isRejected: isRejected,
+    });
+  };
+
+  const hadleDeleteAll = () => {
+    questions?.results.map((question) => {
+      deleteQuestion({ questionId: question.id }).then((res) => {
+        setSubjectId(subjectId);
+      });
     });
   };
 
@@ -61,7 +70,7 @@ function AnswerPage() {
               <UButton
                 type="floating"
                 isSmallButton={true}
-                handleClick={() => {}}
+                handleClick={hadleDeleteAll}
               >
                 삭제하기
               </UButton>
