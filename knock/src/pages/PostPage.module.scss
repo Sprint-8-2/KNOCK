@@ -1,6 +1,9 @@
 .post-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
   &__banner {
-    width: 100%;
     height: 14.625rem;
     margin-top: 2rem;
   }
@@ -14,8 +17,7 @@
   }
 
   &__feed-list {
-    width: 75rem;
-    margin: 10rem auto;
+    margin-top: 10rem;
   }
 
   &__profile {
