@@ -29,6 +29,11 @@ class APIHandler {
         throw new Error(`${error.detail ?? '알 수 없는 에러입니다'}`);
       }
 
+      // No Content
+      if (response.status === 204) {
+        return {} as T;
+      }
+
       return response.json() as T;
     } catch (error) {
       console.log('API Error');
