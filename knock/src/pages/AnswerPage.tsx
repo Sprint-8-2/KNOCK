@@ -23,7 +23,7 @@ function AnswerPage() {
     subjectId: Number(id) || '',
   });
 
-  const hadleDeleteAll = () => {
+  const handleDeleteAll = () => {
     questions?.results.map((question) => {
       deleteQuestion({ questionId: question.id }).then((res) => {
         setSubjectId(subjectId);
@@ -57,7 +57,7 @@ function AnswerPage() {
               <UButton
                 type="floating"
                 isSmallButton={true}
-                handleClick={hadleDeleteAll}
+                handleClick={handleDeleteAll}
               >
                 삭제하기
               </UButton>
