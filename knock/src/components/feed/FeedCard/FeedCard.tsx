@@ -18,7 +18,7 @@ import styles from './FeedCard.module.scss';
 
 interface FeedCardProps
   extends QuestionDetailResponse,
-    Omit<Omit<SubjectDetailResponse, 'id'>, 'questionCount'> {
+    Omit<SubjectDetailResponse, 'id' | 'questionCount'> {
   isShowDropdown?: boolean;
   mode?: 'post' | 'answer';
 }
