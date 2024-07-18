@@ -16,19 +16,17 @@ import {
 import { Link, useParams } from 'react-router-dom';
 import Profile from '../components/Profile/Profile';
 import ModalPage from './ModalPage';
+import useGetUserInfo from '../lib/hooks/feed/useGetUserInfo';
 
 const PostPage = () => {
   const { id: subjectId } = useParams();
-  const [subjectInfo, setSubjectInfo] = useState<SubjectDetailResponse>();
+
   const [subjectQuestionList, setSubjectQuestionList] =
     useState<SubjectQuestionListResponse>();
 
-  const fetchDetailSubject = async ({ subjectId }: SubjectGetDetailParams) => {
-    try {
-      const fetchData = await getDetailSubject({ subjectId });
-      setSubjectInfo(fetchData);
-    } catch (error) {}
-  };
+  const { data: subjectInfo } = useGetUserInfo({
+    subjectId: subjectId as string | number,
+  });
 
   const fetchSubjectQuestionList = async ({
     subjectId,
@@ -40,7 +38,6 @@ const PostPage = () => {
   };
 
   useEffect(() => {
-    fetchDetailSubject({ subjectId: subjectId as string | number });
     fetchSubjectQuestionList({ subjectId: subjectId as string | number });
   }, []);
 
