@@ -106,10 +106,9 @@ const FeedCard = ({
     });
   const handleRejectAnswer = () => {
     if (questionValue.answer?.id) {
-      putAnswer({
+      patchAnswer({
         subjectId: questionValue.answer?.id || '',
         body: {
-          content: questionValue.answer?.content || 'rejected',
           isRejected: true,
         },
       }).then(() => {
