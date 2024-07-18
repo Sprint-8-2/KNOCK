@@ -8,6 +8,7 @@ import Profile from '../components/Profile/Profile';
 import ModalPage from './ModalPage';
 import useGetUserInfo from '../lib/hooks/feed/useGetUserInfo';
 import useQuestionList from '../lib/hooks/feed/useQuestionList';
+import MetaTags from '../core/ui/MetaTags/MetaTags';
 
 const PostPage = () => {
   const { id: subjectId } = useParams();
@@ -21,6 +22,7 @@ const PostPage = () => {
 
   return (
     <>
+      <MetaTags />
       <div className={styles['post-page']}>
         <Image
           src={postPageBannerImage}
