@@ -6,6 +6,7 @@ import ImageEmptyQuestion from '../../../core/assets/image/EmptyQuestion.svg';
 import IconMessage from '../../../core/assets/icon/MessagesBrown.svg';
 import useGetUserInfo from '../../../lib/hooks/feed/useGetUserInfo';
 import styles from './FeedList.module.scss';
+import EmptyFeedListImage from '../EmptyFeedListImage/EmptyFeedList';
 
 interface FeedListProps extends SubjectQuestionListResponse {
   subejctId: number;
@@ -53,13 +54,7 @@ const FeedList = ({
             );
           })}
         {isEmptyQuestion && (
-          <>
-            <Image
-              containerClassName={styles['feedlist__empty-image']}
-              src={ImageEmptyQuestion}
-              alt="빈 질문"
-            />
-          </>
+          <EmptyFeedListImage className={styles['feedlist__empty-image']} />
         )}
       </div>
     </>
