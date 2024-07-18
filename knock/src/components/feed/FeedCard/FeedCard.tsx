@@ -13,7 +13,7 @@ import {
   createQuestionReaction,
   getQuestionDetails,
 } from '../../../lib/api/Questions';
-import { putAnswer } from '../../../lib/api/Answers';
+import { patchAnswer, putAnswer } from '../../../lib/api/Answers';
 import styles from './FeedCard.module.scss';
 
 interface FeedCardProps
@@ -96,7 +96,7 @@ const FeedCard = ({
       });
   };
   const handleUpdateAnswer = (answerId: number | undefined, content: string) =>
-    putAnswer({
+    patchAnswer({
       subjectId: questionValue.answer?.id || '',
       body: { content: content, isRejected: false },
     }).then(() => {
