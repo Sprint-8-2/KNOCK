@@ -1,26 +1,33 @@
 @import '../../core/styles/global.scss';
 
-.container {
+.feed-profile {
   width: 11.0625rem;
   height: 15rem;
-  display: inline-flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  justify-content: center;
-  align-items: center;
-}
-
-.profileImage {
   display: flex;
-  width: 8.5rem;
-  height: 8.5rem;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  flex-shrink: 0;
-  padding-left: 1.28rem;
-  padding-right: 1.28rem;
+  justify-content: center;
+  gap: 0.75rem;
+
+  &--img {
+    width: 8.5rem;
+    height: 8.5rem;
+    border-radius: 136px;
+  }
+
+  &__name {
+    @include H2;
+  }
 }
 
-.text {
-  @include H2;
+@media (width < 668px) {
+  .feed-profile {
+    &--img {
+      width: 6.5rem;
+      height: 6.5rem;
+    }
+    &__name {
+      @include H3;
+    }
+  }
 }
