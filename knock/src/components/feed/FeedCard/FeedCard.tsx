@@ -139,7 +139,11 @@ const FeedCard = ({
     <>
       <div className={styles['feedcard']} key={id}>
         <div className={styles['feedcard__header']}>
-          <Badge isAnswered={!questionValue.answer?.isRejected} />
+          <Badge
+            isAnswered={
+              questionValue.answer !== null && !questionValue.answer?.isRejected
+            }
+          />
           {mode !== 'post' && (
             <Dropdown
               ButtonclassName={styles['feedcard__btn-dropdown']}
