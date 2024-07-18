@@ -1,0 +1,62 @@
+@import '../../core/styles/global.scss';
+
+@mixin box {
+  height: auto;
+  justify-content: center;
+  align-items: center;
+  padding: 0.75rem 1.5rem;
+  display: flex;
+  border-radius: 0.5rem;
+}
+
+.container {
+  &__form {
+    width: 25rem;
+    height: 10.75;
+
+    display: inline-flex;
+    padding: 2rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.625rem;
+
+    border-radius: 1rem;
+    background: $Grayscale-10;
+  }
+
+  &__name-box {
+    @include box;
+    width: 100%;
+    gap: 0.25rem;
+    border: 1px solid $Grayscale-40;
+    background: $Grayscale-10;
+    box-sizing: border-box;
+  }
+
+  &__img {
+    width: 1.25rem;
+    height: 1.25rem;
+    flex-shrink: 0;
+  }
+
+  &__input-box {
+    width: auto;
+    height: auto;
+    color: $Grayscale-40;
+    flex: 1 0 0;
+    @include Body3-Regular;
+    border: none;
+  }
+
+  &__submit-button {
+    @include box;
+    width: 100%;
+    display: flex;
+    gap: 0.5rem;
+    align-self: stretch;
+    background: $Brown-40;
+    @include Body3-Regular;
+    color: $Grayscale-10;
+    box-sizing: border-box;
+  }
+}
