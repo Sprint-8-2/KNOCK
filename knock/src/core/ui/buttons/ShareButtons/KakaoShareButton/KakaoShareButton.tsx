@@ -68,9 +68,6 @@ const KakaoShareButton = ({ sharedUrl }: KaKoShareButtonProps) => {
       document.body.removeChild(script);
     };
   }, []);
-  // const shareToKakaoTalk = (title: string, sharedUrl: string) => {
-
-  // };
 
   return (
     <>
