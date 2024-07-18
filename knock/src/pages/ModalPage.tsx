@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import './ModalPage.scss';
+import './modalPage.scss';
 import UButton from '../core/ui/buttons/UButton/UButton';
 import Image from '../core/ui/CommonImage/Image';
 import Textarea from '../core/ui/Textarea/Textarea';

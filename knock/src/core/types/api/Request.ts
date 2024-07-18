@@ -11,7 +11,7 @@ export interface AnswerHasBodyParams extends AnswerParams {
 }
 
 export interface AnswerBody {
-  content: string;
+  content?: string;
   isRejected: boolean;
 }
 

@@ -3,13 +3,14 @@
 .form-textarea {
   @include Body3-Regular;
   width: 100%;
-  height: 100%;
+  height: 12rem;
   background-color: $Grayscale-20;
   padding: 1rem;
   outline: none;
   border: none;
   border-radius: 0.5rem;
   resize: none;
+  box-sizing: border-box;
 
   &:focus {
     border: 0.0625rem solid $Brown-40;
