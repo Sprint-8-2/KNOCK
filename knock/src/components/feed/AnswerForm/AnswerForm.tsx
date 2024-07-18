@@ -31,7 +31,7 @@ const AnswerForm = ({
   };
   useEffect(() => {
     isButtonValid();
-  }, []);
+  }, [answerContent]);
   return (
     <div className={styles['answer__form']}>
       <Textarea
@@ -43,6 +43,7 @@ const AnswerForm = ({
       />
       <button
         className={`${styles['answer__form-btn--submit']} ${isDisable ? styles['answer__form-btn--submit--disabled'] : ''}`}
+        disabled={isDisable}
         onClick={handleClick}
       >
         답변 완료
