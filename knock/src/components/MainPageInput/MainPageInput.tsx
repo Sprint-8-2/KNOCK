@@ -1,4 +1,4 @@
-import HumanIcon from '../../core/assets/icon/Person.svg';
+import PersonIcon from '../../core/assets/icon/Person.svg';
 import styles from './mainPageInput.module.scss';
 import React, { useState } from 'react';
 import UButton from '../../core/ui/buttons/UButton/UButton';
@@ -6,12 +6,11 @@ import Input from '../../core/ui/Input/Input';
 import { createSubject } from '../../lib/api/Subject';
 import { useNavigate } from 'react-router-dom';
 import useUserInfo from '../../lib/hooks/useUserInfo';
+import Icon from '../../core/ui/CommonIcon/icon';
 
-interface MainPageInputProps {
-  onSubmit: (name: string) => void;
-}
+interface MainPageInputProps {}
 
-const MainPageInput: React.FC<MainPageInputProps> = ({ onSubmit }) => {
+const MainPageInput: React.FC<MainPageInputProps> = () => {
   const [name, setName] = useState('');
   const navigate = useNavigate();
   const { handleUserInfo } = useUserInfo();
@@ -32,19 +31,22 @@ const MainPageInput: React.FC<MainPageInputProps> = ({ onSubmit }) => {
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
+    if (name && e.key === 'Enter') {
       handleSubmit(e);
     }
   };
+
+  function handleClick(e: React.MouseEvent<HTMLElement, MouseEvent>): void {}
 
   return (
     <div className={`${styles['container']}`}>
       <form className={`${styles['container__outside']}`}>
         <Input value={name} onKeyDown={handleKeyDown} onChange={handleNameSet}>
-          <img
-            src={HumanIcon}
-            alt="HumanIcon"
+          <Icon
+            src="Person.svg"
+            alt="Person"
             className={`${styles['container__img']}`}
+            handleClick={handleClick}
           />
         </Input>
         <UButton
