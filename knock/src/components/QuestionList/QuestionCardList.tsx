@@ -11,9 +11,7 @@ interface QuestionCardListProps {
 
 const QuestionCardList = ({ questions }: QuestionCardListProps) => {
   return (
-    <ul
-      className={`${styles['question-list-main__cards']} ${styles['question-list-main__cards--large']}`}
-    >
+    <ul className={`${styles['question-list-main__cards']}`}>
       {questions.map((e) => {
         return (
           <li key={e.id}>

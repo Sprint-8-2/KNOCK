@@ -1,26 +1,22 @@
+import { useEffect, useState } from 'react';
 import PaginationButton from './PaginationButton';
 
 import styles from '../../styles/pagination.module.scss';
-import { useState } from 'react';
 
 interface PaginationProps {
-  pageIndexes: number[];
+  itemCount: number;
   currentPage: number;
   handleCurrentPage: (newIndex: number) => void;
 }
 
 const Pagination = ({
-  pageIndexes,
+  itemCount,
   currentPage,
   handleCurrentPage,
 }: PaginationProps) => {
-  const [currentPageIndexes, setCurrentPageIndexes] = useState<number[]>(() =>
-    pageIndexes.slice(0, 5),
-  );
+  const [currentPageIndexes, setCurrentPageIndexes] = useState<number[]>([]);
   const [prevDisabled, setPrevDisabled] = useState<boolean>(true);
-  const [nextDisabled, setNextDisabled] = useState<boolean>(() =>
-    pageIndexes.length > 5 ? false : true,
-  );
+  const [nextDisabled, setNextDisabled] = useState<boolean>(true);
 
   const handleListClick = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     const target = e.target as HTMLElement;
@@ -28,18 +24,23 @@ const Pagination = ({
     switch (target.innerText) {
       case '<':
         newIndex = (Math.floor(currentPage / 5) - 1) * 5 + 1;
-        setCurrentPageIndexes([
-          ...pageIndexes.slice(newIndex - 1, newIndex + 4),
-        ]);
+        setCurrentPageIndexes(
+          Array(5)
+            .fill(0)
+            .map((_, i) => newIndex + i),
+        );
         setNextDisabled(false);
         setPrevDisabled(newIndex <= 5 ? true : false);
         break;
       case '>':
         newIndex = Math.ceil(currentPage / 5) * 5 + 1;
-        setCurrentPageIndexes([
-          ...pageIndexes.slice(newIndex - 1, newIndex + 4),
-        ]);
-        setNextDisabled(newIndex + 5 > pageIndexes.length ? true : false);
+        setCurrentPageIndexes(
+          Array(Math.min(5, itemCount - newIndex))
+            .fill(0)
+            .map((_, i) => newIndex + i),
+        );
+
+        setNextDisabled(newIndex + 5 > itemCount ? true : false);
         setPrevDisabled(false);
         break;
       default:
@@ -48,6 +49,16 @@ const Pagination = ({
     }
     handleCurrentPage(newIndex);
   };
+
+  useEffect(() => {
+    console.log(itemCount);
+    setCurrentPageIndexes(
+      Array(Math.min(5, itemCount))
+        .fill(0)
+        .map((_, i) => i + 1),
+    );
+    setNextDisabled(itemCount <= 5 ? true : false);
+  }, [itemCount]);
 
   return (
     <ul className={styles['pagination']} onClick={handleListClick}>
