@@ -4,6 +4,7 @@ import AnswerContent from '../AnswerContent/AnswerContent';
 import AnswerRejection from '../AnswerRejection/AnswerRejection';
 import AnswerModification from '../AnswerModification/AnswerModification';
 import AnswerProfile from '../AnswerProfile/AnswerProfile';
+import AnswerStateRenderer from '../AnswerStateRenderer/AnswerStateRenderer';
 
 export type AnswerState = 'answered' | 'empty' | 'rejected';
 
@@ -56,17 +57,13 @@ const Answer = ({
           answerId={answerId}
         />
       ) : (
-        <>
-          {answerState === 'answered' && <AnswerContent content={content} />}
-          {answerState === 'empty' && mode === 'answer' && (
-            <AnswerForm
-              content={content}
-              questionId={questionId}
-              handleSubmit={answerSubmit}
-            />
-          )}
-          {answerState === 'rejected' && <AnswerRejection />}
-        </>
+        <AnswerStateRenderer
+          answerState={answerState}
+          mode={mode}
+          content={content}
+          questionId={questionId}
+          answerSubmit={answerSubmit}
+        />
       )}
     </div>
   );
