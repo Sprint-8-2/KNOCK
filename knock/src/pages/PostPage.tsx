@@ -3,43 +3,21 @@ import styles from './PostPage.module.scss';
 import postPageBannerImage from '../core/assets/image/feedHeaderImage.png';
 import mainLogo from '../core/assets/image/MainPgaeLogo.svg';
 import FeedList from '../components/feed/FeedList/FeedList';
-import { useEffect, useState } from 'react';
-import { getDetailSubject, getSubjectQuestionList } from '../lib/api/Subject';
-import {
-  SubjectGetDetailParams,
-  SubjectQuestionListParams,
-} from '../core/types/api/Request';
-import {
-  SubjectDetailResponse,
-  SubjectQuestionListResponse,
-} from '../core/types/api/Response';
 import { Link, useParams } from 'react-router-dom';
 import Profile from '../components/Profile/Profile';
 import ModalPage from './ModalPage';
 import useGetUserInfo from '../lib/hooks/feed/useGetUserInfo';
+import useQuestionList from '../lib/hooks/feed/useQuestionList';
 
 const PostPage = () => {
   const { id: subjectId } = useParams();
-
-  const [subjectQuestionList, setSubjectQuestionList] =
-    useState<SubjectQuestionListResponse>();
-
   const { data: subjectInfo } = useGetUserInfo({
     subjectId: subjectId as string | number,
   });
 
-  const fetchSubjectQuestionList = async ({
-    subjectId,
-  }: SubjectQuestionListParams) => {
-    try {
-      const fetchData = await getSubjectQuestionList({ subjectId });
-      setSubjectQuestionList(fetchData);
-    } catch (error) {}
-  };
-
-  useEffect(() => {
-    fetchSubjectQuestionList({ subjectId: subjectId as string | number });
-  }, []);
+  const { data: subjectQuestionList } = useQuestionList({
+    subjectId: subjectId || '',
+  });
 
   return (
     <>
