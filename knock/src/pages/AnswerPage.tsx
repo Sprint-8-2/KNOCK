@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import FeedList from '../components/feed/FeedList/FeedList';
 import MetaTags from '../core/ui/MetaTags/MetaTags';
@@ -16,17 +16,19 @@ function AnswerPage() {
   const { id } = useParams(); // subjectId
   const navigate = useNavigate();
   const [subjectId, setSubjectId] = useState<number>(Number(id?.trim()));
+  const [renderTrigger, setRenderTrigger] = useState<number>(0);
 
   const { data: userData } = useGetUserInfo({ subjectId: subjectId });
 
   const { data: questions } = useQuestionList({
     subjectId: Number(id) || '',
+    deps: [renderTrigger],
   });
 
   const handleDeleteAll = () => {
     questions?.results.map((question) => {
-      deleteQuestion({ questionId: question.id }).then((res) => {
-        setSubjectId(subjectId);
+      deleteQuestion({ questionId: question.id }).then(() => {
+        setRenderTrigger(renderTrigger - 1);
       });
     });
   };
@@ -34,6 +36,10 @@ function AnswerPage() {
   const handleClickLogo = () => {
     navigate(`/`);
   };
+
+  useEffect(() => {
+    setRenderTrigger(questions?.count || 0);
+  }, []);
 
   return (
     <>
@@ -63,6 +69,7 @@ function AnswerPage() {
               </UButton>
             </div>
             <FeedList
+              key={renderTrigger}
               count={questions?.count || 0}
               next={questions?.next || null}
               previous={questions?.next || null}

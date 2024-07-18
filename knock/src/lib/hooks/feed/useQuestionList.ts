@@ -3,9 +3,12 @@ import { getSubjectQuestionList } from '../../api/Subject';
 import { SubjectQuestionListResponse } from '../../../core/types/api/Response';
 import { SubjectQuestionListParams } from '../../../core/types/api/Request';
 
-interface useQuestionListProps extends SubjectQuestionListParams {}
+interface useQuestionListProps extends SubjectQuestionListParams {
+  deps?: any[];
+}
 
 const useQuestionList = ({
+  deps = [],
   ...subjectQuestionListParams
 }: useQuestionListProps) => {
   const [data, setData] = useState<SubjectQuestionListResponse>();
@@ -33,7 +36,7 @@ const useQuestionList = ({
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, deps);
 
   return { data, isLoading, error };
 };
