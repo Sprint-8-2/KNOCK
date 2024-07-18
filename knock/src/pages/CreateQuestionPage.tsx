@@ -2,25 +2,27 @@ import React, { useState } from 'react';
 import style from './CreateQuestionPage.module.scss';
 import UButton from '../core/ui/buttons/UButton/UButton';
 import CrateQuestion from '../components/Modal/crateQuestion';
-import Error from '../components/Modal/Error';
+import ErrorModal from '../components/Modal/Error';
 import useSubmitQuestion from '../lib/hooks/useSubmitQuestion';
 
-interface ModalPageProps {
+interface CreateQuestionPageProps {
   name: string;
   src: string;
   alt: string;
   subjectId: number;
 }
 
-const CreateQuestionPage: React.FC<ModalPageProps> = ({
+const CreateQuestionPage: React.FC<CreateQuestionPageProps> = ({
   name,
   src,
   alt,
   subjectId,
 }) => {
   const [modalOpen, setModalOpen] = useState(false);
+  const [textareaValue, setTextareaValue] = useState('');
   const [isActivation, setIsActivation] = useState(true);
   const [errorModalOpen, setErrorModalOpen] = useState(false);
+
   const { handleSubmit, isLoading } = useSubmitQuestion({
     subjectId,
     onSuccess: () => setModalOpen(false),
@@ -31,12 +33,20 @@ const CreateQuestionPage: React.FC<ModalPageProps> = ({
   });
 
   const handleModalOpen = () => {
-    setModalOpen(true);
+    setTextareaValue('');
     setIsActivation(true);
+    setModalOpen(true);
   };
 
   const handleModalClose = () => {
     setModalOpen(false);
+  };
+
+  const handleTextareaChange = (
+    event: React.ChangeEvent<HTMLTextAreaElement>,
+  ) => {
+    setTextareaValue(event.target.value);
+    setIsActivation(event.target.value.trim().length === 0);
   };
 
   const handleErrorModalClose = () => {
@@ -56,25 +66,17 @@ const CreateQuestionPage: React.FC<ModalPageProps> = ({
       </div>
       <CrateQuestion
         isOpen={modalOpen}
-        onSubmit={(value) => {
-          handleSubmit(value);
-          setModalOpen(false);
-        }}
         onClose={handleModalClose}
-        onChange={() => {
-          setIsActivation(false);
-        }}
+        onSubmit={handleSubmit}
+        onChange={handleTextareaChange}
         isActivation={isActivation}
         isLoading={isLoading}
         name={name}
         src={src}
         alt={alt}
+        textareaValue={textareaValue}
       />
-      <Error
-        isOpen={errorModalOpen}
-        onClose={handleErrorModalClose}
-        errorMessage="재작성 부탁드립니다."
-      />
+      <ErrorModal isOpen={errorModalOpen} onClose={handleErrorModalClose} />
     </>
   );
 };

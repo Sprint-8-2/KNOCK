@@ -1,5 +1,5 @@
 import React, { useRef, ReactNode } from 'react';
-import style from './Modal.module.scss';
+import style from './CommonModal.module.scss';
 
 interface CommonModalProps {
   isOpen: boolean;
