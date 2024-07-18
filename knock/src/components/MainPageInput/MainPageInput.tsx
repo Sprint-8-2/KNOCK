@@ -27,7 +27,7 @@ const MainPageInput: React.FC<MainPageInputProps> = ({ onSubmit }) => {
       navigate(`/post/${id}/answer`);
       handleUserInfo({ id, name: subName, imageSource });
     } catch (e) {
-      console.error();
+      console.error(e);
     }
   };
 
@@ -39,10 +39,7 @@ const MainPageInput: React.FC<MainPageInputProps> = ({ onSubmit }) => {
 
   return (
     <div className={`${styles['container']}`}>
-      <form
-        className={`${styles['container__outside']}`}
-        // onSubmit={handleSubmit}
-      >
+      <form className={`${styles['container__outside']}`}>
         <Input value={name} onKeyDown={handleKeyDown} onChange={handleNameSet}>
           <img
             src={HumanIcon}
