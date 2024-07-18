@@ -1,75 +1,62 @@
-import React from 'react';
 import HumanIcon from '../../core/assets/icon/Person.svg';
 import styles from './mainPageInput.module.scss';
-import { useState } from 'react';
+import React, { useState } from 'react';
+import UButton from '../../core/ui/buttons/UButton/UButton';
+import Input from '../../core/ui/Input/Input';
+import { createSubject } from '../../lib/api/Subject';
 import { useNavigate } from 'react-router-dom';
-import { apiHandler } from '../../lib/api/APIHandler';
+import useUserInfo from '../../lib/hooks/useUserInfo';
 
 interface MainPageInputProps {
   onSubmit: (name: string) => void;
-  placeholder: string;
-  submitButtonText: string;
 }
 
-interface ApiResponse {
-  id: string;
-}
-
-const MainPageInput: React.FC<MainPageInputProps> = ({
-  onSubmit,
-  placeholder,
-  submitButtonText,
-}) => {
-  const navigate = useNavigate();
+const MainPageInput: React.FC<MainPageInputProps> = ({ onSubmit }) => {
   const [name, setName] = useState('');
-  const [feedId, setFeedId] = useState('');
+  const navigate = useNavigate();
+  const { handleUserInfo } = useUserInfo();
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleNameSet = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setName(e.target.value);
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLElement>) => {
     e.preventDefault();
-    onSubmit(name);
     try {
-      const response = await generateFeed(name);
-      setFeedId(response.id);
-      navigate(`/post/${feedId}/answer`);
-    } catch (error) {
-      console.log('Error generating feed:', error);
-      throw error;
+      const { id, name: subName, imageSource } = await createSubject({ name });
+      navigate(`/post/${id}/answer`);
+      handleUserInfo({ id, name: subName, imageSource });
+    } catch (e) {
+      console.error();
     }
   };
 
-  const generateFeed = async (name: string): Promise<ApiResponse> => {
-    try {
-      const response = (await apiHandler.post('your-endpoint', {
-        id: name,
-      })) as ApiResponse;
-      return response;
-    } catch (error) {
-      console.log('Error generating feed:', error);
-      throw error;
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      handleSubmit(e);
     }
   };
 
   return (
     <div className={`${styles['container']}`}>
-      <form className={`${styles['container__form']}`} onSubmit={handleSubmit}>
-        <div className={`${styles['container__name-box']}`}>
+      <form
+        className={`${styles['container__outside']}`}
+        // onSubmit={handleSubmit}
+      >
+        <Input value={name} onKeyDown={handleKeyDown} onChange={handleNameSet}>
           <img
             src={HumanIcon}
             alt="HumanIcon"
             className={`${styles['container__img']}`}
           />
-          <input
-            placeholder={placeholder}
-            className={`${styles['container__input-box']}`}
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </div>
-        <input
-          type="submit"
-          value={submitButtonText}
+        </Input>
+        <UButton
+          type="box"
+          handleClick={handleSubmit}
           className={`${styles['container__submit-button']}`}
-        />
+        >
+          질문 하기
+        </UButton>
       </form>
     </div>
   );
