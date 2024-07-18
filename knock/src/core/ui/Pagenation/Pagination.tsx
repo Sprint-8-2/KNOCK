@@ -51,7 +51,6 @@ const Pagination = ({
   };
 
   useEffect(() => {
-    console.log(itemCount);
     setCurrentPageIndexes(
       Array(Math.min(5, itemCount))
         .fill(0)
