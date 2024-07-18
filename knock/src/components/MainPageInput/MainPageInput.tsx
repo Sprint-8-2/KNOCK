@@ -43,7 +43,7 @@ const MainPageInput: React.FC<MainPageInputProps> = () => {
       <form className={`${styles['container__outside']}`}>
         <Input value={name} onKeyDown={handleKeyDown} onChange={handleNameSet}>
           <Icon
-            src="Person.svg"
+            src={PersonIcon}
             alt="Person"
             className={`${styles['container__img']}`}
             handleClick={handleClick}
