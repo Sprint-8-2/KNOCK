@@ -11,6 +11,7 @@ import useQuestionList from '../lib/hooks/feed/useQuestionList';
 import { deleteQuestion } from '../lib/api/Questions';
 import styles from '../core/styles/answerPage.module.scss';
 import useGetUserInfo from '../lib/hooks/feed/useGetUserInfo';
+import Toast from '../core/ui/Toast/Toast';
 
 function AnswerPage() {
   const { id } = useParams(); // subjectId
@@ -24,6 +25,17 @@ function AnswerPage() {
     subjectId: Number(id) || '',
     deps: [renderTrigger],
   });
+
+  const [onToast, setOnToast] = useState(false);
+  const handleCopySuccess = () => {
+    setOnToast(true);
+    setTimeout(() => {
+      setOnToast(false);
+    }, 5000);
+  };
+  const handleError = () => {
+    setOnToast(false);
+  };
 
   const handleDeleteAll = () => {
     questions?.results.map((question) => {
@@ -44,6 +56,11 @@ function AnswerPage() {
   return (
     <>
       <MetaTags />
+      {onToast && (
+        <div className={styles['page__toast']}>
+          <Toast toastMessage="URL이 복사되었습니다." />
+        </div>
+      )}
       <div className={styles['page']}>
         <div className={styles['page__container']}>
           <Image
@@ -55,6 +72,8 @@ function AnswerPage() {
             <Image src={imgLogo} alt="로고" />
           </div>
           <Profile
+            copySuccess={handleCopySuccess}
+            copyError={handleError}
             name={userData?.name || ''}
             profileImage={userData?.imageSource || ''}
           />

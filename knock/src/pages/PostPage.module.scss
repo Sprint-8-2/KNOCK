@@ -32,4 +32,10 @@
     bottom: 1rem;
     right: 1rem;
   }
+  &__toast {
+    position: fixed;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 }

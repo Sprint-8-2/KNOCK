@@ -42,4 +42,10 @@ body {
   &__feed-list {
     margin: 0.63rem 0 9.75rem;
   }
+  &__toast {
+    position: fixed;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 }

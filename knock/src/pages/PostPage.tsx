@@ -9,6 +9,8 @@ import ModalPage from './ModalPage';
 import useGetUserInfo from '../lib/hooks/feed/useGetUserInfo';
 import useQuestionList from '../lib/hooks/feed/useQuestionList';
 import MetaTags from '../core/ui/MetaTags/MetaTags';
+import Toast from '../core/ui/Toast/Toast';
+import { useState } from 'react';
 
 const PostPage = () => {
   const { id: subjectId } = useParams();
@@ -19,10 +21,25 @@ const PostPage = () => {
   const { data: subjectQuestionList } = useQuestionList({
     subjectId: subjectId || '',
   });
+  const [onToast, setOnToast] = useState(false);
+  const handleCopySuccess = () => {
+    setOnToast(true);
+    setTimeout(() => {
+      setOnToast(false);
+    }, 5000);
+  };
+  const handleError = () => {
+    setOnToast(false);
+  };
 
   return (
     <>
       <MetaTags />
+      {onToast && (
+        <div className={styles['post-page__toast']}>
+          <Toast toastMessage="URL이 복사되었습니다." />
+        </div>
+      )}
       <div className={styles['post-page']}>
         <Image
           src={postPageBannerImage}
@@ -31,6 +48,8 @@ const PostPage = () => {
         />
         <div className={styles['post-page__profile']}>
           <Profile
+            copySuccess={handleCopySuccess}
+            copyError={handleError}
             profileImage={subjectInfo?.imageSource as string}
             name={subjectInfo?.name as string}
           />
