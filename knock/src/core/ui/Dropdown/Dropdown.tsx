@@ -1,9 +1,10 @@
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 
 import DropdownContent from './DropdownContent';
 
 import styles from '../../styles/dropdown.module.scss';
 import Icon from '../CommonIcon/icon';
+import useCloseRef from '../../../lib/hooks/useCloseRef';
 
 interface DropdownProps {
   ButtonclassName?: string;
@@ -22,30 +23,18 @@ const Dropdown = ({
   dropdownElementList,
   handleSelectElement,
 }: DropdownProps) => {
-  const dropdownRef = useRef<HTMLDivElement | null>(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
+  const handleClose = () => {
+    setIsDropdownOpen(false);
+  };
+  const { ref: dropdownRef } = useCloseRef({
+    isOpen: isDropdownOpen,
+    onClose: handleClose,
+  });
 
   const handleDropdownToggle = () => {
     setIsDropdownOpen((prev) => !prev);
   };
-
-  useEffect(() => {
-    const handleDropdownOutClose = (e: MouseEvent) => {
-      if (
-        isDropdownOpen &&
-        dropdownRef &&
-        !dropdownRef.current?.contains(e.target as Node)
-      ) {
-        setIsDropdownOpen(false);
-      }
-    };
-
-    window.addEventListener('click', handleDropdownOutClose);
-
-    return () => {
-      window.removeEventListener('click', handleDropdownOutClose);
-    };
-  }, [isDropdownOpen, dropdownRef.current]);
 
   return (
     <div className={`${styles['dropdown']}`} ref={dropdownRef}>
