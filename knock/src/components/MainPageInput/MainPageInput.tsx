@@ -1,6 +1,5 @@
 import PersonIcon from '../../core/assets/icon/Person.svg';
 import styles from './mainPageInput.module.scss';
-import React, { useState } from 'react';
 import UButton from '../../core/ui/buttons/UButton/UButton';
 import Input from '../../core/ui/Input/Input';
 import Icon from '../../core/ui/CommonIcon/icon';
