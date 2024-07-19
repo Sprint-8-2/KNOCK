@@ -10,23 +10,36 @@ import imgLogo from '../core/assets/image/SubPageLogo.svg';
 import useQuestionList from '../lib/hooks/feed/useQuestionList';
 import { deleteQuestion } from '../lib/api/Questions';
 import styles from '../core/styles/answerPage.module.scss';
-import useGetUserInfo from '../lib/hooks/feed/useGetUserInfo';
 import Toast from '../core/ui/Toast/Toast';
+import localStorageUtil from '../lib/util/localStorageUtil';
+
+interface LocalUserInfoValue {
+  name: string;
+  imageSource: string;
+}
+type LocalUserInfo = LocalUserInfoValue[];
 
 function AnswerPage() {
   const { id } = useParams(); // subjectId
   const navigate = useNavigate();
   const [subjectId, setSubjectId] = useState<number>(Number(id?.trim()));
+  const [userData, setUserData] = useState<LocalUserInfoValue>();
   const [renderTrigger, setRenderTrigger] = useState<number>(0);
-
-  const { data: userData } = useGetUserInfo({ subjectId: subjectId });
-
+  const [onToast, setOnToast] = useState(false);
   const { data: questions } = useQuestionList({
     subjectId: Number(id) || '',
     deps: [renderTrigger],
   });
 
-  const [onToast, setOnToast] = useState(false);
+  const getLocalUserInfo = () => {
+    const localUserInfo: LocalUserInfo = localStorageUtil.get('UserInfo');
+    if (localUserInfo.hasOwnProperty(subjectId)) {
+      setUserData(localUserInfo[subjectId]);
+    } else {
+      navigate('/notfound');
+    }
+  };
+
   const handleCopySuccess = () => {
     setOnToast(true);
     setTimeout(() => {
@@ -50,6 +63,7 @@ function AnswerPage() {
   };
 
   useEffect(() => {
+    getLocalUserInfo();
     setRenderTrigger(questions?.count || 0);
   }, []);
 

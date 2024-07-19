@@ -23,7 +23,8 @@ const localStorageUtil = {
     }
 
     if (!isValidJSON(result)) {
-      throw new Error('can not parse json error');
+      // json parse error
+      return null;
     }
 
     return JSON.parse(result);
