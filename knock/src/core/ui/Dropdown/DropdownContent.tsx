@@ -10,7 +10,7 @@ const DropdownContent = ({
   selected = '',
 }: DropdownContentProps) => {
   return (
-    <ul>
+    <>
       {dropdownElementList.map((e, idx) => {
         return (
           <li
@@ -21,7 +21,7 @@ const DropdownContent = ({
           </li>
         );
       })}
-    </ul>
+    </>
   );
 };
 
