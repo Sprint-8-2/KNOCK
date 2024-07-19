@@ -7,7 +7,7 @@ interface MetaTagProps {
   path?: string;
 }
 
-const DEPLOY_URL = 'https://dev-knock.netlify.app/';
+const DEPLOY_URL = process.env.REACT_APP_DEPLOY_PRODUCT_URL;
 
 export default function MetaTags(props: MetaTagProps) {
   const url = props.path ? `${DEPLOY_URL}${props.path}` : DEPLOY_URL;

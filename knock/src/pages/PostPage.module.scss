@@ -1,0 +1,41 @@
+.post-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__banner {
+    height: 14.625rem;
+    margin-top: 2rem;
+  }
+
+  &__logo-img {
+    width: 10.6rem;
+    position: absolute;
+    top: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  &__feed-list {
+    margin-top: 10rem;
+  }
+
+  &__profile {
+    display: flex;
+    position: absolute;
+    top: 8rem;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  &__floating-btn {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+  }
+  &__toast {
+    position: fixed;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}

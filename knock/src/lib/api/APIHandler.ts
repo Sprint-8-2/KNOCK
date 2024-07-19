@@ -1,11 +1,11 @@
-const BASE_URL = 'https://openmind-api.vercel.app/8-2/';
+const BASE_URL = process.env.REACT_APP_BASE_URL || '';
 
 type NetworkError = {
-  detail?: string;
+  detail: string;
 };
 
 class APIHandler {
-  private baseUrl: string;
+  private baseUrl: string | undefined;
 
   constructor(baseUrl: string) {
     this.baseUrl = baseUrl;
@@ -27,6 +27,11 @@ class APIHandler {
       if (!response.ok) {
         const error = (await response.json()) as NetworkError;
         throw new Error(`${error.detail ?? '알 수 없는 에러입니다'}`);
+      }
+
+      // No Content
+      if (response.status === 204) {
+        return {} as T;
       }
 
       return response.json() as T;
