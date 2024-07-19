@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+
 import DropdownContent from './DropdownContent';
 
 import styles from '../../styles/dropdown.module.scss';
@@ -14,36 +15,56 @@ interface DropdownProps {
 }
 
 const Dropdown = ({
-  ButtonclassName,
   children,
-  dropdownElementList,
   iconSrc = '',
-  handleSelectElement,
   selected = '',
+  ButtonclassName,
+  dropdownElementList,
+  handleSelectElement,
 }: DropdownProps) => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
+  const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
 
-  const handleOpen = () => {
-    setIsOpen((prev) => !prev);
+  const handleDropdownOpen = () => {
+    setIsDropdownOpen((prev) => !prev);
   };
+
+  useEffect(() => {
+    const handleDropdownOutClose = (e: MouseEvent) => {
+      if (
+        isDropdownOpen &&
+        dropdownRef &&
+        !dropdownRef.current?.contains(e.target as Node)
+      ) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    window.addEventListener('click', handleDropdownOutClose);
+
+    return () => {
+      window.removeEventListener('click', handleDropdownOutClose);
+    };
+  }, [isDropdownOpen, dropdownRef.current]);
+
   return (
-    <div className={`${styles['dropdown']}`}>
+    <div className={`${styles['dropdown']}`} ref={dropdownRef}>
       <button
         className={`${
           ButtonclassName ? ButtonclassName : styles['dropdown__button']
-        } ${isOpen ? styles['dropdown__button--active'] : ''}`}
-        onClick={handleOpen}
+        } ${isDropdownOpen ? styles['dropdown__button--active'] : ''}`}
+        onClick={handleDropdownOpen}
       >
         {children}
         {iconSrc && (
           <Icon
             src={iconSrc}
             alt="드랍다운 아이콘"
-            className={`${styles['dropdown__button--icon']} ${isOpen ? styles['dropdown__button--turn'] : ''}`}
+            className={`${styles['dropdown__button--icon']} ${isDropdownOpen ? styles['dropdown__button--turn'] : ''}`}
           />
         )}
         <div
-          className={`${styles['dropdown__content']} ${isOpen ? styles['dropdown__content--visible'] : ''}`}
+          className={`${styles['dropdown__content']} ${isDropdownOpen ? styles['dropdown__content--visible'] : ''}`}
           onClick={handleSelectElement}
         >
           <DropdownContent
