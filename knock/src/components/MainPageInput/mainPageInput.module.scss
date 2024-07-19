@@ -1,14 +1,7 @@
 @import '../../core/styles/global.scss';
 
-* {
-  box-sizing: border-box;
-}
-
 .container {
   &__outside {
-    width: 25rem;
-    height: 10.75;
-
     display: flex;
     padding: 2rem;
     flex-direction: column;
