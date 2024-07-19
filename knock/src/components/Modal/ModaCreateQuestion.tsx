@@ -1,4 +1,4 @@
-import style from './ModalCrateQuestion.module.scss';
+import style from './ModaCreateQuestion.module.scss';
 import UButton from '../../core/ui/buttons/UButton/UButton';
 import Image from '../../core/ui/CommonImage/Image';
 import Textarea from '../../core/ui/Textarea/Textarea';
@@ -20,7 +20,7 @@ interface CrateQuestionProps {
   textareaValue: string;
 }
 
-const CrateQuestion: React.FC<CrateQuestionProps> = ({
+const ModaCreateQuestion: React.FC<CrateQuestionProps> = ({
   name,
   src,
   alt,
@@ -91,4 +91,4 @@ const CrateQuestion: React.FC<CrateQuestionProps> = ({
   );
 };
 
-export default CrateQuestion;
+export default ModaCreateQuestion;

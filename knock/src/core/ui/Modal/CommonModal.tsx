@@ -1,4 +1,4 @@
-import React, { useRef, ReactNode } from 'react';
+import React, { useRef, ReactNode, useEffect, useState } from 'react';
 import style from './CommonModal.module.scss';
 
 interface CommonModalProps {
@@ -12,6 +12,15 @@ const CommonModal: React.FC<CommonModalProps> = ({
   onClose,
   children,
 }) => {
+  const [isvisible, setIsVisible] = useState(isOpen);
+  useEffect(() => {
+    if (isOpen) {
+      setIsVisible(true);
+    } else {
+      setTimeout(() => setIsVisible(false), 200);
+    }
+  }, [isOpen]);
+
   const modalBackground = useRef<HTMLDivElement>(null);
 
   const handleClickOutsideModal = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -21,8 +30,8 @@ const CommonModal: React.FC<CommonModalProps> = ({
   };
 
   return (
-    <>
-      {isOpen && (
+    <div className={style[`animation${isOpen ? '__is-open' : ''}`]}>
+      {isvisible && (
         <div
           className={style['modal-container']}
           ref={modalBackground}
@@ -31,7 +40,7 @@ const CommonModal: React.FC<CommonModalProps> = ({
           <div className={style['modal-content']}>{children}</div>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import style from './CreateQuestionPage.module.scss';
 import UButton from '../core/ui/buttons/UButton/UButton';
-import ModalCrateQuestion from '../components/Modal/ModalCrateQuestion';
+import ModalCrateQuestion from '../components/Modal/ModaCreateQuestion';
 import ErrorModal from '../components/Modal/Error';
 import useSubmitQuestion from '../lib/hooks/useSubmitQuestion';
 
