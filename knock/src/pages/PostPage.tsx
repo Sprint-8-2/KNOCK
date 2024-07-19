@@ -5,7 +5,7 @@ import mainLogo from '../core/assets/image/MainPgaeLogo.svg';
 import FeedList from '../components/feed/FeedList/FeedList';
 import { Link, useParams } from 'react-router-dom';
 import Profile from '../components/Profile/Profile';
-import ModalPage from './ModalPage';
+import CreateQuestionPage from './CreateQuestionPage';
 import useGetUserInfo from '../lib/hooks/feed/useGetUserInfo';
 import useQuestionList from '../lib/hooks/feed/useQuestionList';
 import MetaTags from '../core/ui/MetaTags/MetaTags';
@@ -74,7 +74,7 @@ const PostPage = () => {
           )}
         </div>
       </div>
-      <ModalPage
+      <CreateQuestionPage
         name={subjectInfo?.name as string}
         src={subjectInfo?.imageSource as string}
         alt={`${subjectInfo?.name}의 프로필 이미지`}
