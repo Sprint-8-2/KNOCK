@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import Textarea from '../../core/ui/Textarea/Textarea';
+import Textarea from '../../../core/ui/Textarea/Textarea';
 import styles from './AnswerForm.module.scss';
 
 interface AnswerProps {
   content: string;
-  handleSubmit?: (questionId: number | string, content: string) => void;
-  questionId: number | string;
+  handleSubmit?: (questionId: number | undefined, content: string) => void;
+  questionId: number | undefined;
 }
 
 const AnswerForm = ({
@@ -31,7 +31,7 @@ const AnswerForm = ({
   };
   useEffect(() => {
     isButtonValid();
-  }, []);
+  }, [answerContent]);
   return (
     <div className={styles['answer__form']}>
       <Textarea
@@ -43,6 +43,7 @@ const AnswerForm = ({
       />
       <button
         className={`${styles['answer__form-btn--submit']} ${isDisable ? styles['answer__form-btn--submit--disabled'] : ''}`}
+        disabled={isDisable}
         onClick={handleClick}
       >
         답변 완료

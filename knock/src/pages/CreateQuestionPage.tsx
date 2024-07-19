@@ -9,7 +9,7 @@ interface CreateQuestionPageProps {
   name: string;
   src: string;
   alt: string;
-  subjectId: number;
+  subjectId: number | string;
 }
 
 const CreateQuestionPage: React.FC<CreateQuestionPageProps> = ({
