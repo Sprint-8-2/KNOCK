@@ -25,7 +25,7 @@ const Dropdown = ({
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
 
-  const handleDropdownOpen = () => {
+  const handleDropdownToggle = () => {
     setIsDropdownOpen((prev) => !prev);
   };
 
@@ -53,7 +53,7 @@ const Dropdown = ({
         className={`${
           ButtonclassName ? ButtonclassName : styles['dropdown__button']
         } ${isDropdownOpen ? styles['dropdown__button--active'] : ''}`}
-        onClick={handleDropdownOpen}
+        onClick={handleDropdownToggle}
       >
         {children}
         {iconSrc && (
@@ -63,7 +63,7 @@ const Dropdown = ({
             className={`${styles['dropdown__button--icon']} ${isDropdownOpen ? styles['dropdown__button--turn'] : ''}`}
           />
         )}
-        <div
+        <ul
           className={`${styles['dropdown__content']} ${isDropdownOpen ? styles['dropdown__content--visible'] : ''}`}
           onClick={handleSelectElement}
         >
@@ -71,7 +71,7 @@ const Dropdown = ({
             dropdownElementList={dropdownElementList}
             selected={selected}
           />
-        </div>
+        </ul>
       </button>
     </div>
   );
