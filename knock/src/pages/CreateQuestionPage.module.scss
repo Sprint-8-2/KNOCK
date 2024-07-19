@@ -1,7 +1,7 @@
 @import '../core/styles/global.scss';
 
 .btn-wrapper {
-  display: flex;
-  justify-content: right;
-  margin-top: 5rem;
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
 }
