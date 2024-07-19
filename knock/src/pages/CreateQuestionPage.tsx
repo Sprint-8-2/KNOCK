@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import style from './CreateQuestionPage.module.scss';
 import UButton from '../core/ui/buttons/UButton/UButton';
-import CrateQuestion from '../components/Modal/crateQuestion';
+import ModaCreateQuestion from '../components/Modal/ModaCreateQuestion';
 import ErrorModal from '../components/Modal/Error';
 import useSubmitQuestion from '../lib/hooks/useSubmitQuestion';
 
@@ -64,7 +64,7 @@ const CreateQuestionPage: React.FC<CreateQuestionPageProps> = ({
           질문 작성하기
         </UButton>
       </div>
-      <CrateQuestion
+      <ModaCreateQuestion
         isOpen={modalOpen}
         onClose={handleModalClose}
         onSubmit={handleSubmit}
