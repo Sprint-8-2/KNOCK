@@ -2,6 +2,7 @@ import { clsx } from 'clsx';
 import styles from './UButton.module.scss';
 
 interface UButtonProps {
+  buttonTagType?: React.ButtonHTMLAttributes<HTMLButtonElement>['type'];
   type: 'box' | 'floating' | 'round';
   className?: string;
   handleClick: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
@@ -12,6 +13,7 @@ interface UButtonProps {
 }
 
 const UButton = ({
+  buttonTagType,
   type,
   className = '',
   handleClick,
@@ -38,6 +40,7 @@ const UButton = ({
         )}
         onClick={handleClick}
         disabled={isDisalbed}
+        type={buttonTagType}
       >
         {children}
       </button>
