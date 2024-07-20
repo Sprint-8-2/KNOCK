@@ -9,37 +9,15 @@ import Pagination from '../../core/ui/Pagenation/Pagination';
 import QuestionCardList from './QuestionCardList';
 
 import styles from './QuestionListPagination.module.scss';
+import useSubjectList from '../../lib/hooks/subjectList/useSubjectList';
 
 interface QuestionListPaginationProps {
   order: 'name' | 'time';
 }
 
 const QuestionListPagination = ({ order }: QuestionListPaginationProps) => {
-  const { pageSize } = useResize();
-  const [questions, setQuestions] = useState<SubjectDetailResponse[]>([]);
-  const [maxIndex, setMaxIndex] = useState<number>(0);
-  const [currentIndex, setCurrentIndex] = useState<number>(1);
-  const handlecurrentIndex = (newValue: number) => {
-    setCurrentIndex(newValue);
-  };
-
-  useEffect(() => {
-    setCurrentIndex(1);
-  }, [order]);
-
-  const handleQuestions = async ({
-    limit,
-    offset,
-    sort,
-  }: SubjectListParams) => {
-    const { count, results } = await getSubjectList({ limit, offset, sort });
-    setQuestions(results);
-    setMaxIndex(Math.ceil(count / pageSize));
-  };
-  useEffect(() => {
-    const offset = pageSize * (currentIndex - 1);
-    handleQuestions({ limit: pageSize, offset, sort: order });
-  }, [order, currentIndex, pageSize]);
+  const { maxIndex, currentIndex, questions, handleCurrentIndex } =
+    useSubjectList({ order });
 
   return (
     <section className={styles['question-list-main__pagination']}>
@@ -47,7 +25,7 @@ const QuestionListPagination = ({ order }: QuestionListPaginationProps) => {
       <Pagination
         currentPage={currentIndex}
         itemCount={maxIndex}
-        handleCurrentPage={handlecurrentIndex}
+        handleCurrentPage={handleCurrentIndex}
       />
     </section>
   );
