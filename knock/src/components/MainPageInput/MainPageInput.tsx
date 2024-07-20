@@ -1,22 +1,39 @@
 import PersonIcon from '../../core/assets/icon/Person.svg';
 import styles from './mainPageInput.module.scss';
+import React, { useState } from 'react';
 import UButton from '../../core/ui/buttons/UButton/UButton';
 import Input from '../../core/ui/Input/Input';
+import { createSubject } from '../../lib/api/Subject';
+import { useNavigate } from 'react-router-dom';
+import useUserInfo from '../../lib/hooks/useUserInfo';
 import Icon from '../../core/ui/CommonIcon/icon';
 
-interface MainPageInputProps {
-  name: string;
-  handleNameSet: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleSubmit: (e: React.FormEvent<HTMLElement>) => void;
-  handleKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void;
-}
+const MainPageInput = () => {
+  const [name, setName] = useState('');
+  const navigate = useNavigate();
+  const { handleUserInfo } = useUserInfo();
 
-const MainPageInput = ({
-  name,
-  handleNameSet,
-  handleSubmit,
-  handleKeyDown,
-}: MainPageInputProps) => {
+  const handleNameSet = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setName(e.target.value);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (name && e.key === 'Enter') {
+      handleSubmit(e as unknown as React.MouseEvent<HTMLElement, MouseEvent>);
+    }
+  };
+
+  const handleSubmit = async (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    e.preventDefault();
+    try {
+      const { id, name: subName, imageSource } = await createSubject({ name });
+      navigate(`post/${id}/answer`);
+      handleUserInfo({ id, name: subName, imageSource });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div className={`${styles['container']}`}>
       <form className={`${styles['container__outside']}`}>
