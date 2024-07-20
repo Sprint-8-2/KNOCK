@@ -25,8 +25,23 @@ class APIHandler {
     try {
       const response = await fetch(`${this.baseUrl}${path}`, _options);
       if (!response.ok) {
-        const error = (await response.json()) as NetworkError;
-        throw new Error(`${error.detail ?? '알 수 없는 에러입니다'}`);
+        if (response.status === 404) {
+          let apiError;
+          await response
+            .json()
+            .then((e) => {
+              const error = e as NetworkError;
+              apiError = new Error(`${error.detail}\n파라미터를 확인해주세요.`);
+            })
+            .catch(() => {
+              apiError = new Error(
+                `요청하신 주소를 찾을 수 없습니다. 주소를 확인해주세요.`,
+              );
+            });
+          throw apiError;
+        }
+
+        throw new Error('알 수 없는 에러입니다 네트워크 탭을 확인해주세요');
       }
 
       // No Content
