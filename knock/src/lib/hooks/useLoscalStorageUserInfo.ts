@@ -10,6 +10,15 @@ interface UserInfos {
   [id: number]: Omit<UserInfo, 'id'>;
 }
 
+const getUserInfoFromLocalStorage = (): UserInfos | null => {
+  const stringUserInfo = window.localStorage.getItem('userInfo');
+  if (stringUserInfo) {
+    return JSON.parse(stringUserInfo);
+  } else {
+    return null;
+  }
+};
+
 const useLoscalStorageUserInfo = (): {
   users: UserInfos | null;
   addUserInfo: (newUserInfo: UserInfo) => void;
@@ -17,15 +26,6 @@ const useLoscalStorageUserInfo = (): {
   const [users, setUsers] = useState<UserInfos | null>(() =>
     getUserInfoFromLocalStorage(),
   );
-
-  const getUserInfoFromLocalStorage = (): UserInfos | null => {
-    const stringUserInfo = window.localStorage.getItem('userInfo');
-    if (stringUserInfo) {
-      return JSON.parse(stringUserInfo);
-    } else {
-      return null;
-    }
-  };
 
   const addUserInfo = (newUserInfo: UserInfo) => {
     if (newUserInfo.name && newUserInfo.imageSource) {
