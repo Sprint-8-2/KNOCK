@@ -1,0 +1,51 @@
+@import '../../styles/global.scss';
+
+.modal-container {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 38.25rem;
+  height: 28.375rem;
+  flex-shrink: 0;
+  border-radius: 1.5rem;
+  @include Shadow(3);
+  background-color: $Grayscale-10;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.animation {
+  animation: fadeOut 0.2s ease-in;
+
+  &__is-open {
+    animation: fadeIn 0.2s ease-in;
+  }
+}
