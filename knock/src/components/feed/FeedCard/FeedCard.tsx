@@ -34,7 +34,10 @@ const FeedCard = ({
   answer,
   ...subjectDetail
 }: FeedCardProps) => {
-  const dropdownElementList = ['수정하기', '거절하기'];
+  const dropdownElementList = [
+    { selected: 'update', content: '수정하기' },
+    { selected: 'reject', content: '거절하기' },
+  ];
   const [answerState, setAnswerState] = useState<AnswerState>('empty');
   const [isModification, setIsModification] = useState(false);
   const [questionValue, setQuestionValue] = useState<QuestionDetailResponse>({
@@ -51,10 +54,9 @@ const FeedCard = ({
 
   const handleDropdown = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     const target = e.target as HTMLElement;
-    console.log(target.textContent);
-    if (target.textContent === dropdownElementList[0]) {
+    if (target.dataset['selected'] === 'update') {
       setIsModification(true);
-    } else if (target.textContent === dropdownElementList[1]) {
+    } else if (target.dataset['selected'] === 'reject') {
       handleRejectAnswer();
     }
   };

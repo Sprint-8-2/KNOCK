@@ -1,23 +1,41 @@
 import styles from '../../styles/dropdown.module.scss';
+import Icon from '../CommonIcon/icon';
+
+export interface DropdownContentList {
+  selected: string;
+  content: string;
+}
 
 interface DropdownContentProps {
-  dropdownElementList: React.ReactNode[] | string[];
+  iconSourse?: string;
+  dropdownElementList: DropdownContentList[];
   selected?: string;
 }
 
 const DropdownContent = ({
   dropdownElementList,
   selected = '',
+  iconSourse,
 }: DropdownContentProps) => {
   return (
     <>
-      {dropdownElementList.map((e, idx) => {
+      {dropdownElementList.map((e) => {
         return (
           <li
-            className={` ${selected === e ? styles['dropdown__content--selected'] : styles['dropdown__content--disselected']}`}
-            key={idx}
+            className={` ${selected === e.selected ? styles['dropdown__content--selected'] : styles['dropdown__content--disselected']}`}
+            key={e.content}
+            data-selected={e.selected}
           >
-            {e}
+            {iconSourse ? (
+              <Icon
+                src={iconSourse}
+                alt={`드랍다운 ${e.content}`}
+                className=""
+              />
+            ) : (
+              ''
+            )}
+            {e.content}
           </li>
         );
       })}

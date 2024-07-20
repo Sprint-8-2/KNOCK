@@ -9,7 +9,7 @@ import { getSubjectList } from '../../lib/api/Subject';
 import useResize from '../../lib/hooks/useResize';
 
 interface QuestionListPaginationProps {
-  order: string;
+  order: 'name' | 'time';
 }
 
 const QuestionListPagination = ({ order }: QuestionListPaginationProps) => {
@@ -35,9 +35,8 @@ const QuestionListPagination = ({ order }: QuestionListPaginationProps) => {
     setMaxIndex(Math.ceil(count / pageSize));
   };
   useEffect(() => {
-    const sort = order === '이름순' ? 'name' : 'time';
     const offset = pageSize * (currentIndex - 1);
-    handleQuestions({ limit: pageSize, offset, sort });
+    handleQuestions({ limit: pageSize, offset, sort: order });
   }, [order, currentIndex, pageSize]);
 
   return (
