@@ -61,11 +61,7 @@ const InfiniteFeedList = ({
 
   useEffect(() => {
     if (isFetched && questions) {
-      const totalQuestions = questions.pages.reduce(
-        (total, page) => total + page.results.length,
-        0,
-      );
-      setQuestionCount(totalQuestions);
+      setQuestionCount(questions.pages[0].count);
     }
   }, [isFetched, questions]);
 
