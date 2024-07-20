@@ -54,6 +54,3 @@ function MainPageInput() {
   );
 }
 export default MainPageInput;
-function addUserInfo(arg0: { id: number; name: string; imageSource: string }) {
-  throw new Error('Function not implemented.');
-}
