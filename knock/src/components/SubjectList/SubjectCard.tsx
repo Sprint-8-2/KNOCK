@@ -1,12 +1,12 @@
 import UserCard from '../../core/ui/UserCard/UserCard';
 
-interface QuestionCardProps {
+interface SubjectCardProps {
   name: string;
   src: string;
   questionCount: number;
 }
 
-const QuestionCard = ({ name, src, questionCount }: QuestionCardProps) => {
+const SubjectCard = ({ name, src, questionCount }: SubjectCardProps) => {
   return (
     <>
       <UserCard name={name} src={src} count={questionCount} />
@@ -14,4 +14,4 @@ const QuestionCard = ({ name, src, questionCount }: QuestionCardProps) => {
   );
 };
 
-export default QuestionCard;
+export default SubjectCard;

@@ -11,11 +11,11 @@ interface SubjectListFuncParams {
 
 const useSubjectList = ({ order }: SubjectListFuncParams) => {
   const { pageSize } = useResize();
-  const [questions, setQuestions] = useState<SubjectDetailResponse[]>([]);
+  const [subjects, setSubjects] = useState<SubjectDetailResponse[]>([]);
   const [maxIndex, setMaxIndex] = useState<number>(0);
   const [currentIndex, setCurrentIndex] = useState<number>(1);
 
-  const handleQuestions = useCallback(
+  const handleSubjects = useCallback(
     async ({ limit, offset, sort }: SubjectListParams) => {
       await getSubjectList({
         limit,
@@ -24,7 +24,7 @@ const useSubjectList = ({ order }: SubjectListFuncParams) => {
       })
         .then((response) => {
           const { count, results } = response;
-          setQuestions(results);
+          setSubjects(results);
           setMaxIndex(Math.ceil(count / pageSize));
         })
         .catch((error) => {});
@@ -38,14 +38,14 @@ const useSubjectList = ({ order }: SubjectListFuncParams) => {
 
   useEffect(() => {
     const offset = pageSize * (currentIndex - 1);
-    handleQuestions({ limit: pageSize, offset, sort: order });
-  }, [order, currentIndex, pageSize, handleQuestions]);
+    handleSubjects({ limit: pageSize, offset, sort: order });
+  }, [order, currentIndex, pageSize, handleSubjects]);
 
   useEffect(() => {
     handleCurrentIndex(1);
   }, [order]);
 
-  return { currentIndex, maxIndex, questions, handleCurrentIndex };
+  return { currentIndex, maxIndex, subjects, handleCurrentIndex };
 };
 
 export default useSubjectList;

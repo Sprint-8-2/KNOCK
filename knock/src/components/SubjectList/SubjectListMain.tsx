@@ -1,13 +1,13 @@
 import { useState } from 'react';
 
 import Dropdown from '../../core/ui/Dropdown/Dropdown';
-import QuestionListPagination from './QuestionListPagination';
+import SubjectListPagination from './SubjectListPagination';
 
 import ArrowDownIcon from '../../core/assets/icon/Arrow-down.svg';
 
-import styles from './QuestionListMain.module.scss';
+import styles from './SubjectListMain.module.scss';
 
-const QuestionListMain = () => {
+const SubjectListMain = () => {
   const [order, setOrder] = useState<'name' | 'time'>('time');
   const dropdownElementlist = [
     { selected: 'name', content: '이름순' },
@@ -24,8 +24,8 @@ const QuestionListMain = () => {
   };
 
   return (
-    <main className={styles['question-list-main']}>
-      <section className={styles['question-list-title']}>
+    <main className={styles['subject-list-main']}>
+      <section className={styles['subject-list-title']}>
         <h1>누구에게 질문할까요?</h1>
         <Dropdown
           handleSelectElement={handleOrder}
@@ -33,14 +33,14 @@ const QuestionListMain = () => {
           selected={order}
           iconSrc={ArrowDownIcon}
         >
-          <p className={styles['question-list-title__dropdown']}>
+          <p className={styles['subject-list-title__dropdown']}>
             <span>{order === 'name' ? '이름순' : '최신순'}</span>
           </p>
         </Dropdown>
       </section>
-      <QuestionListPagination order={order} />
+      <SubjectListPagination order={order} />
     </main>
   );
 };
 
-export default QuestionListMain;
+export default SubjectListMain;

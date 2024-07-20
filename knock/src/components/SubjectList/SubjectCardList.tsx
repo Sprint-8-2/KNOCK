@@ -1,22 +1,22 @@
 import { Link } from 'react-router-dom';
 
 import { SubjectDetailResponse } from '../../core/types/api/Response';
-import QuestionCard from './QuestionCard';
+import SubjectCard from './SubjectCard';
 
-import styles from './QuestionCardList.module.scss';
+import styles from './SubjectCardList.module.scss';
 
-interface QuestionCardListProps {
-  questions: SubjectDetailResponse[];
+interface SubjectCardListProps {
+  subjects: SubjectDetailResponse[];
 }
 
-const QuestionCardList = ({ questions }: QuestionCardListProps) => {
+const SubjectCardList = ({ subjects }: SubjectCardListProps) => {
   return (
-    <ul className={`${styles['question-list-main__cards']}`}>
-      {questions.map((e) => {
+    <ul className={`${styles['subject-list-main__cards']}`}>
+      {subjects.map((e) => {
         return (
           <li key={e.id}>
             <Link to={`/post/${e.id}`}>
-              <QuestionCard
+              <SubjectCard
                 name={e.name}
                 src={e.imageSource}
                 questionCount={e.questionCount}
@@ -29,4 +29,4 @@ const QuestionCardList = ({ questions }: QuestionCardListProps) => {
   );
 };
 
-export default QuestionCardList;
+export default SubjectCardList;
