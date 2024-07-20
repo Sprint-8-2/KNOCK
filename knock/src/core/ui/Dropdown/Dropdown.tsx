@@ -1,10 +1,10 @@
 import { useState } from 'react';
 
 import DropdownContent, { DropdownContentList } from './DropdownContent';
+import useCloseRef from '../../../lib/hooks/useCloseRef';
+import Icon from '../CommonIcon/icon';
 
 import styles from '../../styles/dropdown.module.scss';
-import Icon from '../CommonIcon/icon';
-import useCloseRef from '../../../lib/hooks/useCloseRef';
 
 interface DropdownProps {
   ButtonclassName?: string;

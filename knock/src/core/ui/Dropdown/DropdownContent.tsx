@@ -4,10 +4,11 @@ import Icon from '../CommonIcon/icon';
 export interface DropdownContentList {
   selected: string;
   content: string;
+  iconSourse?: string;
+  iconClassName?: string;
 }
 
 interface DropdownContentProps {
-  iconSourse?: string;
   dropdownElementList: DropdownContentList[];
   selected?: string;
 }
@@ -15,7 +16,6 @@ interface DropdownContentProps {
 const DropdownContent = ({
   dropdownElementList,
   selected = '',
-  iconSourse,
 }: DropdownContentProps) => {
   return (
     <>
@@ -26,11 +26,11 @@ const DropdownContent = ({
             key={e.content}
             data-selected={e.selected}
           >
-            {iconSourse ? (
+            {e.iconSourse ? (
               <Icon
-                src={iconSourse}
+                src={e.iconSourse}
                 alt={`드랍다운 ${e.content}`}
-                className=""
+                className={e.iconClassName ?? ''}
               />
             ) : (
               ''

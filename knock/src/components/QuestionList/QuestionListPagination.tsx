@@ -1,12 +1,14 @@
-import { useCallback, useEffect, useState } from 'react';
-import Pagination from '../../core/ui/Pagenation/Pagination';
-import QuestionCardList from './QuestionCardList';
+import { useEffect, useState } from 'react';
 
-import styles from './QuestionListPagination.module.scss';
 import { SubjectDetailResponse } from '../../core/types/api/Response';
 import { SubjectListParams } from '../../core/types/api/Request';
 import { getSubjectList } from '../../lib/api/Subject';
 import useResize from '../../lib/hooks/useResize';
+
+import Pagination from '../../core/ui/Pagenation/Pagination';
+import QuestionCardList from './QuestionCardList';
+
+import styles from './QuestionListPagination.module.scss';
 
 interface QuestionListPaginationProps {
   order: 'name' | 'time';

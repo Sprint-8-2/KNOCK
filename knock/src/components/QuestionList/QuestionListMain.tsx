@@ -1,9 +1,10 @@
 import { useState } from 'react';
 
 import Dropdown from '../../core/ui/Dropdown/Dropdown';
+import QuestionListPagination from './QuestionListPagination';
 
 import ArrowDownIcon from '../../core/assets/icon/Arrow-down.svg';
-import QuestionListPagination from './QuestionListPagination';
+import ticon from '../../core/assets/icon/Edit.svg';
 
 import styles from './QuestionListMain.module.scss';
 
