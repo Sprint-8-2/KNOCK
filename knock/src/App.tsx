@@ -5,10 +5,12 @@ import MainPage from './pages/MainPage';
 import PostPage from './pages/PostPage';
 import SubjectList from './pages/SubjectList';
 import NotFound from './pages/NotFound/NotFound';
+import DarkModeBtn from './core/ui/DarkModeBtn/DarkModeBtn';
 
 function App() {
   return (
     <BrowserRouter>
+      <DarkModeBtn />
       <Routes>
         <Route index element={<MainPage />} />
         <Route path="list" element={<SubjectList />} />

@@ -1,6 +1,6 @@
 import Image from '../core/ui/CommonImage/Image';
 import styles from './PostPage.module.scss';
-import postPageBannerImage from '../core/assets/image/feedHeaderImage.png';
+import postPageBannerImage from '../core/assets/image/Banner.svg';
 import mainLogo from '../core/assets/image/MainPgaeLogo.svg';
 import FeedList from '../components/feed/FeedList/FeedList';
 import { Link, useParams } from 'react-router-dom';
