@@ -1,15 +1,15 @@
 import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Image from '../core/ui/CommonImage/Image';
-import postPageBannerImage from '../core/assets/image/feedHeaderImage.png';
+import styles from './PostPage.module.scss';
+import postPageBannerImage from '../core/assets/image/Banner.svg';
 import mainLogo from '../core/assets/image/MainPgaeLogo.svg';
 import Profile from '../components/Profile/Profile';
-import ModalPage from './ModalPage';
+import CreateQuestionPage from './CreateQuestionPage';
 import useGetUserInfo from '../lib/hooks/feed/useGetUserInfo';
 import MetaTags from '../core/ui/MetaTags/MetaTags';
 import Toast from '../core/ui/Toast/Toast';
 import InfiniteFeedList from '../components/feed/FeedList/InfiniteFeedList';
-import styles from './PostPage.module.scss';
 
 const PostPage = () => {
   const { id: subjectId } = useParams();
@@ -66,7 +66,7 @@ const PostPage = () => {
           />
         </div>
       </div>
-      <ModalPage
+      <CreateQuestionPage
         name={subjectInfo?.name as string}
         src={subjectInfo?.imageSource as string}
         alt={`${subjectInfo?.name}의 프로필 이미지`}
