@@ -69,7 +69,7 @@ export const getSubjectQuestionList = async ({
   offset,
   options,
 }: SubjectQuestionListParams) => {
-  const path = `${DOMAIN}${subjectId}/questions/?${limit !== undefined ? 'limit=' + limit : ''}${offset !== undefined ? 'offset=' + offset : ''}/`;
+  const path = `${DOMAIN}${subjectId}/questions/?${limit !== undefined ? 'limit=' + limit : ''}&${offset !== undefined ? 'offset=' + offset : ''}`;
   return await apiHandler.get<SubjectQuestionListResponse>(path, options);
 };
 
