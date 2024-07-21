@@ -107,7 +107,7 @@ function AnswerPage() {
             </div>
             <InfiniteFeedList
               key={renderTrigger}
-              subjectId={userInfo?.id || 0}
+              subjectId={subjectId}
               subjectName={userInfo?.name || ''}
               subjectProfileImgSrc={userInfo?.imageSource || ''}
             />
