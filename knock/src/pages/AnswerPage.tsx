@@ -10,20 +10,21 @@ import imgLogo from '../core/assets/image/SubPageLogo.svg';
 import useQuestionList from '../lib/hooks/feed/useQuestionList';
 import Toast from '../core/ui/Toast/Toast';
 import InfiniteFeedList from '../components/feed/FeedList/InfiniteFeedList';
+import useLoscalStorageUserInfo from '../lib/hooks/useLoscalStorageUserInfo';
 import styles from '../core/styles/answerPage.module.scss';
-import localStorageUtil from '../lib/util/localStorageUtil';
 
-interface LocalUserInfoValue {
+interface UserInfo {
+  id: number;
   name: string;
   imageSource: string;
 }
-type LocalUserInfo = LocalUserInfoValue[];
 
 function AnswerPage() {
   const { id } = useParams(); // subjectId
   const navigate = useNavigate();
-  const [subjectId, setSubjectId] = useState<number>(Number(id?.trim()));
-  const [userData, setUserData] = useState<LocalUserInfoValue>();
+  const [subjectId] = useState<number>(Number(id?.trim()));
+  const { users } = useLoscalStorageUserInfo();
+  const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
   const [renderTrigger, setRenderTrigger] = useState<number>(0);
   const [onToast, setOnToast] = useState(false);
   const { data: questions } = useQuestionList({
@@ -32,9 +33,12 @@ function AnswerPage() {
   });
 
   const getLocalUserInfo = () => {
-    const localUserInfo: LocalUserInfo = localStorageUtil.get('UserInfo');
-    if (localUserInfo.hasOwnProperty(subjectId)) {
-      setUserData(localUserInfo[subjectId]);
+    if (users && users[subjectId]) {
+      setUserInfo({
+        id: subjectId,
+        name: users[subjectId].name,
+        imageSource: users[subjectId].imageSource,
+      });
     } else {
       navigate('/notfound');
     }
@@ -88,8 +92,8 @@ function AnswerPage() {
           <Profile
             copySuccess={handleCopySuccess}
             copyError={handleError}
-            name={userData?.name || ''}
-            profileImage={userData?.imageSource || ''}
+            name={userInfo?.name || ''}
+            profileImage={userInfo?.imageSource || ''}
           />
           <div className={styles['page__feed-list']}>
             <div className={styles['page__list-header']}>
@@ -103,9 +107,9 @@ function AnswerPage() {
             </div>
             <InfiniteFeedList
               key={renderTrigger}
-              subjectId={subjectId}
-              subjectName={userData?.name || ''}
-              subjectProfileImgSrc={userData?.imageSource || ''}
+              subjectId={userInfo?.id || 0}
+              subjectName={userInfo?.name || ''}
+              subjectProfileImgSrc={userInfo?.imageSource || ''}
             />
           </div>
         </div>
