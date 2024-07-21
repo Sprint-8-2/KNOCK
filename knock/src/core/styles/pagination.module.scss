@@ -34,6 +34,7 @@
     }
 
     &--selected {
+      @include Body1-Regular;
       color: $Brown-40;
     }
 
@@ -41,6 +42,20 @@
       @include Body3-Regular;
       font-family: 'Actor';
       line-height: 1.5625rem;
+      color: $Grayscale-40;
+      &--selected {
+        @include Body1-Regular;
+        color: $Brown-40;
+      }
+
+      &:hover {
+        color: $Grayscale-60;
+      }
+
+      &:disabled {
+        color: $Grayscale-40;
+        cursor: auto;
+      }
     }
   }
 }

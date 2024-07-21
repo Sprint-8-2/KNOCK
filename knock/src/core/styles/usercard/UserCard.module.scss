@@ -4,7 +4,7 @@
   @include Body1-Regular;
   text-decoration: none;
   display: flex;
-  min-height: 9rem;
+  min-height: 11.6875rem;
   flex-direction: column;
   justify-content: space-between;
   padding: 1.25rem;
@@ -12,7 +12,7 @@
   border: 1px solid $Grayscale-40;
   background: $Grayscale-10;
 
-  @media (width <= 430px) {
+  @media (width <= 668px) {
     padding: 1rem;
   }
 
