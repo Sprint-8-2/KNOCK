@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import FeedList from '../components/feed/FeedList/FeedList';
+import { deleteQuestion } from '../lib/api/Questions';
 import MetaTags from '../core/ui/MetaTags/MetaTags';
 import Image from '../core/ui/CommonImage/Image';
 import ImageBanner from '../core/assets/image/feedHeaderImage.png';
@@ -8,9 +8,9 @@ import UButton from '../core/ui/buttons/UButton/UButton';
 import Profile from '../components/Profile/Profile';
 import imgLogo from '../core/assets/image/SubPageLogo.svg';
 import useQuestionList from '../lib/hooks/feed/useQuestionList';
-import { deleteQuestion } from '../lib/api/Questions';
-import styles from '../core/styles/answerPage.module.scss';
 import Toast from '../core/ui/Toast/Toast';
+import InfiniteFeedList from '../components/feed/FeedList/InfiniteFeedList';
+import styles from '../core/styles/answerPage.module.scss';
 import localStorageUtil from '../lib/util/localStorageUtil';
 
 interface LocalUserInfoValue {
@@ -101,13 +101,11 @@ function AnswerPage() {
                 삭제하기
               </UButton>
             </div>
-            <FeedList
+            <InfiniteFeedList
               key={renderTrigger}
-              count={questions?.count || 0}
-              next={questions?.next || null}
-              previous={questions?.next || null}
-              results={questions?.results || []}
-              subejctId={subjectId}
+              subjectId={subjectId}
+              subjectName={userData?.name || ''}
+              subjectProfileImgSrc={userData?.imageSource || ''}
             />
           </div>
         </div>

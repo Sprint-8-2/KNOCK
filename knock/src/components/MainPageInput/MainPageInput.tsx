@@ -5,39 +5,36 @@ import UButton from '../../core/ui/buttons/UButton/UButton';
 import Input from '../../core/ui/Input/Input';
 import { createSubject } from '../../lib/api/Subject';
 import { useNavigate } from 'react-router-dom';
-import useUserInfo from '../../lib/hooks/useUserInfo';
+import useLoscalStorageUserInfo from '../../lib/hooks/useLoscalStorageUserInfo';
 import Icon from '../../core/ui/CommonIcon/icon';
 
-const MainPageInput = () => {
+function MainPageInput() {
   const [name, setName] = useState('');
   const navigate = useNavigate();
-  const { handleUserInfo } = useUserInfo();
+  const { addUserInfo: addUserInfoToLocalStorage } = useLoscalStorageUserInfo();
 
   const handleNameSet = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (name && e.key === 'Enter') {
-      handleSubmit(e as unknown as React.MouseEvent<HTMLElement, MouseEvent>);
-    }
-  };
-
-  const handleSubmit = async (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const { id, name: subName, imageSource } = await createSubject({ name });
       navigate(`post/${id}/answer`);
-      handleUserInfo({ id, name: subName, imageSource });
+      addUserInfoToLocalStorage({ id, name: subName, imageSource });
     } catch (error) {
       console.error(error);
     }
   };
-
+  // 네
   return (
     <div className={`${styles['container']}`}>
-      <form className={`${styles['container__outside']}`}>
-        <Input value={name} onKeyDown={handleKeyDown} onChange={handleNameSet}>
+      <form
+        onSubmit={handleSubmit}
+        className={`${styles['container__outside']}`}
+      >
+        <Input value={name} onChange={handleNameSet}>
           <Icon
             src={PersonIcon}
             alt="Person"
@@ -47,7 +44,7 @@ const MainPageInput = () => {
         </Input>
         <UButton
           type="box"
-          handleClick={handleSubmit}
+          handleClick={() => {}}
           className={`${styles['container__submit-button']}`}
         >
           질문 하기
@@ -55,5 +52,5 @@ const MainPageInput = () => {
       </form>
     </div>
   );
-};
+}
 export default MainPageInput;
