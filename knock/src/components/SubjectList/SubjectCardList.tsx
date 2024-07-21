@@ -7,9 +7,10 @@ import styles from './SubjectCardList.module.scss';
 
 interface SubjectCardListProps {
   subjects: SubjectDetailResponse[];
+  isLoading: boolean;
 }
 
-const SubjectCardList = ({ subjects }: SubjectCardListProps) => {
+const SubjectCardList = ({ subjects, isLoading }: SubjectCardListProps) => {
   return (
     <ul className={`${styles['subject-list-main__cards']}`}>
       {subjects.map((e) => {
@@ -20,6 +21,7 @@ const SubjectCardList = ({ subjects }: SubjectCardListProps) => {
                 name={e.name}
                 src={e.imageSource}
                 questionCount={e.questionCount}
+                isLoading={isLoading}
               />
             </Link>
           </li>

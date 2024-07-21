@@ -1,15 +1,26 @@
+import SkeletonUserCard from '../../core/ui/UserCard/SkeletonUserCard';
 import UserCard from '../../core/ui/UserCard/UserCard';
 
 interface SubjectCardProps {
   name: string;
   src: string;
   questionCount: number;
+  isLoading: boolean;
 }
 
-const SubjectCard = ({ name, src, questionCount }: SubjectCardProps) => {
+const SubjectCard = ({
+  name,
+  src,
+  questionCount,
+  isLoading,
+}: SubjectCardProps) => {
   return (
     <>
-      <UserCard name={name} src={src} count={questionCount} />
+      {isLoading ? (
+        <SkeletonUserCard />
+      ) : (
+        <UserCard name={name} src={src} count={questionCount} />
+      )}
     </>
   );
 };

@@ -1,0 +1,63 @@
+@import '../global.scss';
+
+.user-skeleton-card {
+  text-decoration: none;
+  display: flex;
+  min-height: 9rem;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.25rem;
+  border-radius: 1rem;
+  border: 1px solid $Grayscale-40;
+  background: $Grayscale-10;
+
+  @media (width <= 430px) {
+    padding: 1rem;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    &--img {
+      animation: loading 1.8s infinite ease-in-out;
+      display: flex;
+      width: 3.75rem;
+      height: 3.75rem;
+      justify-content: center;
+      align-items: center;
+      border-radius: 60px;
+    }
+  }
+
+  &__name {
+    max-width: 11rem;
+    height: 1.5rem;
+    border-radius: 4px;
+    animation: loading 1.8s infinite ease-in-out;
+  }
+
+  &__received-container {
+    max-width: 11rem;
+    height: 2rem;
+    border-radius: 4px;
+    animation: loading 1.8s infinite ease-in-out;
+  }
+}
+
+@keyframes loading {
+  0% {
+    background-color: $Grayscale-40;
+    opacity: 0.1;
+  }
+
+  50% {
+    background-color: $Grayscale-40;
+    opacity: 0.3;
+  }
+
+  100% {
+    background-color: $Grayscale-40;
+    opacity: 0.1;
+  }
+}
