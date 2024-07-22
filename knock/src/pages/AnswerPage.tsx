@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { deleteQuestion } from '../lib/api/Questions';
 import MetaTags from '../core/ui/MetaTags/MetaTags';
 import Image from '../core/ui/CommonImage/Image';
@@ -62,10 +62,6 @@ function AnswerPage() {
     });
   };
 
-  const handleClickLogo = () => {
-    navigate(`/`);
-  };
-
   useEffect(() => {
     getLocalUserInfo();
     setRenderTrigger(questions?.count || 0);
@@ -86,9 +82,9 @@ function AnswerPage() {
             src={ImageBanner}
             alt="배너"
           />
-          <div className={styles['page__logo']} onClick={handleClickLogo}>
+          <Link to={`/`} className={styles['page__logo']}>
             <Image src={imgLogo} alt="로고" />
-          </div>
+          </Link>
           <Profile
             copySuccess={handleCopySuccess}
             copyError={handleError}
