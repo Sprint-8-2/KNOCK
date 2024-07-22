@@ -6,8 +6,8 @@ interface UserInfo {
   imageSource: string;
 }
 
-interface UserInfos {
-  [id: number]: Omit<UserInfo, 'id'>;
+export interface UserInfos {
+  [id: string]: Omit<UserInfo, 'id'>;
 }
 
 const getUserInfoFromLocalStorage = (): UserInfos | null => {
@@ -33,7 +33,7 @@ const useLoscalStorageUserInfo = (): {
       if (!userInfos) {
         userInfos = {};
       }
-      userInfos[newUserInfo.id] = {
+      userInfos[newUserInfo.id.toString()] = {
         name: newUserInfo.name,
         imageSource: newUserInfo.imageSource,
       };

@@ -31,6 +31,7 @@ const SubjectListMain = () => {
           handleSelectElement={handleOrder}
           dropdownElementList={dropdownElementlist}
           selected={order}
+          className={styles['subject-list-title__dropdown--button']}
           iconSrc={ArrowDownIcon}
         >
           <p className={styles['subject-list-title__dropdown']}>
