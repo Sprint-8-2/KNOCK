@@ -1,7 +1,4 @@
-import AnswerForm from '../AnswerForm/AnswerForm';
 import styles from './Answer.module.scss';
-import AnswerContent from '../AnswerContent/AnswerContent';
-import AnswerRejection from '../AnswerRejection/AnswerRejection';
 import AnswerModification from '../AnswerModification/AnswerModification';
 import AnswerProfile from '../AnswerProfile/AnswerProfile';
 import AnswerStateRenderer from '../AnswerStateRenderer/AnswerStateRenderer';

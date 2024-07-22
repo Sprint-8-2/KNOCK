@@ -9,7 +9,7 @@ import CreateQuestionPage from './CreateQuestionPage';
 import useGetUserInfo from '../lib/hooks/feed/useGetUserInfo';
 import MetaTags from '../core/ui/MetaTags/MetaTags';
 import Toast from '../core/ui/Toast/Toast';
-import InfiniteFeedList from '../components/feed/FeedList/InfiniteFeedList';
+import FeedList from '../components/feed/FeedList/FeedList';
 
 const PostPage = () => {
   const { id: subjectId } = useParams();
@@ -57,7 +57,7 @@ const PostPage = () => {
           />
         </Link>
         <div className={styles['post-page__feed-list']}>
-          <InfiniteFeedList
+          <FeedList
             mode="post"
             key={subjectId}
             subjectId={Number(subjectId)}

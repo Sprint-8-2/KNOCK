@@ -9,8 +9,6 @@ const DarkModeBtn = () => {
     const windowDarkMode =
       window.matchMedia &&
       window.matchMedia('(prefers-color-scheme: dark)').matches;
-    console.log(windowDarkMode);
-
     if (localStorage.getItem('theme') !== 'default') return;
     if (windowDarkMode) {
       setTheme('darkMode');
