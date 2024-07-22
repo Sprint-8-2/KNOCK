@@ -24,9 +24,9 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({
           </div>
           <div className={style['confirm-modal__buttons-wrapper']}>
             <UButton handleClick={onConfirm} type="box" isLightTheme={false}>
-              확인
+              삭제
             </UButton>
-            <UButton handleClick={onCancel} type="box" isLightTheme={false}>
+            <UButton handleClick={onCancel} type="box" isLightTheme={true}>
               취소
             </UButton>
           </div>

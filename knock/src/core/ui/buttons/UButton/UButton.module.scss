@@ -100,4 +100,11 @@
   align-items: center;
   border: 0;
   border-radius: 12.5rem;
+
+  &:hover {
+    @include Shadow(2);
+  }
+  &:active {
+    background-color: $Brown-30;
+  }
 }
