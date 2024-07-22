@@ -1,11 +1,11 @@
 @import '../../core//styles/global.scss';
 
-.question-list-main {
+.subject-list-main {
   max-width: 1200px;
   margin: 0 auto;
 }
 
-.question-list-title {
+.subject-list-title {
   @include H1;
   display: flex;
   text-align: center;
@@ -21,6 +21,9 @@
     margin: 0 1.5rem 1.12rem;
   }
   &__dropdown {
+    &--button {
+      z-index: 0;
+    }
     white-space: nowrap;
     display: flex;
     justify-content: center;

@@ -1,14 +1,17 @@
-.question-list-main__cards {
+@import 'src/core/styles/global.scss';
+
+.subject-list-main__cards {
   display: grid;
   justify-content: center;
   margin: 0 2rem;
   gap: 1.25rem;
-  grid-template: repeat(2, 1fr) / repeat(4, minmax(180px, 220px));
+  grid-template: repeat(2, 1fr) / repeat(4, minmax(auto, 220px));
 
   @media (width < 876px) {
-    grid-template: repeat(2, 1fr) / repeat(3, minmax(180px, 220px));
+    grid-template: repeat(2, 1fr) / repeat(3, minmax(auto, 220px));
   }
   @media (width < 668px) {
+    width: 90%;
     grid-template: repeat(3, 1fr) / repeat(2, 1fr);
     gap: 1rem;
     margin: 0 1.5rem;
@@ -19,7 +22,7 @@
   }
   & li {
     cursor: pointer;
-    @media (width < 668px) {
+    @media (width < 376px) {
       width: 9.71875rem;
     }
   }

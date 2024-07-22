@@ -1,25 +1,20 @@
+import { useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import Image from '../core/ui/CommonImage/Image';
 import styles from './PostPage.module.scss';
-import postPageBannerImage from '../core/assets/image/feedHeaderImage.png';
+import postPageBannerImage from '../core/assets/image/Banner.svg';
 import mainLogo from '../core/assets/image/MainPgaeLogo.svg';
-import FeedList from '../components/feed/FeedList/FeedList';
-import { Link, useParams } from 'react-router-dom';
 import Profile from '../components/Profile/Profile';
-import ModalPage from './ModalPage';
+import CreateQuestionPage from './CreateQuestionPage';
 import useGetUserInfo from '../lib/hooks/feed/useGetUserInfo';
-import useQuestionList from '../lib/hooks/feed/useQuestionList';
 import MetaTags from '../core/ui/MetaTags/MetaTags';
 import Toast from '../core/ui/Toast/Toast';
-import { useState } from 'react';
+import FeedList from '../components/feed/FeedList/FeedList';
 
 const PostPage = () => {
   const { id: subjectId } = useParams();
   const { data: subjectInfo } = useGetUserInfo({
     subjectId: subjectId as string | number,
-  });
-
-  const { data: subjectQuestionList } = useQuestionList({
-    subjectId: subjectId || '',
   });
   const [onToast, setOnToast] = useState(false);
   const handleCopySuccess = () => {
@@ -62,19 +57,16 @@ const PostPage = () => {
           />
         </Link>
         <div className={styles['post-page__feed-list']}>
-          {subjectQuestionList && (
-            <FeedList
-              mode="post"
-              subejctId={Number(subjectId)}
-              count={subjectQuestionList.count}
-              next={subjectQuestionList.next}
-              previous={subjectQuestionList.previous}
-              results={subjectQuestionList.results}
-            />
-          )}
+          <FeedList
+            mode="post"
+            key={subjectId}
+            subjectId={Number(subjectId)}
+            subjectName={subjectInfo?.name || ''}
+            subjectProfileImgSrc={subjectInfo?.imageSource || ''}
+          />
         </div>
       </div>
-      <ModalPage
+      <CreateQuestionPage
         name={subjectInfo?.name as string}
         src={subjectInfo?.imageSource as string}
         alt={`${subjectInfo?.name}의 프로필 이미지`}

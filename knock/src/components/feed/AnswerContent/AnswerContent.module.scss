@@ -1,6 +1,33 @@
 @import '../../../core/styles/global.scss';
 
-.content {
+.answer-content-container {
   @include Body3-Regular;
-  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+
+  &__content {
+    display: flex;
+    &--contracted {
+      display: -webkit-box;
+      line-clamp: 6;
+      -webkit-line-clamp: 6;
+      -webkit-box-orient: vertical;
+      word-break: break-all;
+      overflow: hidden;
+    }
+  }
+  &__button {
+    @include Caption1-Medium;
+    display: none;
+    align-self: center;
+    border: none;
+    border-radius: 1rem;
+    background-color: unset;
+    &--display {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
 }

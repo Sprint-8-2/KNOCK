@@ -6,7 +6,8 @@ import Icon from '../../../CommonIcon/icon';
 import styles from './KakaoShareButton.module.scss';
 
 import kakaoIcon from '../../../../assets/icon/Kakaotalk.svg';
-import useUserInfo from '../../../../../lib/hooks/useUserInfo';
+import useLoscalStorageUserInfo from '../../../../../lib/hooks/useLoscalStorageUserInfo';
+import { useParams } from 'react-router-dom';
 
 const KAKAO_KEY = process.env.REACT_APP_KAKAO_JAVASCRIPT_KEY;
 
@@ -21,8 +22,9 @@ interface KaKoShareButtonProps {
 }
 
 const KakaoShareButton = ({ sharedUrl }: KaKoShareButtonProps) => {
-  const { userInfo } = useUserInfo();
-
+  const { id: userId } = useParams();
+  const { users } = useLoscalStorageUserInfo();
+  const userName = users && userId ? users[Number(userId)].name : '';
   const handleKaKaoShare = () => {
     if (window.Kakao === undefined) {
       return;
@@ -36,10 +38,11 @@ const KakaoShareButton = ({ sharedUrl }: KaKoShareButtonProps) => {
     kakao.Share.sendDefault({
       objectType: 'feed',
       content: {
-        title: `${userInfo?.name || ''}님께서 knock을 요청하셨어요!`,
-        description: `${userInfo?.name || ''}님께 질문을 통해 마음에 knock 해주세요!`,
-        imageUrl:
-          'https://github.com/Sprint-8-2/KNOCK/blob/dev/knock/src/core/assets/image/mainimage.png',
+        title: `✊✊ ${userName}님께서 질문을 요청하셨어요!`,
+        description: `${userName}님께 질문을 통해 마음에 knock 해주세요!`,
+        imageUrl: encodeURI(
+          'https://cdn.pixabay.com/photo/2016/08/23/10/16/door-1613991_1280.png',
+        ),
         link: {
           mobileWebUrl: sharedUrl,
           webUrl: sharedUrl,

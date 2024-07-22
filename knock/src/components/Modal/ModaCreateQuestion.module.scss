@@ -1,10 +1,4 @@
-@import '../core/styles/global.scss';
-
-.btn-wrapper {
-  display: flex;
-  justify-content: right;
-  margin-top: 5rem;
-}
+@import '../../core/styles/global.scss';
 
 .modal-container {
   width: 100%;
@@ -35,19 +29,24 @@
 }
 
 .modal-content {
-  width: 38.25rem;
-  height: 28.375rem;
   flex-shrink: 0;
   border-radius: 1.5rem;
   @include Shadow(3);
   background-color: $Grayscale-10;
+  width: 2px;
 
   &__header-question {
     display: flex;
     width: 33.25rem;
     justify-content: space-between;
     align-items: center;
-    margin: 2.5rem;
+    margin: 0 2.5rem;
+  }
+  @media (max-width: 768px) {
+    &__header-question {
+      width: 16.25rem;
+      margin: 0 1.5rem;
+    }
   }
 
   &__question {
@@ -72,12 +71,24 @@
   &__title {
     @include H3;
   }
+  @media (max-width: 768px) {
+    &__title {
+      @include Body1-Regular;
+    }
+  }
 
   &__profile-container {
     display: flex;
     align-items: center;
-    margin: 2.5rem auto 0.75rem 2.5rem;
+    margin: 2.5rem 2.5rem 0.75rem 2.5rem;
+    gap: 0.19rem;
     @include Body1-Regular;
+  }
+
+  @media (max-width: 768px) {
+    &__profile-container {
+      margin: 2.5rem 2.5rem 0.75rem 1.5rem;
+    }
   }
 
   &__to-label {
@@ -88,61 +99,43 @@
     display: flex;
     width: 1.75rem;
     height: 1.75rem;
+    border-radius: 70%;
     justify-content: center;
     align-items: center;
+  }
+
+  &__question-button-container {
+    text-align: center;
   }
 
   &__textarea {
-    display: flex;
     width: 33.25rem;
     height: 11.25rem;
-    padding: 1rem;
     justify-content: center;
     align-items: center;
-    gap: 0.625rem;
-    margin: auto;
+    margin-left: 2.5rem;
+  }
+
+  @media (max-width: 768px) {
+    &__textarea {
+      width: 17.25rem;
+      height: 22.25rem;
+      margin-left: 1.5rem;
+    }
   }
 
   &__question-button {
-    text-align: center;
+    width: 33.3rem;
+  }
+  @media (max-width: 768px) {
+    &__question-button {
+      width: 17.4rem;
+    }
   }
 
-  &__continer {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-}
-
-.error-modal {
   &__container {
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: rgba(0, 0, 0, 0.5);
-  }
-
-  &__content {
-    width: 19.25rem;
-    height: 14.375rem;
-    flex-shrink: 0;
-    border-radius: 1.5rem;
-    @include Shadow(3);
-    background-color: $Grayscale-10;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
-  }
-
-  &__title {
-    @include H3;
-    text-align: center;
+    gap: 1.2rem;
   }
 }

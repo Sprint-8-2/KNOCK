@@ -1,13 +1,13 @@
 @import './global.scss';
 
 .form-input {
+  width: 100%;
   display: flex;
   align-items: center;
   width: 100%;
   border: 1px solid $Grayscale-40;
   border-radius: 0.5rem;
   padding: 0.75rem 1rem;
-  margin: 100px;
   gap: 0.25rem;
 
   &:focus-within {
@@ -24,6 +24,7 @@
     flex: 1;
     outline: none;
     border: none;
+    background-color: unset;
     @include Body3-Regular;
 
     &::placeholder {
