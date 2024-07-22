@@ -8,6 +8,7 @@ import styles from './MainPage.module.scss';
 import UButton from '../core/ui/buttons/UButton/UButton';
 import { useNavigate } from 'react-router-dom';
 import Icon from '../core/ui/CommonIcon/icon';
+import AnimationPage from './AnimationPage/AnimationPage';
 
 const MainPage = () => {
   const navigate = useNavigate();
@@ -17,35 +18,38 @@ const MainPage = () => {
   };
 
   return (
-    <div className={`${styles['mainPage']}`}>
-      <MetaTags />
-      <UButton
-        type="box"
-        handleClick={goToAnswerPage}
-        isLightTheme={true}
-        className={`${styles['mainPage__answer']}`}
-      >
-        답변하러 가기
-        <Icon
-          src={rightArrow}
-          alt="rightArrow"
-          className={styles['mainPage__answer__rightArrowImg']}
+    <>
+      <AnimationPage />
+      <div className={`${styles['mainPage']}`}>
+        <MetaTags />
+        <UButton
+          type="box"
+          handleClick={goToAnswerPage}
+          isLightTheme={true}
+          className={`${styles['mainPage__answer']}`}
+        >
+          답변하러 가기
+          <Icon
+            src={rightArrow}
+            alt="rightArrow"
+            className={styles['mainPage__answer__rightArrowImg']}
+          />
+        </UButton>
+        <Image
+          src={MainPageLogo}
+          alt="메인페이지로고"
+          imageClassName={styles['mainPage__logo']}
         />
-      </UButton>
-      <Image
-        src={MainPageLogo}
-        alt="메인페이지로고"
-        imageClassName={styles['mainPage__logo']}
-      />
-      <div className={`${styles['mainPage__mainInput']}`}>
-        <MainPageInput />
+        <div className={`${styles['mainPage__mainInput']}`}>
+          <MainPageInput />
+        </div>
+        <Image
+          src={backgroundImg}
+          alt="배경이미지"
+          imageClassName={styles['mainPage__bg-img']}
+        />
       </div>
-      <Image
-        src={backgroundImg}
-        alt="배경이미지"
-        imageClassName={styles['mainPage__bg-img']}
-      />
-    </div>
+    </>
   );
 };
 
