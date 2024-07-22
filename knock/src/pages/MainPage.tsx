@@ -2,7 +2,7 @@ import MainPageInput from '../components/MainPageInput/MainPageInput';
 import Image from '../core/ui/CommonImage/Image';
 import MetaTags from '../core/ui/MetaTags/MetaTags';
 import MainPageLogo from '../core/assets/image/MainPgaeLogo.svg';
-import backgroundImg from '../core/assets/image/mainimage.png';
+import backgroundImg from '../core/assets/image/MainBgImg.svg';
 import rightArrow from '../core/assets/icon/Hyphen-Arrow-right.svg';
 import styles from './MainPage.module.scss';
 import UButton from '../core/ui/buttons/UButton/UButton';
