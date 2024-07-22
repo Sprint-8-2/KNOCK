@@ -7,6 +7,7 @@ import Icon from '../../../core/ui/CommonIcon/icon';
 import IconMessage from '../../../core/assets/icon/MessagesBrown.svg';
 import EmptyFeedListImage from '../EmptyFeedListImage/EmptyFeedList';
 import styles from './FeedList.module.scss';
+import useInfiniteQuestionList from '../../../lib/hooks/feed/useInfiniteQuestionList';
 
 interface FeedListProps {
   subjectId: number;
@@ -27,32 +28,15 @@ const FeedList = ({
   const headerMessage = isEmptyQuestion
     ? '아직 질문이 없습니다'
     : `${qestionCount} 개의 질문이 있습니다`;
-  function getOffsetFromUrl(url: string | null): string | null {
-    if (!url) return null;
-    const urlObj = new URL(url);
-    return urlObj.searchParams.get('offset');
-  }
+
   const {
     data: questions,
     hasNextPage,
     fetchNextPage,
     isFetchingNextPage,
     isFetched,
-  } = useInfiniteQuery<SubjectQuestionListResponse>({
-    queryKey: ['questions', subjectId],
-    queryFn: async ({ pageParam: offset }) => {
-      const response = await fetch(
-        `${process.env.REACT_APP_BASE_URL}subjects/${subjectId}/questions/?limit=${FEED_LIMIT_SIZE}&offset=${offset}`,
-      );
-      return response.json();
-    },
-    initialPageParam: 0,
-    getNextPageParam: (lastFeeds, feeds) => {
-      if (lastFeeds.next) return getOffsetFromUrl(lastFeeds.next);
-      return null;
-    },
-    staleTime: 1000 * 60 * 1,
-  });
+  } = useInfiniteQuestionList({ subjectId: subjectId, limit: FEED_LIMIT_SIZE });
+
   const fetchNextFeeds = () => {
     if (!isFetchingNextPage) {
       fetchNextPage();
