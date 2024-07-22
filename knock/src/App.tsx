@@ -4,7 +4,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import AnswerPage from './pages/AnswerPage';
 import MainPage from './pages/MainPage';
 import PostPage from './pages/PostPage';
-import QuestionList from './pages/QuestionList';
+import SubjectList from './pages/SubjectList';
 import NotFound from './pages/NotFound/NotFound';
 import DarkModeBtn from './core/ui/DarkModeBtn/DarkModeBtn';
 
@@ -16,7 +16,7 @@ function App() {
         <DarkModeBtn />
         <Routes>
           <Route index element={<MainPage />} />
-          <Route path="list" element={<QuestionList />} />
+          <Route path="list" element={<SubjectList />} />
           <Route path="post/:id">
             <Route index element={<PostPage />} />
             <Route path="answer" element={<AnswerPage />} />

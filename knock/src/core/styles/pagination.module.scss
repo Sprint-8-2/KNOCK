@@ -5,6 +5,18 @@
   justify-content: center;
   align-items: center;
 
+  &__loading-spinner {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin: 1rem;
+    border: 0.2rem solid $Brown-40;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: spinner 1s linear infinite;
+  }
+
   &__list {
     text-decoration: none;
   }
@@ -34,6 +46,7 @@
     }
 
     &--selected {
+      @include Body1-Regular;
       color: $Brown-40;
     }
 
@@ -41,6 +54,29 @@
       @include Body3-Regular;
       font-family: 'Actor';
       line-height: 1.5625rem;
+      color: $Grayscale-40;
+      &--selected {
+        @include Body1-Regular;
+        color: $Brown-40;
+      }
+
+      &:hover {
+        color: $Grayscale-60;
+      }
+
+      &:disabled {
+        color: $Grayscale-40;
+        cursor: auto;
+      }
     }
+  }
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }
