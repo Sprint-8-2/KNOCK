@@ -33,11 +33,11 @@ const CommonModal: React.FC<CommonModalProps> = ({
     <div className={style[`animation${isOpen ? '__is-open' : ''}`]}>
       {isvisible && (
         <div
-          className={style['modal-container']}
+          className={style['common-modal-container']}
           ref={modalBackground}
           onClick={handleClickOutsideModal}
         >
-          <div className={style['modal-content']}>{children}</div>
+          <div className={style['common-modal-content']}>{children}</div>
         </div>
       )}
     </div>

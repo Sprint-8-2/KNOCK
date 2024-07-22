@@ -34,6 +34,7 @@ const ModaCreateQuestion: React.FC<CrateQuestionProps> = ({
 }) => {
   const handleSendClick = () => {
     onSubmit(textareaValue);
+    window.location.reload();
   };
 
   return (
@@ -52,7 +53,7 @@ const ModaCreateQuestion: React.FC<CrateQuestionProps> = ({
             <img onClick={onClose} src={closeicon} alt="닫기 아이콘" />
           </button>
         </div>
-        <label htmlFor={style['textareaContent']}>
+        <label htmlFor="textareaContent">
           <div className={style['modal-content__profile-container']}>
             <span className={style['modal-content__to-label']}>To.</span>
             <Image
