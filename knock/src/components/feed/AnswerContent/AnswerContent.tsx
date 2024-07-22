@@ -19,7 +19,6 @@ const AnswerContent = ({ content = '' }: AnswerContentProps) => {
   useEffect(() => {
     if (!contentRef.current) return;
     const contentElement = contentRef.current;
-    console.dir(contentElement);
     const lineHeight = parseFloat(
       window.getComputedStyle(contentElement).lineHeight,
     );
