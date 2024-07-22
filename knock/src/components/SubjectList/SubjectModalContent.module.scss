@@ -25,8 +25,9 @@
     align-items: center;
     justify-content: end;
     cursor: pointer;
+    transition: transform 1s;
     &:hover {
-      transform: rotate(180deg);
+      transform: rotate(90deg);
     }
   }
 
