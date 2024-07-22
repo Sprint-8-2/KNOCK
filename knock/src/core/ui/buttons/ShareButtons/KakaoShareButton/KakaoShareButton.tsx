@@ -24,8 +24,7 @@ interface KaKoShareButtonProps {
 const KakaoShareButton = ({ sharedUrl }: KaKoShareButtonProps) => {
   const { id: userId } = useParams();
   const { users } = useLoscalStorageUserInfo();
-  const userName = users && userId ? users[Number(userId)] : '';
-
+  const userName = users && userId ? users[Number(userId)].name : '';
   const handleKaKaoShare = () => {
     if (window.Kakao === undefined) {
       return;
@@ -39,10 +38,11 @@ const KakaoShareButton = ({ sharedUrl }: KaKoShareButtonProps) => {
     kakao.Share.sendDefault({
       objectType: 'feed',
       content: {
-        title: `${userName}님께서 knock을 요청하셨어요!`,
+        title: `✊✊ ${userName}님께서 질문을 요청하셨어요!`,
         description: `${userName}님께 질문을 통해 마음에 knock 해주세요!`,
-        imageUrl:
-          'https://github.com/Sprint-8-2/KNOCK/blob/dev/knock/src/core/assets/image/mainimage.png',
+        imageUrl: encodeURI(
+          'https://cdn.pixabay.com/photo/2016/08/23/10/16/door-1613991_1280.png',
+        ),
         link: {
           mobileWebUrl: sharedUrl,
           webUrl: sharedUrl,
