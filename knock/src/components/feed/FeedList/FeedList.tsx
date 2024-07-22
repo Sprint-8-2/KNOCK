@@ -1,6 +1,4 @@
 import { useEffect, useState } from 'react';
-import { SubjectQuestionListResponse } from '../../../core/types/api/Response';
-import { useInfiniteQuery } from '@tanstack/react-query';
 import InfiniteScroll from 'react-infinite-scroller';
 import FeedCard from '../FeedCard/FeedCard';
 import Icon from '../../../core/ui/CommonIcon/icon';
