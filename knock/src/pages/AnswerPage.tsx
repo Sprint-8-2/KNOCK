@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { deleteQuestion } from '../lib/api/Questions';
 import MetaTags from '../core/ui/MetaTags/MetaTags';
 import Image from '../core/ui/CommonImage/Image';
-import ImageBanner from '../core/assets/image/feedHeaderImage.png';
+import ImageBanner from '../core/assets/image/Banner.svg';
 import UButton from '../core/ui/buttons/UButton/UButton';
 import Profile from '../components/Profile/Profile';
 import imgLogo from '../core/assets/image/SubPageLogo.svg';
