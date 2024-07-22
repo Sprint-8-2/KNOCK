@@ -12,10 +12,11 @@
   height: 1.125rem;
   @include Caption1-Medium;
   display: flex;
-  padding: 0.25rem 0.75rem;
+  padding: 0.75rem 2rem;
   justify-content: center;
   align-items: center;
   gap: 0.625rem;
+  white-space: nowrap;
 
   &__answered {
     @include badge-styles($Brown-40);

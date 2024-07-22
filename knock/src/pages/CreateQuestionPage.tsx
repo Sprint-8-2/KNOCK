@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import style from './CreateQuestionPage.module.scss';
 import UButton from '../core/ui/buttons/UButton/UButton';
 import ModalCrateQuestion from '../components/Modal/ModaCreateQuestion';
@@ -22,6 +22,7 @@ const CreateQuestionPage: React.FC<CreateQuestionPageProps> = ({
   const [textareaValue, setTextareaValue] = useState('');
   const [isActivation, setIsActivation] = useState(true);
   const [errorModalOpen, setErrorModalOpen] = useState(false);
+  const [buttonText, setButtonText] = useState('질문 작성하기');
 
   const { handleSubmit, isLoading } = useSubmitQuestion({
     subjectId,
@@ -53,15 +54,27 @@ const CreateQuestionPage: React.FC<CreateQuestionPageProps> = ({
     setErrorModalOpen(false);
   };
 
+  useEffect(() => {
+    const handleResize = () => {
+      setButtonText(window.innerWidth <= 768 ? '질문 작성' : '질문 작성하기');
+    };
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
     <>
       <div className={style['btn-wrapper']}>
         <UButton
+          className={style['question-botton']}
           handleClick={handleModalOpen}
           type="floating"
           isLightTheme={true}
         >
-          질문 작성하기
+          {buttonText}
         </UButton>
       </div>
       <ModalCrateQuestion
