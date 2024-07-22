@@ -27,7 +27,11 @@ const Profile = ({
         imageClassName={styles['feed-profile--img']}
       />
       <div className={`${styles['feed-profile__name']}`}>{name}</div>
-      <ShareButtons copySuccess={copySuccess} copyError={copyError} />
+      <ShareButtons
+        copySuccess={copySuccess}
+        copyError={copyError}
+        name={name}
+      />
     </div>
   );
 };
