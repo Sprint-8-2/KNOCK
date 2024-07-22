@@ -12,7 +12,12 @@
   border: 1px solid $Grayscale-40;
   background: $Grayscale-10;
 
-  @media (width <= 668px) {
+  &:hover {
+    @include Shadow(3);
+    outline: 1px solid $Grayscale-60;
+  }
+
+  @media (width <= 375px) {
     padding: 1rem;
   }
 
@@ -29,7 +34,7 @@
       align-items: center;
       border-radius: 60px;
 
-      @media (width <= 430px) {
+      @media (width <= 375px) {
         width: 3rem;
         height: 3rem;
       }
@@ -53,7 +58,7 @@
   &__messages {
     height: 1.125rem;
 
-    @media (width <= 430px) {
+    @media (width <= 375px) {
       height: 1rem;
     }
   }
@@ -62,7 +67,7 @@
     @include Body3-Regular;
     color: $Grayscale-40;
 
-    @media (width <= 430px) {
+    @media (width <= 375px) {
       font-size: 0.875rem;
     }
   }
@@ -71,7 +76,7 @@
     @include Body3-Regular;
     color: $Grayscale-40;
 
-    @media (width <= 430px) {
+    @media (width <= 375px) {
       font-size: 0.875rem;
     }
   }
