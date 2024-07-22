@@ -15,7 +15,7 @@
   &-content-container {
     @include Body2-Regular;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     gap: 0.3rem;
 
     &__content {
@@ -36,6 +36,7 @@
       border: none;
       border-radius: 1rem;
       background-color: unset;
+      align-self: center;
       &--display {
         display: flex;
         justify-content: center;
@@ -43,7 +44,7 @@
       }
     }
   }
-  // @media (max-width: 768px) {
-  //   font-size: 1rem;
-  // }
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
 }

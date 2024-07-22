@@ -41,6 +41,7 @@ const AnswerContent = ({ content = '' }: AnswerContentProps) => {
         className={`${styles['answer-content-container__button']} ${isDisplayBtn ? styles['answer-content-container__button--display'] : ''}`}
         onClick={handleExpendButton}
       >
+        {isExpanded ? '접기' : '더보기'}
         <Icon
           src={isExpanded ? ArrowUpIcon : ArrowDownIcon}
           alt="펼치기"
