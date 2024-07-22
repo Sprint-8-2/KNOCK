@@ -11,6 +11,7 @@ import useQuestionList from '../lib/hooks/feed/useQuestionList';
 import Toast from '../core/ui/Toast/Toast';
 import FeedList from '../components/feed/FeedList/FeedList';
 import useLoscalStorageUserInfo from '../lib/hooks/useLoscalStorageUserInfo';
+import { getSubjectQuestionList } from '../lib/api/Subject';
 import styles from '../core/styles/answerPage.module.scss';
 
 interface UserInfo {
@@ -54,8 +55,12 @@ function AnswerPage() {
     setOnToast(false);
   };
 
-  const handleDeleteAll = () => {
-    questions?.results.map((question) => {
+  const handleDeleteAll = async () => {
+    const response = await getSubjectQuestionList({
+      subjectId: subjectId,
+      limit: questions?.count,
+    });
+    response.results.map((question) => {
       deleteQuestion({ questionId: question.id }).then(() => {
         setRenderTrigger(renderTrigger - 1);
       });
