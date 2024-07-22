@@ -51,7 +51,6 @@ const useSubjectList = ({ order }: SubjectListFuncParams) => {
           : prev;
       });
     } else if (isError) {
-      console.log('api error');
     }
   }, [data, isError, isSuccess]);
 

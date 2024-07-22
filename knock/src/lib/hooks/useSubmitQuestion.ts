@@ -28,7 +28,6 @@ const useSubmitQuestion = ({
         answer: DEFAULT_SUBJECT_QUESTION_ANSWER,
         options: {},
       });
-      console.log('질문제출 성공', response);
       onSuccess();
     } catch (error) {
       onError();

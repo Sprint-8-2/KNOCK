@@ -53,6 +53,7 @@ $bgColor: $Grayscale-10;
     @include Shadow(1);
     @include Center;
     position: absolute;
+    visibility: hidden;
     opacity: 0;
     top: 120%;
     padding: 0.25rem 0;
@@ -62,6 +63,7 @@ $bgColor: $Grayscale-10;
     background: $bgColor;
 
     &--visible {
+      visibility: visible;
       opacity: 1;
       list-style: none;
       animation: dropdown-slide-in 0.4s ease;

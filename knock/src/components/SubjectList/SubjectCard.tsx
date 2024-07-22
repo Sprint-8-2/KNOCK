@@ -15,7 +15,7 @@ const SubjectCard = ({
   isLoading,
 }: SubjectCardProps) => {
   const shortName = name.length > 6 ? name.slice(0, 6) + '...' : name;
-  console.log(shortName);
+
   return (
     <>
       {isLoading ? (
