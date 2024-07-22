@@ -12,6 +12,7 @@ interface FeedListProps {
   subjectName: string;
   subjectProfileImgSrc: string;
   mode?: 'post' | 'answer';
+  renderTrigger?: number;
 }
 
 const FeedList = ({
@@ -19,6 +20,7 @@ const FeedList = ({
   subjectName,
   subjectProfileImgSrc,
   mode = 'answer',
+  renderTrigger,
 }: FeedListProps) => {
   const FEED_LIMIT_SIZE: number = 4;
   const [qestionCount, setQuestionCount] = useState<number>(0);
@@ -33,7 +35,11 @@ const FeedList = ({
     fetchNextPage,
     isFetchingNextPage,
     isFetched,
-  } = useInfiniteQuestionList({ subjectId: subjectId, limit: FEED_LIMIT_SIZE });
+  } = useInfiniteQuestionList({
+    subjectId: subjectId,
+    limit: FEED_LIMIT_SIZE,
+    requestTrigger: renderTrigger,
+  });
 
   const fetchNextFeeds = () => {
     if (!isFetchingNextPage) {
@@ -45,7 +51,7 @@ const FeedList = ({
     if (isFetched && questions) {
       setQuestionCount(questions.pages[0].count);
     }
-  }, [isFetched, questions]);
+  }, [isFetched, questions, renderTrigger]);
 
   return (
     <>

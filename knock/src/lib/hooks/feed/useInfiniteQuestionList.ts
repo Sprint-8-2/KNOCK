@@ -8,13 +8,16 @@ function getOffsetFromUrl(url: string | null): string | null {
   return urlObj.searchParams.get('offset');
 }
 
-interface useInfiniteQuestionListProps extends SubjectQuestionListParams {}
+interface useInfiniteQuestionListProps extends SubjectQuestionListParams {
+  requestTrigger?: number;
+}
 
 const useInfiniteQuestionList = ({
+  requestTrigger,
   ...props
 }: useInfiniteQuestionListProps) => {
   return useInfiniteQuery<SubjectQuestionListResponse>({
-    queryKey: ['questions', props.subjectId],
+    queryKey: ['questions', props.subjectId, requestTrigger || 0],
     queryFn: async ({ pageParam: offset }) => {
       const response = await fetch(
         `${process.env.REACT_APP_BASE_URL}subjects/${props.subjectId}/questions/?limit=${props.limit}&offset=${offset}`,
