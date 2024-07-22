@@ -8,25 +8,42 @@ import UButton from '../core/ui/buttons/UButton/UButton';
 import Profile from '../components/Profile/Profile';
 import imgLogo from '../core/assets/image/SubPageLogo.svg';
 import useQuestionList from '../lib/hooks/feed/useQuestionList';
-import useGetUserInfo from '../lib/hooks/feed/useGetUserInfo';
 import Toast from '../core/ui/Toast/Toast';
 import InfiniteFeedList from '../components/feed/FeedList/InfiniteFeedList';
+import useLoscalStorageUserInfo from '../lib/hooks/useLoscalStorageUserInfo';
 import styles from '../core/styles/answerPage.module.scss';
+
+interface UserInfo {
+  id: number;
+  name: string;
+  imageSource: string;
+}
 
 function AnswerPage() {
   const { id } = useParams(); // subjectId
   const navigate = useNavigate();
-  const [subjectId, setSubjectId] = useState<number>(Number(id?.trim()));
+  const [subjectId] = useState<number>(Number(id?.trim()));
+  const { users } = useLoscalStorageUserInfo();
+  const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
   const [renderTrigger, setRenderTrigger] = useState<number>(0);
-
-  const { data: userData } = useGetUserInfo({ subjectId: subjectId });
-
+  const [onToast, setOnToast] = useState(false);
   const { data: questions } = useQuestionList({
     subjectId: Number(id) || '',
     deps: [renderTrigger],
   });
 
-  const [onToast, setOnToast] = useState(false);
+  const getLocalUserInfo = () => {
+    if (users && users[subjectId]) {
+      setUserInfo({
+        id: subjectId,
+        name: users[subjectId].name,
+        imageSource: users[subjectId].imageSource,
+      });
+    } else {
+      navigate('/notfound');
+    }
+  };
+
   const handleCopySuccess = () => {
     setOnToast(true);
     setTimeout(() => {
@@ -50,6 +67,7 @@ function AnswerPage() {
   };
 
   useEffect(() => {
+    getLocalUserInfo();
     setRenderTrigger(questions?.count || 0);
   }, []);
 
@@ -74,8 +92,8 @@ function AnswerPage() {
           <Profile
             copySuccess={handleCopySuccess}
             copyError={handleError}
-            name={userData?.name || ''}
-            profileImage={userData?.imageSource || ''}
+            name={userInfo?.name || ''}
+            profileImage={userInfo?.imageSource || ''}
           />
           <div className={styles['page__feed-list']}>
             <div className={styles['page__list-header']}>
@@ -90,8 +108,8 @@ function AnswerPage() {
             <InfiniteFeedList
               key={renderTrigger}
               subjectId={subjectId}
-              subjectName={userData?.name || ''}
-              subjectProfileImgSrc={userData?.imageSource || ''}
+              subjectName={userInfo?.name || ''}
+              subjectProfileImgSrc={userInfo?.imageSource || ''}
             />
           </div>
         </div>
