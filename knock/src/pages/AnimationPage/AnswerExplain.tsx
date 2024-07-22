@@ -43,7 +43,7 @@ const AnswerExplain = () => {
       >
         <div className="answer-container">
           <span className="answer-explain__message-1">
-            질문에 답할 수 있습니다
+            질문에 답변을 달 수 있습니다
           </span>
           <span className="answer-explain__message-2">
             당신의 답변을 기다립니다

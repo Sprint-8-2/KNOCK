@@ -27,7 +27,7 @@ const ListPageExplain: React.FC = () => {
             질문하고 싶은 카드를 선택해주세요
           </span>
           <span className="list-explain__message-2">
-            여러분의 질문을 기다립니다.
+            여러분의 질문을 기다립니다
           </span>
         </div>
       </AnimatedText>

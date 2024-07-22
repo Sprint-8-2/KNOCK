@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 import MainPageInput from '../components/MainPageInput/MainPageInput';
 import Image from '../core/ui/CommonImage/Image';
 import MetaTags from '../core/ui/MetaTags/MetaTags';
@@ -11,15 +12,28 @@ import Icon from '../core/ui/CommonIcon/icon';
 import AnimationPage from './AnimationPage/AnimationPage';
 
 const MainPage = () => {
+  const [isWideScreen, setIsWideScreen] = useState(window.innerWidth > 768);
+
   const navigate = useNavigate();
 
   const goToAnswerPage = () => {
     navigate(`/list`);
   };
 
+  useEffect(() => {
+    const handleResize = () => {
+      setIsWideScreen(window.innerWidth > 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
     <>
-      <AnimationPage />
+      {isWideScreen && <AnimationPage />}
       <div className={`${styles['mainPage']}`}>
         <MetaTags />
         <Image

@@ -1,5 +1,15 @@
+@import '../../core/styles/global.scss';
+
+@font-face {
+  font-family: 'SBAggroB';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 .list-explain {
-  background-color: #f9f9f9;
+  background-color: $Grayscale-20;
   height: 800px;
   width: 100%;
   font-size: 100px;
@@ -25,7 +35,7 @@
 
 .list-explain__message {
   position: absolute;
-  left: 46%;
+  left: 44%;
   bottom: 32rem;
 }
 
@@ -37,10 +47,10 @@
 
 .list-explain__message-1 {
   font-size: 30px;
-  font-family: Pretendard, sans-serif;
+  font-family: 'SBAggroB';
 }
 
 .list-explain__message-2 {
   font-size: 30px;
-  font-family: Pretendard, sans-serif;
+  font-family: 'SBAggroB';
 }

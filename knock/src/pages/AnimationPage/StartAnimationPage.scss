@@ -1,7 +1,15 @@
 @import '../../core/styles/global.scss';
 
+@font-face {
+  font-family: 'SBAggroB';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 .start-animation__container {
-  background-color: #f9f9f9;
+  background-color: $Grayscale-20;
   width: 100%;
   height: 1000px;
   position: sticky;
@@ -21,8 +29,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: 6rem;
-  font-family: Pretendard, sans-serif;
+  font-size: 5rem;
+  font-family: 'SBAggroB';
   gap: 0.5rem;
   position: absolute;
   bottom: 48%;
