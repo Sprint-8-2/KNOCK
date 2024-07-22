@@ -12,6 +12,8 @@ interface PaginationProps {
   handleCurrentPage: (newIndex: number) => void;
 }
 
+const pageLength = 5;
+
 const Pagination = ({
   itemCount,
   currentPage,
@@ -25,27 +27,28 @@ const Pagination = ({
 
   const handleListClick = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     const target = e.target as HTMLElement;
+    const maxIndex = Math.ceil(itemCount / pageSize);
     let newIndex = currentPage;
     switch (target.innerText) {
       case '<':
-        newIndex = (Math.floor(currentPage / 5) - 1) * 5 + 1;
+        newIndex = (Math.floor(currentPage / pageLength) - 1) * pageLength + 1;
         setCurrentPageIndexes(
-          Array(5)
+          Array(pageLength)
             .fill(0)
             .map((_, i) => newIndex + i),
         );
         setNextDisabled(false);
-        setPrevDisabled(newIndex <= 5);
+        setPrevDisabled(newIndex <= pageLength);
         break;
       case '>':
-        newIndex = Math.ceil(currentPage / 5) * 5 + 1;
+        newIndex = Math.ceil(currentPage / pageLength) * pageLength + 1;
         setCurrentPageIndexes(
-          Array(Math.min(5, itemCount - newIndex))
+          Array(Math.min(pageLength, maxIndex - newIndex + 1))
             .fill(0)
             .map((_, i) => newIndex + i),
         );
 
-        setNextDisabled(newIndex + 5 > itemCount);
+        setNextDisabled(newIndex + pageLength > maxIndex ? true : false);
         setPrevDisabled(false);
         break;
       default:
@@ -58,19 +61,26 @@ const Pagination = ({
   useEffect(() => {
     const maxIndex = Math.ceil(itemCount / pageSize);
     const newCurrentPage =
-      Math.floor((currentPage % 5 ? currentPage : currentPage - 1) / 5) * 5 + 1;
+      Math.floor(
+        (currentPage % pageLength ? currentPage : currentPage - 1) / pageLength,
+      ) *
+        pageLength +
+      1;
     setCurrentPageIndexes(
       Array(
         Math.min(
-          5,
+          pageLength,
           maxIndex - currentPage + 1 > 0 ? maxIndex - currentPage + 1 : 1,
         ),
       )
         .fill(0)
         .map((_, i) => newCurrentPage + i),
     );
-    setNextDisabled(maxIndex <= 5);
-  }, [itemCount, pageSize, currentPage]);
+  }, [itemCount, pageSize]);
+
+  useEffect(() => {
+    setNextDisabled(Math.ceil(itemCount / pageSize) <= 5);
+  }, [itemCount]);
 
   return (
     <ul className={styles['pagination']} onClick={handleListClick}>
