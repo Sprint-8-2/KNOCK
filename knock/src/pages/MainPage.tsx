@@ -19,6 +19,11 @@ const MainPage = () => {
   return (
     <div className={`${styles['mainPage']}`}>
       <MetaTags />
+      <Image
+        src={MainPageLogo}
+        alt="메인페이지로고"
+        imageClassName={styles['mainPage__logo']}
+      />
       <UButton
         type="box"
         handleClick={goToAnswerPage}
@@ -32,14 +37,7 @@ const MainPage = () => {
           className={styles['mainPage__answer__rightArrowImg']}
         />
       </UButton>
-      <Image
-        src={MainPageLogo}
-        alt="메인페이지로고"
-        imageClassName={styles['mainPage__logo']}
-      />
-      <div className={`${styles['mainPage__mainInput']}`}>
-        <MainPageInput />
-      </div>
+      <MainPageInput mainPageInputClassName={styles['mainPage__mainInput']} />
       <Image
         src={backgroundImg}
         alt="배경이미지"

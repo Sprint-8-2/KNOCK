@@ -8,7 +8,13 @@ import { useNavigate } from 'react-router-dom';
 import useLoscalStorageUserInfo from '../../lib/hooks/useLoscalStorageUserInfo';
 import Icon from '../../core/ui/CommonIcon/icon';
 
-function MainPageInput() {
+type MainPageInputProps = {
+  mainPageInputClassName?: string;
+};
+
+const MainPageInput: React.FC<MainPageInputProps> = ({
+  mainPageInputClassName,
+}) => {
   const [name, setName] = useState('');
   const navigate = useNavigate();
   const { addUserInfo: addUserInfoToLocalStorage } = useLoscalStorageUserInfo();
@@ -27,30 +33,27 @@ function MainPageInput() {
       console.error(error);
     }
   };
-  // 네
   return (
-    <div className={`${styles['container']}`}>
-      <form
-        onSubmit={handleSubmit}
-        className={`${styles['container__outside']}`}
-      >
-        <Input value={name} onChange={handleNameSet}>
-          <Icon
-            src={PersonIcon}
-            alt="Person"
-            className={`${styles['container__img']}`}
-            handleClick={() => {}}
-          />
-        </Input>
-        <UButton
-          type="box"
+    <form
+      onSubmit={handleSubmit}
+      className={`${mainPageInputClassName} ${styles['container']}`}
+    >
+      <Input value={name} onChange={handleNameSet}>
+        <Icon
+          src={PersonIcon}
+          alt="Person"
+          className={`${styles['container__img']}`}
           handleClick={() => {}}
-          className={`${styles['container__submit-button']}`}
-        >
-          질문 하기
-        </UButton>
-      </form>
-    </div>
+        />
+      </Input>
+      <UButton
+        type="box"
+        handleClick={() => {}}
+        className={`${styles['container__submit-button']}`}
+      >
+        질문 하기
+      </UButton>
+    </form>
   );
-}
+};
 export default MainPageInput;
