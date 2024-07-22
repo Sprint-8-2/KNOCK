@@ -9,7 +9,7 @@ import Profile from '../components/Profile/Profile';
 import imgLogo from '../core/assets/image/SubPageLogo.svg';
 import useQuestionList from '../lib/hooks/feed/useQuestionList';
 import Toast from '../core/ui/Toast/Toast';
-import InfiniteFeedList from '../components/feed/FeedList/InfiniteFeedList';
+import FeedList from '../components/feed/FeedList/FeedList';
 import useLoscalStorageUserInfo from '../lib/hooks/useLoscalStorageUserInfo';
 import styles from '../core/styles/answerPage.module.scss';
 
@@ -101,7 +101,7 @@ function AnswerPage() {
                 삭제하기
               </UButton>
             </div>
-            <InfiniteFeedList
+            <FeedList
               key={renderTrigger}
               subjectId={subjectId}
               subjectName={userInfo?.name || ''}
