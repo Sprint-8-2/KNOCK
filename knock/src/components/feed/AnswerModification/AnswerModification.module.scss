@@ -22,9 +22,11 @@
     align-self: stretch;
     outline: none;
     border: none;
+    cursor: pointer;
 
     &--disabled {
       background: $Brown-30;
+      cursor: default;
     }
   }
 }

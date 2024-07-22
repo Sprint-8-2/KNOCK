@@ -17,6 +17,7 @@
     align-items: center;
     gap: 0.5rem;
     border-radius: 0.5rem;
+    cursor: pointer;
 
     align-self: stretch;
     outline: none;
@@ -24,6 +25,7 @@
 
     &--disabled {
       background: $Brown-30;
+      cursor: default;
     }
   }
 }

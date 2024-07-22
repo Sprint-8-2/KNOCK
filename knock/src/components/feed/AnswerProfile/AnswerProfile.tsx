@@ -24,7 +24,7 @@ const AnswerProfile = ({ name, imageSource, createAt }: AnswerProfileProps) => {
           <h1 className={styles['answer__username']}>{name} </h1>
           <p
             className={styles['answer__timestamp']}
-          >{`·  ${elapsedTime(createAt)}`}</p>
+          >{`${createAt ? '·  ' + elapsedTime(createAt) : ''}`}</p>
         </div>
       </div>
     </>

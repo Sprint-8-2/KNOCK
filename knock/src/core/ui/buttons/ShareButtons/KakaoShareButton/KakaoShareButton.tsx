@@ -24,7 +24,8 @@ interface KaKoShareButtonProps {
 const KakaoShareButton = ({ sharedUrl }: KaKoShareButtonProps) => {
   const { id: userId } = useParams();
   const { users } = useLoscalStorageUserInfo();
-  const userName = users && userId ? users[Number(userId)].name : '';
+  const userName =
+    users && userId && users[Number(userId)] ? users[Number(userId)].name : '';
   const handleKaKaoShare = () => {
     if (window.Kakao === undefined) {
       return;
