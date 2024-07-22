@@ -5,7 +5,7 @@ import Image from '../../core/ui/CommonImage/Image';
 import Icon from '../../core/ui/CommonIcon/icon';
 
 import styles from './notFound.module.scss';
-import backgroundImg from '../../core/assets/image/mainimage.png';
+import backgroundImg from '../../core/assets/image/MainBgImg.svg';
 import arrowRight from '../../core/assets/icon/Hyphen-Arrow-right.svg';
 
 const NotFound = () => {
