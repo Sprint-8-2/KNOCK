@@ -9,13 +9,19 @@ interface SubjectListPaginationProps {
 }
 
 const SubjectListPagination = ({ order }: SubjectListPaginationProps) => {
-  const { isLoading, maxIndex, currentIndex, subjects, handleCurrentIndex } =
-    useSubjectList({ order });
+  const {
+    isLoading,
+    itemCount: maxIndex,
+    currentIndex,
+    subjects,
+    handleCurrentIndex,
+  } = useSubjectList({ order });
 
   return (
     <section className={styles['subject-list-main__pagination']}>
       <SubjectCardList subjects={subjects} isLoading={isLoading} />
       <Pagination
+        isLoading={isLoading}
         currentPage={currentIndex}
         itemCount={maxIndex}
         handleCurrentPage={handleCurrentIndex}

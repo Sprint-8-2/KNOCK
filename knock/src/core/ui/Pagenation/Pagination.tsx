@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import useResize from '../../../lib/hooks/useResize';
+
 import PaginationButton from './PaginationButton';
 
 import styles from '../../styles/pagination.module.scss';
@@ -6,6 +8,7 @@ import styles from '../../styles/pagination.module.scss';
 interface PaginationProps {
   itemCount: number;
   currentPage: number;
+  isLoading: boolean;
   handleCurrentPage: (newIndex: number) => void;
 }
 
@@ -13,7 +16,9 @@ const Pagination = ({
   itemCount,
   currentPage,
   handleCurrentPage,
+  isLoading,
 }: PaginationProps) => {
+  const { pageSize } = useResize();
   const [currentPageIndexes, setCurrentPageIndexes] = useState<number[]>([]);
   const [prevDisabled, setPrevDisabled] = useState<boolean>(true);
   const [nextDisabled, setNextDisabled] = useState<boolean>(true);
@@ -30,7 +35,7 @@ const Pagination = ({
             .map((_, i) => newIndex + i),
         );
         setNextDisabled(false);
-        setPrevDisabled(newIndex <= 5 ? true : false);
+        setPrevDisabled(newIndex <= 5);
         break;
       case '>':
         newIndex = Math.ceil(currentPage / 5) * 5 + 1;
@@ -40,7 +45,7 @@ const Pagination = ({
             .map((_, i) => newIndex + i),
         );
 
-        setNextDisabled(newIndex + 5 > itemCount ? true : false);
+        setNextDisabled(newIndex + 5 > itemCount);
         setPrevDisabled(false);
         break;
       default:
@@ -51,28 +56,40 @@ const Pagination = ({
   };
 
   useEffect(() => {
+    const maxIndex = Math.ceil(itemCount / pageSize);
+    const newCurrentPage =
+      Math.floor((currentPage % 5 ? currentPage : currentPage - 1) / 5) * 5 + 1;
     setCurrentPageIndexes(
-      Array(Math.min(5, itemCount))
+      Array(
+        Math.min(
+          5,
+          maxIndex - currentPage + 1 > 0 ? maxIndex - currentPage + 1 : 1,
+        ),
+      )
         .fill(0)
-        .map((_, i) => i + 1),
+        .map((_, i) => newCurrentPage + i),
     );
-    setNextDisabled(itemCount <= 5 ? true : false);
-  }, [itemCount]);
+    setNextDisabled(maxIndex <= 5);
+  }, [itemCount, pageSize, currentPage]);
 
   return (
     <ul className={styles['pagination']} onClick={handleListClick}>
       <li className={styles['pagination__list']}>
         <PaginationButton isDisabled={prevDisabled}>{`<`}</PaginationButton>
       </li>
-      {currentPageIndexes.map((e) => {
-        return (
-          <li key={e}>
-            <PaginationButton isSelected={currentPage === e}>
-              {e}
-            </PaginationButton>
-          </li>
-        );
-      })}
+      {isLoading ? (
+        <div className={styles['pagination__loading-spinner']} />
+      ) : (
+        currentPageIndexes.map((e) => {
+          return (
+            <li key={e}>
+              <PaginationButton isSelected={currentPage === e}>
+                {e}
+              </PaginationButton>
+            </li>
+          );
+        })
+      )}
 
       <li className={styles['pagination__list']}>
         <PaginationButton isDisabled={nextDisabled}>{`>`}</PaginationButton>
