@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { deleteQuestion } from '../lib/api/Questions';
 import MetaTags from '../core/ui/MetaTags/MetaTags';
 import Image from '../core/ui/CommonImage/Image';
@@ -9,9 +9,11 @@ import Profile from '../components/Profile/Profile';
 import imgLogo from '../core/assets/image/SubPageLogo.svg';
 import useQuestionList from '../lib/hooks/feed/useQuestionList';
 import Toast from '../core/ui/Toast/Toast';
-import InfiniteFeedList from '../components/feed/FeedList/InfiniteFeedList';
+import FeedList from '../components/feed/FeedList/FeedList';
 import useLoscalStorageUserInfo from '../lib/hooks/useLoscalStorageUserInfo';
+import { getSubjectQuestionList } from '../lib/api/Subject';
 import styles from '../core/styles/answerPage.module.scss';
+import ConfirmModal from '../components/feed/ConfirmModal/ConfirmModal';
 
 interface UserInfo {
   id: number;
@@ -27,10 +29,11 @@ function AnswerPage() {
   const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
   const [renderTrigger, setRenderTrigger] = useState<number>(0);
   const [onToast, setOnToast] = useState(false);
+  const [isOpenDelModal, setIsOpenDelModal] = useState<boolean>(false);
   const { data: questions } = useQuestionList({
     subjectId: Number(id) || '',
-    deps: [renderTrigger],
   });
+  const DELETE_ALL_CONFIRM_MESSAGE = '정말 모든 질문을 삭제하시겠습니까?';
 
   const getLocalUserInfo = () => {
     if (users && users[subjectId]) {
@@ -54,16 +57,27 @@ function AnswerPage() {
     setOnToast(false);
   };
 
-  const handleDeleteAll = () => {
-    questions?.results.map((question) => {
+  const deleteAllQuestions = async () => {
+    const response = await getSubjectQuestionList({
+      subjectId: subjectId,
+      limit: questions?.count,
+    });
+    response.results.map((question) => {
       deleteQuestion({ questionId: question.id }).then(() => {
         setRenderTrigger(renderTrigger - 1);
       });
     });
   };
 
-  const handleClickLogo = () => {
-    navigate(`/`);
+  const handleDeleteAll = () => {
+    setIsOpenDelModal(true);
+  };
+  const handleCancelDeleteAll = () => {
+    setIsOpenDelModal(false);
+  };
+  const handleConfirmDeleteAll = () => {
+    deleteAllQuestions();
+    setIsOpenDelModal(false);
   };
 
   useEffect(() => {
@@ -86,9 +100,9 @@ function AnswerPage() {
             src={ImageBanner}
             alt="배너"
           />
-          <div className={styles['page__logo']} onClick={handleClickLogo}>
+          <Link to={`/`} className={styles['page__logo']}>
             <Image src={imgLogo} alt="로고" />
-          </div>
+          </Link>
           <Profile
             copySuccess={handleCopySuccess}
             copyError={handleError}
@@ -105,15 +119,22 @@ function AnswerPage() {
                 삭제하기
               </UButton>
             </div>
-            <InfiniteFeedList
+            <FeedList
               key={renderTrigger}
               subjectId={subjectId}
               subjectName={userInfo?.name || ''}
               subjectProfileImgSrc={userInfo?.imageSource || ''}
+              renderTrigger={renderTrigger}
             />
           </div>
         </div>
       </div>
+      <ConfirmModal
+        isOpen={isOpenDelModal}
+        onConfirm={handleConfirmDeleteAll}
+        onCancel={handleCancelDeleteAll}
+        message={DELETE_ALL_CONFIRM_MESSAGE}
+      />
     </>
   );
 }
