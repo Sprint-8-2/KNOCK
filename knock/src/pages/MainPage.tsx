@@ -2,7 +2,7 @@ import MainPageInput from '../components/MainPageInput/MainPageInput';
 import Image from '../core/ui/CommonImage/Image';
 import MetaTags from '../core/ui/MetaTags/MetaTags';
 import MainPageLogo from '../core/assets/image/MainPgaeLogo.svg';
-import backgroundImg from '../core/assets/image/mainimage.png';
+import backgroundImg from '../core/assets/image/MainBgImg.svg';
 import rightArrow from '../core/assets/icon/Hyphen-Arrow-right.svg';
 import styles from './MainPage.module.scss';
 import UButton from '../core/ui/buttons/UButton/UButton';
@@ -19,6 +19,11 @@ const MainPage = () => {
   return (
     <div className={`${styles['mainPage']}`}>
       <MetaTags />
+      <Image
+        src={MainPageLogo}
+        alt="메인페이지로고"
+        imageClassName={styles['mainPage__logo']}
+      />
       <UButton
         type="box"
         handleClick={goToAnswerPage}
@@ -32,14 +37,7 @@ const MainPage = () => {
           className={styles['mainPage__answer__rightArrowImg']}
         />
       </UButton>
-      <Image
-        src={MainPageLogo}
-        alt="메인페이지로고"
-        imageClassName={styles['mainPage__logo']}
-      />
-      <div className={`${styles['mainPage__mainInput']}`}>
-        <MainPageInput />
-      </div>
+      <MainPageInput mainPageInputClassName={styles['mainPage__mainInput']} />
       <Image
         src={backgroundImg}
         alt="배경이미지"
