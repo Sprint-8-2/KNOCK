@@ -14,12 +14,14 @@ const SubjectCard = ({
   questionCount,
   isLoading,
 }: SubjectCardProps) => {
+  const shortName = name.length > 6 ? name.slice(0, 6) + '...' : name;
+  console.log(shortName);
   return (
     <>
       {isLoading ? (
         <SkeletonUserCard />
       ) : (
-        <UserCard name={name} src={src} count={questionCount} />
+        <UserCard name={shortName} src={src} count={questionCount} />
       )}
     </>
   );
