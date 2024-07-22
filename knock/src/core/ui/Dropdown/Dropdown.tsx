@@ -13,11 +13,13 @@ interface DropdownProps {
   handleSelectElement: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
   selected?: string;
   iconSrc?: string;
+  className?: string;
 }
 
 const Dropdown = ({
   children,
   iconSrc = '',
+  className = '',
   selected = '',
   ButtonclassName,
   dropdownElementList,
@@ -37,7 +39,7 @@ const Dropdown = ({
   };
 
   return (
-    <div className={`${styles['dropdown']}`} ref={dropdownRef}>
+    <div className={`${styles['dropdown']} ${className}`} ref={dropdownRef}>
       <button
         className={`${
           ButtonclassName ? ButtonclassName : styles['dropdown__button']
