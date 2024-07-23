@@ -1,4 +1,4 @@
-import { keepPreviousData, useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
@@ -27,7 +27,7 @@ const useSubjectListQuery = ({
       return queryArray.join('&');
     };
 
-    const path = `subjects/?${query()}/`;
+    const path = `subjects/?${query()}`;
 
     return await fetch(`${BASE_URL}${path}`).then((res) => res.json());
   };
@@ -36,7 +36,7 @@ const useSubjectListQuery = ({
     queryKey: ['subjectList', currentIndex, order, pageSize],
     queryFn: () => handleQueryRequest(pageSize),
     refetchOnWindowFocus: false,
-    gcTime: 1000 * 60,
+    gcTime: 1000 * 60 * 2,
     staleTime: 1000 * 5,
   });
 };
