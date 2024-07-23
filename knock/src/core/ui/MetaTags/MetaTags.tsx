@@ -14,20 +14,31 @@ export default function MetaTags(props: MetaTagProps) {
   const defaultTitle = '오픈마인드';
   const defaultDescription =
     '질문과 답변을 통해 마음을 열고 대화 나누는 소통 플랫폼';
-  const defaultImage = '';
+  const defaultImage =
+    'https://github.com/user-attachments/assets/399a8697-2700-47f3-99f7-5a0a88edc6a6';
 
   return (
     <Helmet>
       <title>
-        {(props.title && `${defaultTitle} - ${props.title}`) || defaultTitle}
+        {props.title ? props.title + ' | ' + defaultTitle : defaultTitle}
       </title>
       <meta
         name="description"
         content={props.description || defaultDescription}
       />
       <meta property="og:type" content="website" />
-      <meta property="og:title" content={props.title || defaultTitle} />
-      <meta property="og:site_name" content={defaultTitle} />
+      <meta
+        property="og:title"
+        content={
+          props.title ? props.title + ' | ' + defaultTitle : defaultTitle
+        }
+      />
+      <meta
+        property="og:site_name"
+        content={
+          props.title ? props.title + ' | ' + defaultTitle : defaultTitle
+        }
+      />
       <meta
         property="og:description"
         content={props.description || defaultDescription}
