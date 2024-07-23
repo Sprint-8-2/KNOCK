@@ -3,7 +3,7 @@
   box-sizing: border-box;
 }
 .mainPage {
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   display: flex;
   align-items: center;
@@ -13,11 +13,12 @@
     width: 10.0625rem;
     height: 2.875rem;
     position: absolute;
-    top: 2.81rem;
+    top: 315.81rem;
     right: 8.14rem;
     display: flex;
     justify-content: center;
     white-space: nowrap;
+    z-index: 1;
 
     &__rightArrowImg {
       width: 1.125rem;
@@ -40,12 +41,18 @@
     width: 100%;
     height: 75.36%;
     position: absolute;
-    bottom: 0;
+    top: 326.81rem;
     right: 0;
     z-index: -1;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
+  }
+
+  @media (max-width: 768px) {
+    &__bg-img {
+      top: 22.35rem;
+    }
   }
 }
 
