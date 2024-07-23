@@ -15,7 +15,6 @@ const AnimationPage: React.FC = () => {
   useEffect(() => {
     const handleScroll = () => {
       const value = window.scrollY;
-      console.log('scrollY는', value);
 
       if (LogoRef.current) {
         LogoRef.current.style.animation =

@@ -14,7 +14,6 @@ const StartAnimationPage: React.FC = () => {
 
   const handleScroll = () => {
     const value = window.scrollY;
-    console.log('scrollY는', value);
 
     if (TalkImageRef.current) {
       TalkImageRef.current.style.animation =
