@@ -9,9 +9,10 @@ import styles from './ShareButtons.module.scss';
 interface ShareButtonsProps {
   copySuccess: () => void;
   copyError: () => void;
+  name: string;
 }
 
-const ShareButtons = ({ copySuccess, copyError }: ShareButtonsProps) => {
+const ShareButtons = ({ copySuccess, copyError, name }: ShareButtonsProps) => {
   const { id: path } = useParams();
   const sharedUrl = `${window.location.origin}/${path ? 'post/' + path : 'list'}`;
 
@@ -23,7 +24,7 @@ const ShareButtons = ({ copySuccess, copyError }: ShareButtonsProps) => {
           onSuccess={copySuccess}
           onError={copyError}
         />
-        <KakaoShareButton sharedUrl={sharedUrl} />
+        <KakaoShareButton sharedUrl={sharedUrl} name={name} />
         <FacebookShareButton sharedUrl={sharedUrl} />
       </div>
     </>
