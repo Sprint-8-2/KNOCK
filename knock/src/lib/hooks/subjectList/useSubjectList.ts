@@ -43,7 +43,9 @@ const useSubjectList = ({ order }: SubjectListFuncParams) => {
   };
 
   useEffect(() => {
-    if (isSuccess) {
+    if (isLoading) {
+      setSubjects(getDefaultArray(pageSize));
+    } else if (isSuccess) {
       const { count, results } = data;
       setItemCount(count);
       setSubjects(results);
