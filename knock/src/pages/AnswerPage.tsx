@@ -95,11 +95,6 @@ function AnswerPage() {
       )}
       <div className={styles['page']}>
         <div className={styles['page__container']}>
-          <Image
-            containerClassName={styles['page__banner']}
-            src={ImageBanner}
-            alt="배너"
-          />
           <Link to={`/`} className={styles['page__logo']}>
             <Image src={imgLogo} alt="로고" />
           </Link>
