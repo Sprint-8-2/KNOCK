@@ -29,7 +29,7 @@ const PostPage = () => {
 
   return (
     <>
-      <MetaTags />
+      <MetaTags title={(subjectInfo?.name || '') + ' 님께 ' + '질문하기'} />
       {onToast && (
         <div className={styles['post-page__toast']}>
           <Toast toastMessage="URL이 복사되었습니다." />

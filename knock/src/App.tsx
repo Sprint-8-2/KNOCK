@@ -8,8 +8,8 @@ import SubjectList from './pages/SubjectList';
 import NotFound from './pages/NotFound/NotFound';
 import DarkModeBtn from './core/ui/DarkModeBtn/DarkModeBtn';
 
+const queryClient = new QueryClient();
 function App() {
-  const queryClient = new QueryClient();
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
