@@ -25,7 +25,9 @@ const getDefaultArray = (length: number) =>
 
 const useSubjectList = ({ order }: SubjectListFuncParams) => {
   const { pageSize } = useResize();
-  const [subjects, setSubjects] = useState<SubjectDetailResponse[]>([]);
+  const [subjects, setSubjects] = useState<SubjectDetailResponse[]>(
+    getDefaultArray(pageSize),
+  );
 
   const [itemCount, setItemCount] = useState<number>(0);
   const [currentIndex, setCurrentIndex] = useState<number>(1);
