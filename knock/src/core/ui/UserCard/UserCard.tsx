@@ -1,5 +1,6 @@
 import Image from '../CommonImage/Image';
 import Icon from '../CommonIcon/icon';
+import { BiMessageRoundedDetail } from 'react-icons/bi';
 
 import messages from '../../assets/icon/Messages.svg';
 import styles from '../../styles/usercard/UserCard.module.scss';
@@ -36,11 +37,7 @@ const UserCard: React.FC<UserCardProps> = ({
       </div>
       <div className={styles['user-card__received-container']}>
         <div className={styles['user-card__icon-questions']}>
-          <Icon
-            src={messages}
-            alt="메시지 이미지"
-            className={styles['user-card__messages']}
-          />
+          <BiMessageRoundedDetail className={styles['user-card__messages']} />
           <span className={styles['user-card__received-questions']}>
             받은 질문
           </span>

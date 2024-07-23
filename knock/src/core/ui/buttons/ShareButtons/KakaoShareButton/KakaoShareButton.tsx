@@ -19,13 +19,16 @@ declare global {
 
 interface KaKoShareButtonProps {
   sharedUrl: string;
+  name: string;
 }
 
-const KakaoShareButton = ({ sharedUrl }: KaKoShareButtonProps) => {
+const KakaoShareButton = ({ sharedUrl, name }: KaKoShareButtonProps) => {
   const { id: userId } = useParams();
   const { users } = useLoscalStorageUserInfo();
   const userName =
-    users && userId && users[Number(userId)] ? users[Number(userId)].name : '';
+    users && userId && users[Number(userId)]
+      ? users[Number(userId)].name
+      : null;
   const handleKaKaoShare = () => {
     if (window.Kakao === undefined) {
       return;
@@ -39,8 +42,10 @@ const KakaoShareButton = ({ sharedUrl }: KaKoShareButtonProps) => {
     kakao.Share.sendDefault({
       objectType: 'feed',
       content: {
-        title: `✊✊ ${userName}님께서 질문을 요청하셨어요!`,
-        description: `${userName}님께 질문을 통해 마음에 knock 해주세요!`,
+        title: userName
+          ? `✊✊ ${userName}님께서 질문을 요청하셨어요!`
+          : `✊✊ ${name}님께 질문을 해보세요!`,
+        description: `${userName ?? name}님께 질문을 통해 마음에 KNOCK 해주세요!`,
         imageUrl: encodeURI(
           'https://cdn.pixabay.com/photo/2016/08/23/10/16/door-1613991_1280.png',
         ),
@@ -51,7 +56,7 @@ const KakaoShareButton = ({ sharedUrl }: KaKoShareButtonProps) => {
       },
       buttons: [
         {
-          title: 'knock 하러가기',
+          title: 'KNOCK 하러가기',
           link: {
             mobileWebUrl: sharedUrl,
             webUrl: sharedUrl,

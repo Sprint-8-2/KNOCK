@@ -2,12 +2,11 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import UButton from '../../core/ui/buttons/UButton/UButton';
-import Icon from '../../core/ui/CommonIcon/icon';
 import Image from '../../core/ui/CommonImage/Image';
 
 import styles from './SubjectListHeader.module.scss';
 import LogoImage from '../../core/assets/image/SubPageLogo.svg';
-import ArrowRightIcon from '../../core/assets/icon/Hyphen-Arrow-right.svg';
+import { FiArrowRight } from 'react-icons/fi';
 import useLoscalStorageUserInfo from '../../lib/hooks/useLoscalStorageUserInfo';
 import CommonModal from '../../core/ui/Modal/CommonModal';
 import SubjectModalContent from './SubjectModalContent';
@@ -46,10 +45,8 @@ const SubjectListHeader = () => {
         >
           <p className={styles['subject-list-header__button-content']}>
             <span>답변하러 가기</span>
-            <Icon
+            <FiArrowRight
               className={styles['subject-list-header__button-icon']}
-              src={ArrowRightIcon}
-              alt="오른쪽 화살표"
             />
           </p>
         </UButton>

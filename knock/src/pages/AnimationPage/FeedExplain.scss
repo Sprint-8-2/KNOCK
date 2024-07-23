@@ -1,0 +1,63 @@
+@import '../../core/styles/global.scss';
+
+@font-face {
+  font-family: 'SBAggroB';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.feed-explain {
+  background-color: $Grayscale-20;
+  height: 1000px;
+  width: 100%;
+  font-size: 100px;
+  text-align: center;
+  position: relative;
+
+  &__talk-image {
+    position: absolute;
+    top: 13rem;
+    left: 10rem;
+  }
+
+  &__page-image {
+    display: block;
+    width: 30rem;
+    border: 3px solid #c7bbb5;
+    border-radius: 30px;
+    position: absolute;
+    top: 0rem;
+    right: 10rem;
+  }
+
+  &__modal-image {
+    width: 30rem;
+    position: absolute;
+    top: 27rem;
+    right: 35rem;
+  }
+}
+
+.feed-explain__message {
+  position: absolute;
+  left: 40%;
+  bottom: 42rem;
+}
+
+.feed-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.feed-explain__message-1 {
+  font-size: 30px;
+  font-family: 'SBAggroB';
+}
+
+.feed-explain__message-2 {
+  font-size: 30px;
+  font-family: 'SBAggroB';
+}

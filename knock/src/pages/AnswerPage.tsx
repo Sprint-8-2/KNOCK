@@ -87,7 +87,7 @@ function AnswerPage() {
 
   return (
     <>
-      <MetaTags />
+      <MetaTags title={userInfo?.name + ' 님의 ' + '답변하기'} />
       {onToast && (
         <div className={styles['page__toast']}>
           <Toast toastMessage="URL이 복사되었습니다." />
@@ -95,11 +95,6 @@ function AnswerPage() {
       )}
       <div className={styles['page']}>
         <div className={styles['page__container']}>
-          <Image
-            containerClassName={styles['page__banner']}
-            src={ImageBanner}
-            alt="배너"
-          />
           <Link to={`/`} className={styles['page__logo']}>
             <Image src={imgLogo} alt="로고" />
           </Link>

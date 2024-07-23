@@ -1,0 +1,87 @@
+@keyframes Left_slide_StartPoint {
+  from {
+    left: -10rem;
+    opacity: 0;
+  }
+  to {
+    left: 10rem;
+    opacity: 1;
+  }
+}
+
+@keyframes Left_slide_EndPoint {
+  from {
+    left: 10rem;
+    opacity: 1;
+  }
+  to {
+    left: -10rem;
+    opacity: 0;
+  }
+}
+
+@keyframes Right_slide_StartPoint {
+  from {
+    right: -10rem;
+    opacity: 0;
+  }
+  to {
+    right: 10rem;
+    opacity: 1;
+  }
+}
+
+@keyframes Right_slide_EndPoint {
+  from {
+    right: 10rem;
+    opacity: 1;
+  }
+  to {
+    right: -10rem;
+    opacity: 0;
+  }
+}
+
+@keyframes Modal_Right_slide_StartPoint {
+  from {
+    right: -35rem;
+    opacity: 0;
+  }
+  to {
+    right: 35rem;
+    opacity: 1;
+  }
+}
+
+@keyframes Modal_Right_slide_EndPoint {
+  from {
+    right: 35rem;
+    opacity: 1;
+  }
+  to {
+    right: -35rem;
+    opacity: 0;
+  }
+}
+
+@keyframes AnswerComplete_Left_slide_StartPoint {
+  from {
+    left: -22rem;
+    opacity: 0;
+  }
+  to {
+    left: 22rem;
+    opacity: 1;
+  }
+}
+
+@keyframes AnswerComplete_Left_slide_EndPoint {
+  from {
+    left: 22rem;
+    opacity: 1;
+  }
+  to {
+    left: -22rem;
+    opacity: 0;
+  }
+}

@@ -15,15 +15,20 @@
   &-content-container {
     @include Body2-Regular;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     gap: 0.3rem;
+
+    &__icon {
+      color: $Grayscale-60;
+      font-size: 1.2rem;
+    }
 
     &__content {
       display: flex;
       &--contracted {
         display: -webkit-box;
-        line-clamp: 6;
-        -webkit-line-clamp: 6;
+        line-clamp: 4;
+        -webkit-line-clamp: 4;
         -webkit-box-orient: vertical;
         word-break: break-all;
         overflow: hidden;
@@ -36,6 +41,7 @@
       border: none;
       border-radius: 1rem;
       background-color: unset;
+      align-self: center;
       &--display {
         display: flex;
         justify-content: center;
@@ -43,7 +49,7 @@
       }
     }
   }
-  // @media (max-width: 768px) {
-  //   font-size: 1rem;
-  // }
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
 }

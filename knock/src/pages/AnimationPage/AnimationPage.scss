@@ -1,0 +1,49 @@
+body {
+  margin: 0;
+}
+
+.merge-container {
+  overflow: hidden;
+  position: relative;
+  height: 5000px;
+
+  .section-logo-image {
+    width: 23rem;
+    height: 27rem;
+    position: absolute;
+    text-align: center;
+  }
+
+  .section-logo-container {
+    max-height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 27rem;
+    position: fixed;
+    z-index: 1;
+  }
+}
+
+.answer-explain__message {
+  position: absolute;
+  left: 42%;
+  bottom: 35rem;
+}
+
+.answer-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.answer-explain__message-1 {
+  font-size: 30px;
+  font-family: Pretendard, sans-serif;
+}
+
+.answer-explain__message-2 {
+  font-size: 30px;
+  font-family: Pretendard, sans-serif;
+}
