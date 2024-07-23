@@ -26,10 +26,7 @@
     }
 
     &-icon {
-      width: 1.125rem;
-      height: 1.125rem;
-      filter: invert(19%) sepia(14%) saturate(2296%) hue-rotate(337deg)
-        brightness(96%) contrast(92%);
+      color: $Brown-40;
     }
   }
 }

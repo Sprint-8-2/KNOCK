@@ -5,7 +5,7 @@ import Icon from '../../core/ui/CommonIcon/icon';
 import Image from '../../core/ui/CommonImage/Image';
 
 import closeIcon from '../../core/assets/icon/Close.svg';
-import moreIcon from '../../core/assets/icon/Person.svg';
+import { FiUser } from 'react-icons/fi';
 
 import styles from './SubjectModalContent.module.scss';
 
@@ -19,7 +19,7 @@ const SubjectModalContent = ({ users, onClose }: SubjectModalContentProps) => {
     <div className={styles['subject-modal-content']}>
       <div className={styles['subject-modal-content__header']}>
         <div className={styles['subject-modal-content__header--title']}>
-          <Icon src={moreIcon} alt="" className="" />
+          <FiUser className={styles['subject-modal-content__header--icon']} />
           <h3>프로필을 선택해주세요</h3>
         </div>
         <Icon

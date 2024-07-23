@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import styles from './AnswerContent.module.scss';
-import Icon from '../../../core/ui/CommonIcon/icon';
-import ArrowDownIcon from '../../../core/assets/icon/Arrow-down.svg';
+import { FiChevronDown } from 'react-icons/fi';
 
 interface AnswerContentProps {
   content: string;
@@ -36,7 +35,7 @@ const AnswerContent = ({ content = '' }: AnswerContentProps) => {
         onClick={handleExpendButton}
       >
         더보기
-        <Icon src={ArrowDownIcon} alt="펼치기" className="" />
+        <FiChevronDown className={styles['answer-content-container__icon']} />
       </button>
     </div>
   );

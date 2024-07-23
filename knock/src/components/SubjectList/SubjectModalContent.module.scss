@@ -17,6 +17,10 @@
       gap: 1.4rem;
       padding-left: 1rem;
     }
+    &--icon {
+      color: $Grayscale-60;
+      align-self: center;
+    }
   }
 
   &__close--icon {

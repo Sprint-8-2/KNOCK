@@ -1,4 +1,3 @@
-import PersonIcon from '../../core/assets/icon/Person.svg';
 import styles from './mainPageInput.module.scss';
 import React, { useState } from 'react';
 import UButton from '../../core/ui/buttons/UButton/UButton';
@@ -6,7 +5,7 @@ import Input from '../../core/ui/Input/Input';
 import { createSubject } from '../../lib/api/Subject';
 import { useNavigate } from 'react-router-dom';
 import useLoscalStorageUserInfo from '../../lib/hooks/useLoscalStorageUserInfo';
-import Icon from '../../core/ui/CommonIcon/icon';
+import { FiUser } from 'react-icons/fi';
 
 type MainPageInputProps = {
   mainPageInputClassName?: string;
@@ -39,12 +38,7 @@ const MainPageInput: React.FC<MainPageInputProps> = ({
       className={`${mainPageInputClassName} ${styles['container']}`}
     >
       <Input value={name} onChange={handleNameSet}>
-        <Icon
-          src={PersonIcon}
-          alt="Person"
-          className={`${styles['container__img']}`}
-          handleClick={() => {}}
-        />
+        <FiUser className={`${styles['container__img']}`} />
       </Input>
       <UButton
         type="box"

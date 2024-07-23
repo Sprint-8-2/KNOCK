@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
 import FeedCard from '../FeedCard/FeedCard';
-import Icon from '../../../core/ui/CommonIcon/icon';
-import IconMessage from '../../../core/assets/icon/MessagesBrown.svg';
+import { BiMessageRoundedDetail } from 'react-icons/bi';
 import EmptyFeedListImage from '../EmptyFeedListImage/EmptyFeedList';
 import styles from './FeedList.module.scss';
 import useInfiniteQuestionList from '../../../lib/hooks/feed/useInfiniteQuestionList';
@@ -63,7 +62,7 @@ const FeedList = ({
       >
         <div className={styles['feedlist']}>
           <div className={styles['feedlist__header']}>
-            <Icon className="" src={IconMessage} alt="메시지" />
+            <BiMessageRoundedDetail />
             {headerMessage}
           </div>
           {!isEmptyQuestion &&

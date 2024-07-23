@@ -1,8 +1,7 @@
-import Icon from '../../core/ui/CommonIcon/icon';
 import useElapsedTime from '../../lib/hooks/useElapsedTime';
 import styles from './Question.module.scss';
-import ArrowDownIcon from '../../core/assets/icon/Arrow-down.svg';
 import { useEffect, useState } from 'react';
+import { FiChevronDown } from 'react-icons/fi';
 
 interface QuestionProps {
   content: string;
@@ -43,7 +42,9 @@ const Question = ({ content = '', createAt = '' }: QuestionProps) => {
           onClick={handleExpendButton}
         >
           더보기
-          <Icon src={ArrowDownIcon} alt="펼치기" className="" />
+          <FiChevronDown
+            className={styles['question-content-container__icon']}
+          />
         </button>
       </div>
     </div>
