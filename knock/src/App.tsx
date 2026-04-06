@@ -7,11 +7,13 @@ import PostPage from './pages/PostPage';
 import SubjectList from './pages/SubjectList';
 import NotFound from './pages/NotFound/NotFound';
 import DarkModeBtn from './core/ui/DarkModeBtn/DarkModeBtn';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 const queryClient = new QueryClient();
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools initialIsOpen={false} /> 
       <BrowserRouter>
         <DarkModeBtn />
         <Routes>
