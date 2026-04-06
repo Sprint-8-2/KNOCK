@@ -8,10 +8,10 @@
   margin: 0 auto;
   padding: 2.5rem 0;
 
-  @media (width <= 1200px) {
+  @media (max-width: 1200px) {
     margin: 0 2rem;
   }
-  @media (width < 668px) {
+  @media (max-width: 668px) {
     flex-direction: column;
     gap: 1.25rem;
   }

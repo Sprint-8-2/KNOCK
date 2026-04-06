@@ -7,11 +7,10 @@
   gap: 1.25rem;
   grid-template: repeat(2, 1fr) / repeat(4, minmax(auto, 220px));
 
-  @media (width < 876px) {
-    grid-template: repeat(2, 1fr) / repeat(3, minmax(auto, 220px));
+  @media (max-width: 876px) {
+    grid-template: repeat(2, 1fr) / repeat(3, minmax(180px, 220px));
   }
-  @media (width < 668px) {
-    width: 90%;
+  @media (max-width: 668px) {
     grid-template: repeat(3, 1fr) / repeat(2, 1fr);
     gap: 1rem;
     margin: 0 1.5rem;
@@ -22,7 +21,7 @@
   }
   & li {
     cursor: pointer;
-    @media (width < 376px) {
+    @media (max-width : 668px) {
       width: 9.71875rem;
     }
   }

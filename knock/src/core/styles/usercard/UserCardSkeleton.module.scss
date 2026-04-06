@@ -12,7 +12,7 @@
   background: $Grayscale-10;
   gap: 1rem;
 
-  @media (width < 668px) {
+  @media (max-width: 668px) {
     padding: 1rem;
   }
 

@@ -30,7 +30,7 @@
       transform: translateX(2.3rem);
     }
   }
-  @media (width < 768px) {
+  @media (max-width : 768px) {
     width: 3.5rem;
     height: 1.9rem;
     font-size: 1rem;

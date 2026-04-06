@@ -20,7 +20,7 @@
   }
 }
 
-@media (width < 668px) {
+@media (max-width: 668px) {
   .feed-profile {
     &--img {
       width: 6.5rem;

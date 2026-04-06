@@ -94,7 +94,7 @@
   }
 }
 
-@media (width < 768px) {
+@media (max-width: 768px) {
   .subject-modal-content {
     margin: 0 1.5rem;
     &__header {
