@@ -1,6 +1,6 @@
 {
   "name": "knock",
-  "version": "0.1.0",
+  "version": "1.0.1",
   "private": true,
   "dependencies": {
     "@tanstack/react-query": "^5.51.9",
